@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="mybatis.mapper.UsuarioMapper">
+ 
+ <select id="getUsuarios" resultType="Usuario">
+        SELECT id_usu,
+        	   nombre_usu as nombre,
+        	   clave_usu as clave,
+        	   id_tipo_usu
+        FROM tb_usuario
+    </select>
+    
+   <insert id="registrar" parameterType="Usuario">
+    	insert into tb_usuario(id_usu,nombre_usu,clave_usu,id_tipo_usu)
+    	values(#{id_usu},#{nombre},#{clave},#{id_tipo_usu});
+    </insert> 
+    
+    <update id="actualizar" parameterType="Usuario">
+    	update tb_usuario set nombre_usu = #{nombre},
+    						clave_usu = #{clave}
+    				where id_usu = #{id_usu};
+    </update>
+    
+    <delete id="eliminar" parameterType="int">
+    	DELETE FROM tb_usuario
+    	WHERE id_usu = #{id_usu}
+    </delete>
+    
+</mapper>    

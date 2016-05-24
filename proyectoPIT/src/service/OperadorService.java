@@ -1,13 +1,10 @@
 package service;
 
 import java.util.List;
-
 import mybatis.MyBatisUtil;
 import mybatis.mapper.OperadorMapper;
-
 import org.apache.ibatis.session.SqlSession;
-
-import beans.Operador;
+import model.Operador;
 
 public class OperadorService {
 

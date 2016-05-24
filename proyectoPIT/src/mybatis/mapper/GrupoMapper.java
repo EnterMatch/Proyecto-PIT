@@ -1,7 +1,7 @@
 package mybatis.mapper;
 
 import java.util.List;
-import beans.Grupo;
+import model.Grupo;
 
 public interface GrupoMapper {
 

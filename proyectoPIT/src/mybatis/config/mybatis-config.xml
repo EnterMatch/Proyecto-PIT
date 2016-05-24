@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE configuration 
 PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-   <typeAliases>
-    	<typeAlias type="model.Operador" alias="producto"/>
-    	<typeAlias type="model.Grupo" alias="grupo"/>
-    	<typeAlias type="model.Cliente" alias="cliente"/>
-   </typeAliases>
-   
- <environments default="clase">
-    
-        <environment id="clase">
-            <transactionManager type="JDBC"/>
-            <dataSource type="UNPOOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost/db_incidencias"/>
-                <property name="username" value="root"/>
-                <property name="password" value="mysql"/>
-            </dataSource>
-            
-        </environment>
-    </environments>
-    
-    <mappers>
-        <mapper resource="mybatis/mapper/*"/>    
-    </mappers>
-    
+	<typeAliases>
+		<typeAlias type="model.Cliente" alias="clienteBean" />
+		<typeAlias type="model.Empresa" alias="empresaBean" />
+		<typeAlias type="model.EmpresaCliente" alias="empresaClienteBean" />
+		<typeAlias type="model.Estado" alias="estadoBean" />
+		<typeAlias type="model.Grupo" alias="grupoBean" />
+		<typeAlias type="model.Incidencia" alias="incidenciaBean" />
+		<typeAlias type="model.Operador" alias="operadorBean" />
+		<typeAlias type="model.Persona" alias="personaBean" />
+		<typeAlias type="model.Prioridad" alias="prioridadBean" />
+		<typeAlias type="model.TipoOperador" alias="tipoOperadorBean" />
+		<typeAlias type="model.TipoUsuario" alias="tipoUsuarioBean" />
+		<typeAlias type="model.Usuario" alias="usuarioBean" />
+	</typeAliases>
+	
+	<environments default="proyectoPIT">
+
+		<environment id="proyectoPIT">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost/db_incidencias" />
+				<property name="username" value="root" />
+				<property name="password" value="mysql" />
+			</dataSource>
+
+		</environment>
+	</environments>
+
+	<mappers>
+		<package name="mybatis.mapper"/>
+	</mappers>
+
 </configuration>
+
 

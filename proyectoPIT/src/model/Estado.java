@@ -1,4 +1,4 @@
-package beans;
+package model;
 
 public class Estado {
 	private int id_est;

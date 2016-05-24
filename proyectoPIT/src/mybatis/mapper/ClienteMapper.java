@@ -1,7 +1,7 @@
 package mybatis.mapper;
 
 import java.util.List;
-import beans.Cliente;
+import model.Cliente;
 
 public interface ClienteMapper {
 

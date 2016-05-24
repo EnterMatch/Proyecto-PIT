@@ -4,7 +4,7 @@ import java.util.List;
 import mybatis.MyBatisUtil;
 import mybatis.mapper.GrupoMapper;
 import org.apache.ibatis.session.SqlSession;
-import beans.Grupo;
+import model.Grupo;
 
 public class GrupoService {
 

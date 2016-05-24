@@ -1,7 +1,7 @@
 package mybatis.mapper;
 
 import java.util.List;
-import beans.Operador;
+import model.Operador;
 
 public interface OperadorMapper {
 	

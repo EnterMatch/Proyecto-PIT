@@ -1,4 +1,4 @@
-package beans;
+package model;
 
 public class Prioridad {
 	private int id_pri;

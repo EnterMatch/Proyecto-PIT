@@ -4,7 +4,7 @@ import java.util.List;
 import mybatis.MyBatisUtil;
 import mybatis.mapper.ClienteMapper;
 import org.apache.ibatis.session.SqlSession;
-import beans.Cliente;
+import model.Cliente;
 
 public class ClienteService {
 	public int registrar(Cliente reg){

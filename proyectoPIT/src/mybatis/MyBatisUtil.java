@@ -19,7 +19,7 @@ public class MyBatisUtil {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("Error: " + e);
+			throw new RuntimeException("Error: " + e.getMessage());
 		}
 	}
 

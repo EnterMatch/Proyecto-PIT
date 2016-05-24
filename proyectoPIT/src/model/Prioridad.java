@@ -4,12 +4,6 @@ public class Prioridad {
 	private int id_pri;
     private String descrip_pri;
     
-	public Prioridad(int id_pri, String descrip_pri) {
-		super();
-		this.id_pri = id_pri;
-		this.descrip_pri = descrip_pri;
-	}
-
 	public int getId_pri() {
 		return id_pri;
 	}
@@ -25,6 +19,9 @@ public class Prioridad {
 	public void setDescrip_pri(String descrip_pri) {
 		this.descrip_pri = descrip_pri;
 	}
-    
+	@Override
+	public String toString() {
+		return "Prioridad [id_pri=" + id_pri + ", descrip_pri=" + descrip_pri +"]";
+	}
     
 }

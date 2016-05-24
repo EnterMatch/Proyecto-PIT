@@ -14,7 +14,6 @@ public class ClienteService {
 		try{
 			ClienteMapper clienteMapper = session.getMapper(ClienteMapper.class);
 			ok = clienteMapper.registrar(reg);
-			//System.out.println(ok);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

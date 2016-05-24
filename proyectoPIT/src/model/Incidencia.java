@@ -1,4 +1,4 @@
-package beans;
+package model;
 
 public class Incidencia {
 	private int id_inc;

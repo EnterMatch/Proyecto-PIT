@@ -1,4 +1,4 @@
-package beans;
+package model;
 
 public class Cliente {
 	private int id_per;

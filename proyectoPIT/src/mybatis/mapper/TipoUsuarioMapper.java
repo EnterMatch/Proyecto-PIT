@@ -2,7 +2,7 @@ package mybatis.mapper;
 
 import java.util.List;
 
-import beans.Tipo_Usuario;
+import model.Tipo_Usuario;
 
 
 

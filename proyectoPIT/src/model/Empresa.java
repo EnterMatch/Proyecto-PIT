@@ -1,4 +1,4 @@
-package beans;
+package model;
 
 public class Empresa {
 	private int id_emp;

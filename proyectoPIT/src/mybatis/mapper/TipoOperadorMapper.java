@@ -2,7 +2,7 @@ package mybatis.mapper;
 
 import java.util.List;
 
-import beans.Tipo_Operador;
+import model.Tipo_Operador;
 
 
 

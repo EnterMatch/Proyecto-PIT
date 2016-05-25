@@ -1,1 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PersonaMapper">
+	<resultMap type="personaBean" id="personaResult">
+		<id property="id_per" column="id_per"/>
+		<result property="nombre" column="nombre_per"/>
+		<result property="apepat" column="ape_pat_per"/>
+		<result property="apemat" column="ape_mat_per"/>
+		<result property="email" column="email_per"/>
+		<result property="id_usu" column="id_usu"/>
+	</resultMap>
+	<insert id="create" parameterType="personaBean">
+		INSERT tb_persona VALUES(null,#{nombre},#{apepat},#{apemat},#{email},#{id_usu})
+	</insert>
+	<select id = "read" resultMap = "personaResult">
+		SELECT * FROM tb_persona
+	</select>
+	<update id="update" parameterType="personaBean">
+		UPDATE tb_persona SET
+			  	nombre_per = #{nombre}, 
+				ape_pat_per = #{apepat},
+				ape_mat_per = #{apemat}, 
+				email_per = #{email},
+				id_usu = #{id_usu}
+		WHERE 	id_per = #{id_per}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM tb_persona WHERE id_per = #{id_per}
+	</delete>
+	<select id="obtain" parameterType="int" resultType = "personaBean">
+		SELECT * FROM tb_persona
+		WHERE 	id_per = #{id_per}
+	</select>
+</mapper>

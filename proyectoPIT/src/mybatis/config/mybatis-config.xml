@@ -9,14 +9,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="model.Cliente" alias="clienteBean" />
 		<typeAlias type="model.Empresa" alias="empresaBean" />
 		<typeAlias type="model.EmpresaCliente" alias="empresaClienteBean" />
-		<typeAlias type="model.Estado" alias="estadoBean" />
+		<typeAlias type="model.Estado" alias="estado" />
 		<typeAlias type="model.Grupo" alias="grupoBean" />
 		<typeAlias type="model.Incidencia" alias="incidenciaBean" />
 		<typeAlias type="model.Operador" alias="operadorBean" />
 		<typeAlias type="model.Persona" alias="personaBean" />
-		<typeAlias type="model.Prioridad" alias="prioridadBean" />
-		<typeAlias type="model.TipoOperador" alias="tipoOperadorBean" />
-		<typeAlias type="model.TipoUsuario" alias="tipoUsuarioBean" />
+		<typeAlias type="model.Prioridad" alias="prioridad" />
+		<typeAlias type="model.Tipo_Operador" alias="tipoOperadorBean" />
+		<typeAlias type="model.Tipo_Usuario" alias="tipoUsuarioBean" />
 		<typeAlias type="model.Usuario" alias="usuarioBean" />
 	</typeAliases>
 	
@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			<transactionManager type="JDBC" />
 			<dataSource type="UNPOOLED">
 				<property name="driver" value="com.mysql.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://localhost/db_incidencias" />
+				<property name="url" value="jdbc:mysql://localhost/db_incidencias"/>
 				<property name="username" value="root" />
 				<property name="password" value="mysql" />
 			</dataSource>
@@ -35,7 +35,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 
 	<mappers>
-		<package name="mybatis.mapper"/>
+<!-- 		<package name="mybatis.mapper"/> -->  
+		<mapper resource="mybatis/mapper/EstadoPrioridadMapper.xml"/> 
 	</mappers>
 
 </configuration>

@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import model.Estado;
 import model.Prioridad;
 import mybatis.MyBatisUtil;
-import mybatis.mapper.EstadoPrioridadMapper;
 
 public class EstadoPrioridadServices {
 
@@ -28,16 +27,14 @@ public class EstadoPrioridadServices {
 	
 	public static  List<Estado> estados()  {	
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession(); 
-		EstadoPrioridadMapper epm = session.getMapper(EstadoPrioridadMapper.class);
-		List<Estado> estados = epm.getEstados();
+		List<Estado> estados = session.selectList("EstadoPrioridadMapper.getEstados");
 		session.close();
 		return estados; 
 	}
 	
 	public static  List<Prioridad> prioridades()  {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession(); 
-		EstadoPrioridadMapper epm = session.getMapper(EstadoPrioridadMapper.class);
-		List<Prioridad> prioridades = epm.getPrioridades();
+		List<Prioridad> prioridades = session.selectList("EstadoPrioridadMapper.getPrioridades");
 		session.close();
 		return prioridades;
 	}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="EmpresaClienteMapper">
+
+	<resultMap id="datosEmpresa" type="empresaClienteBean">
+        	<id column="id_emp" property="id" jdbcType="INTEGER"/>
+        	<result column="id_per" property="idPersona" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <select id="listadoEmpresaCliente" resultType="model.Empresa">
+        SELECT id_emp as id,
+        	   id_per as idPersona
+        FROM tb_empresa_cliente
+     </select>
+
+     
+        
+        <insert id="registrar" parameterType="empresaCliente">
+        	insert into tb_empresa_cliente(id_emp, id_per)
+        	values(#{id},#{idPersona});
+        </insert>
+        <delete id="eliminar" parameterType="int">
+        	DELETE FROM tb_empresa_cliente
+        	WHERE id_emp=#{id}
+        </delete>
+        
+        <update id="modificar" parameterType="empresaCliente">
+        	UPDATE tb_empresa_cliente 
+        	set id_per=#{idPersona}
+        	WHERE id_emp=#{id}
+        </update>
+        
+        <select id="ConsultaEmpresaCliente" parameterType="empresaCliente">
+        SELECT id_emp as id,
+        	   id_per as idPersona
+        FROM tb_empresa_cliente
+        WHERE id_emp=#{id}
+     </select>
+        
+        
+</mapper>

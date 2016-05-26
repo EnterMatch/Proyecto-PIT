@@ -4,20 +4,20 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="mybatis.mapper.TipoUsuarioMapper">
+ <mapper namespace="TipoUsuarioMapper">
  
-  <select id="getTipoUsuario" resultType="Tipo_Usuario">
+  <select id="getTipoUsuario" resultType="tipoUsuarioBean">
         SELECT id_tipo_usu,
                descrip_tipo_usu as descripcion
         FROM tb_tipo_usuario
     </select>
  
-   <insert id="registrar" parameterType="Tipo_Usuario">
+   <insert id="registrar" parameterType="tipoUsuarioBean">
     	insert into tb_tipo_usuario(id_tipo_usu,descrip_tipo_usu)
     	values(#{id_tipo_usu},#{descripcion});
     </insert> 
  
-      <update id="actualizar" parameterType="Tipo_Usuario">
+    <update id="actualizar" parameterType="tipoUsuarioBean">
     	update tb__tipo_usuario set decrip_tipo_usu = #{descripcion},
     				where id_tipo_usu = #{id_tipo_usu};
     </update>

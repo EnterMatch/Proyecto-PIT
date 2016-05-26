@@ -7,21 +7,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="EmpresaMapper">
 
-	<resultMap id="datosEmpresa" type="empresaBean">
-        	<id column="id_emp" property="id" jdbcType="INTEGER"/>
-        	<result column="razSoc" property="razonSocial" jdbcType="VARCHAR"/>
-    </resultMap>
-
-
-    <select id="listadoEmpresa" resultType="model.Empresa">
-        SELECT id_emp as id,
-        	   razSoc as razonSocial
+	 <select id="listadoEmpresa" resultType="empresaBean">
+        SELECT *
         FROM tb_empresa
      </select>
-
+	
+	<select id="obtener" resultType="empresaBean" parameterType="int">
+		SELECT *
+        FROM tb_empresa WHERE id_emp = #{id_emp}
+	</select>
      
         
-        <insert id="registrar" parameterType="empresa">
+        <insert id="registrar" parameterType="empresaBean">
         	insert into tb_empresa(id_emp, razSoc)
         	values(#{id},#{razonSocial});
         </insert>
@@ -30,13 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         	WHERE id_emp=#{id}
         </delete>
         
-        <update id="modificar" parameterType="empresa">
+        <update id="modificar" parameterType="empresaBean">
         	UPDATE tb_empresa 
         	set razSoc=#{razonSocial}
         	WHERE id_emp=#{id}
         </update>
         
-        <select id="ConsultaEmpresa" parameterType="empresa">
+        <select id="ConsultaEmpresa" parameterType="empresaBean">
         SELECT id_emp as id,
         	   razSoc as razonSocial
         FROM tb_empresa

@@ -37,6 +37,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 <!-- 		<package name="mybatis.mapper"/> -->  
 		<mapper resource="mybatis/mapper/EstadoPrioridadMapper.xml"/> 
+		<mapper resource="mybatis/mapper/EmpresaMapper.xml"/> 
 	</mappers>
 
 </configuration>

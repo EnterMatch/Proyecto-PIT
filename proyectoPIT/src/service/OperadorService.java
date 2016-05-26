@@ -2,7 +2,6 @@ package service;
 
 import java.util.List;
 import mybatis.MyBatisUtil;
-import mybatis.mapper.OperadorMapper;
 import org.apache.ibatis.session.SqlSession;
 import model.Operador;
 
@@ -13,11 +12,12 @@ public class OperadorService {
 		
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			OperadorMapper operadorMapper = session.getMapper(OperadorMapper.class);
-			ok = operadorMapper.registrar(reg);
-			//System.out.println(ok);
+			ok = session.insert("OperadorMapper.registrar",reg);
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
 		return ok;
 	}
@@ -26,10 +26,12 @@ public class OperadorService {
 		int ok = 0;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			OperadorMapper operadorMapper = session.getMapper(OperadorMapper.class);
-			ok = operadorMapper.actualizar(reg);
+			ok = session.update("OperadorMapper.actualizar",reg);
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
 		return ok;
 	}
@@ -38,10 +40,12 @@ public class OperadorService {
 		int ok = 0;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			OperadorMapper operadorMapper = session.getMapper(OperadorMapper.class);
-			ok = operadorMapper.eliminar(id);
+			ok = session.delete("OperadorMapper.eliminar", id);
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
 		return ok;
 	}
@@ -50,10 +54,11 @@ public class OperadorService {
 		List<Operador> lista = null;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			OperadorMapper operadorMapper = session.getMapper(OperadorMapper.class);
-			lista = operadorMapper.getOperadores();
+			lista = session.selectList("OperadorMapper.getOperadores");
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
 		return lista;
 	}

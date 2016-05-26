@@ -9,7 +9,10 @@ public class Empresa {
 		this.id_emp = id_emp;
 		this.razSoc = razSoc;
 	}
-
+	
+	public Empresa(){
+		
+	}
 	public int getId_emp() {
 		return id_emp;
 	}
@@ -24,6 +27,11 @@ public class Empresa {
 
 	public void setRazSoc(String razSoc) {
 		this.razSoc = razSoc;
+	}
+
+	@Override
+	public String toString() {
+		return "Empresa [id_emp=" + id_emp + ", razSoc=" + razSoc + "]";
 	}
     
     

@@ -2,7 +2,6 @@ package service;
 
 import java.util.List;
 import mybatis.MyBatisUtil;
-import mybatis.mapper.ClienteMapper;
 import org.apache.ibatis.session.SqlSession;
 import model.Cliente;
 
@@ -12,10 +11,12 @@ public class ClienteService {
 		
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			ClienteMapper clienteMapper = session.getMapper(ClienteMapper.class);
-			ok = clienteMapper.registrar(reg);
+			ok = session.insert("ClienteMapper.registrar", reg);
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
 		return ok;
 	}
@@ -24,10 +25,12 @@ public class ClienteService {
 		int ok = 0;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			ClienteMapper clienteMapper = session.getMapper(ClienteMapper.class);
-			ok = clienteMapper.eliminar(id);
+			ok = session.delete("ClienteMapper.eliminar", id);
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
 		return ok;
 	}
@@ -36,10 +39,11 @@ public class ClienteService {
 		List<Cliente> lista = null;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			ClienteMapper clienteMapper = session.getMapper(ClienteMapper.class);
-			lista = clienteMapper.getClientes();
+			lista = session.selectList("ClienteMapper.getClientes");
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
 		return lista;
 	}

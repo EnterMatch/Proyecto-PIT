@@ -2,7 +2,7 @@ package service;
 
 import java.util.List;
 import mybatis.MyBatisUtil;
-import mybatis.mapper.GrupoMapper;
+
 import org.apache.ibatis.session.SqlSession;
 import model.Grupo;
 
@@ -13,9 +13,8 @@ public class GrupoService {
 		
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			GrupoMapper grupoMapper = session.getMapper(GrupoMapper.class);
-			ok = grupoMapper.registrar(reg);
-			//System.out.println(ok);
+			ok = session.insert("GrupoMapper.registrar", reg);
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -26,8 +25,8 @@ public class GrupoService {
 		int ok = 0;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			GrupoMapper grupoMapper = session.getMapper(GrupoMapper.class);
-			ok = grupoMapper.actualizar(reg);
+			ok = session.update("GrupoMapper.actualizar", reg);
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -38,8 +37,8 @@ public class GrupoService {
 		int ok = 0;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			GrupoMapper grupoMapper = session.getMapper(GrupoMapper.class);
-			ok = grupoMapper.eliminar(id);
+			ok = session.delete("GrupoMapper.eliminar", id);
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -50,8 +49,7 @@ public class GrupoService {
 		List<Grupo> lista = null;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			GrupoMapper grupoMapper = session.getMapper(GrupoMapper.class);
-			lista = grupoMapper.getGrupos();
+			lista = session.selectList("GrupoMapper.getGrupos");
 		}catch(Exception e){
 			e.printStackTrace();
 		}

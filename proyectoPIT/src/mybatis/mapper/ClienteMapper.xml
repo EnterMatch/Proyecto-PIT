@@ -11,8 +11,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		<result property="nombreCliente" column="nombre_cliente"/>
  		<result property="emailCliente" column="email_cliente"/>
  	</resultMap>
- 	<insert id="create" parameterType="clienteModel">
- 		{call usp_tb_cliente_create(#{nombreCliente},#{emailCliente})}
+ 	<insert id="create" parameterType="clienteModel" statementType="CALLABLE">
+ 		{call usp_tb_cliente_create(#{idCliente, mode=OUT, jdbcType=NUMERIC},#{nombreCliente},#{emailCliente})}
  	</insert>
  	
  	<select id="read" resultMap="clienteResultMap">

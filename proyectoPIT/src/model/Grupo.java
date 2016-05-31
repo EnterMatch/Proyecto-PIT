@@ -2,31 +2,33 @@ package model;
 
 public class Grupo {
 	
-	private int id_grupo;
-	private String nombre;
+	private int idGrupo;
+	private String nombreGrupo;
 	
-	public Grupo(int id_grupo, String nombre) {
+	public int getIdGrupo() {
+		return idGrupo;
+	}
+	public void setIdGrupo(int idGrupo) {
+		this.idGrupo = idGrupo;
+	}
+	public String getNombreGrupo() {
+		return nombreGrupo;
+	}
+	public void setNombreGrupo(String nombreGrupo) {
+		this.nombreGrupo = nombreGrupo;
+	}
+	
+	public Grupo() {}
+	
+	public Grupo(int idGrupo, String nombreGrupo) {
 		super();
-		this.id_grupo = id_grupo;
-		this.nombre = nombre;
-	}
-
-	public int getId_grupo() {
-		return id_grupo;
-	}
-
-	public void setId_grupo(int id_grupo) {
-		this.id_grupo = id_grupo;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.idGrupo = idGrupo;
+		this.nombreGrupo = nombreGrupo;
 	}
 	
+	@Override
+	public String toString() {
+		return "Grupo [idGrupo=" + idGrupo + ", nombreGrupo=" + nombreGrupo + "]";
+	}
 	
-
 }

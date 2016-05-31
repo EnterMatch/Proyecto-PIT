@@ -2,52 +2,42 @@ package model;
 
 public class Usuario {
 	
-	private int id_usu;
-	private String nombre;
-	private String clave;
-	private int id_tipo_usu;
+	private int idUsuario;
+	private String nombreUsuario;
+	private String claveUsuario;
 	
-	public Usuario(int id_usu, String nombre, String clave, int id_tipo_usu) {
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
+	public String getClaveUsuario() {
+		return claveUsuario;
+	}
+	public void setClaveUsuario(String claveUsuario) {
+		this.claveUsuario = claveUsuario;
+	}
+	
+	public Usuario() {}
+	
+	public Usuario(int idUsuario, String nombreUsuario, String claveUsuario) {
 		super();
-		this.id_usu = id_usu;
-		this.nombre = nombre;
-		this.clave = clave;
-		this.id_tipo_usu = id_tipo_usu;
-	}
-
-	public int getId_usu() {
-		return id_usu;
-	}
-
-	public void setId_usu(int id_usu) {
-		this.id_usu = id_usu;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getClave() {
-		return clave;
-	}
-
-	public void setClave(String clave) {
-		this.clave = clave;
-	}
-
-	public int getId_tipo_usu() {
-		return id_tipo_usu;
-	}
-
-	public void setId_tipo_usu(int id_tipo_usu) {
-		this.id_tipo_usu = id_tipo_usu;
+		this.idUsuario = idUsuario;
+		this.nombreUsuario = nombreUsuario;
+		this.claveUsuario = claveUsuario;
 	}
 	
+	@Override
+	public String toString() {
+		return "Usuario [idUsuario=" + idUsuario + ", nombreUsuario=" + nombreUsuario + ", claveUsuario=" + claveUsuario
+				+ "]";
+	}
 	
-	
-
 }

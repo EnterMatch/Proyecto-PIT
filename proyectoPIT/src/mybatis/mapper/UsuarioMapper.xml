@@ -3,30 +3,31 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="mybatis.mapper.UsuarioMapper">
+ <mapper namespace="UsuarioMapper">
  
- <select id="getUsuarios" resultType="Usuario">
-        SELECT id_usu,
-        	   nombre_usu as nombre,
-        	   clave_usu as clave,
-        	   id_tipo_usu
-        FROM tb_usuario
+	<resultMap type="usuarioModel" id="usuarioResultMap">
+ 		<id property="idUsuario" column="is_usuario"/>
+ 		<result property="nombreUsuario" column="nombre_usuario"/>
+ 		<result property="claveUsuario" column="clave_usuario"/>
+ 	</resultMap>
+ 
+ 	<insert id="create" parameterType="usuarioModel" statementType="CALLABLE">
+ 		{call usp_tb_usuario_create(#{idUsuario},#{nombreUsuario},#{claveUsuario})}
+ 	</insert>
+ 
+ 	<select id="read" resultMap="usuarioResultMap">
+        {call usp_tb_usuario_read()}
+    </select>	
+    
+   	<update id="update" parameterType="usuarioModel">
+   		{call usp_tb_usuario_update(#{idUsuario},#{nombreUsuario},#{claveUsuario})}	
+   	</update>
+   	
+   	<delete id="delete" parameterType="int">
+   		{call usp_tb_usuario_delete(#{idUsuario})}
+   	</delete>
+    
+    <select id="obtain" parameterType="int" resultMap="usuarioResultMap">
+    	{call usp_tb_usuario_obtain(#{idUsuario})}
     </select>
-    
-   <insert id="registrar" parameterType="Usuario">
-    	insert into tb_usuario(id_usu,nombre_usu,clave_usu,id_tipo_usu)
-    	values(#{id_usu},#{nombre},#{clave},#{id_tipo_usu});
-    </insert> 
-    
-    <update id="actualizar" parameterType="Usuario">
-    	update tb_usuario set nombre_usu = #{nombre},
-    						clave_usu = #{clave}
-    				where id_usu = #{id_usu};
-    </update>
-    
-    <delete id="eliminar" parameterType="int">
-    	DELETE FROM tb_usuario
-    	WHERE id_usu = #{id_usu}
-    </delete>
-    
 </mapper>    

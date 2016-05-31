@@ -9,7 +9,7 @@ import model.Estado;
 import model.Prioridad;
 import mybatis.MyBatisUtil;
 
-public class EstadoPrioridadServices {
+public class EstadoService {
 
 	
 	

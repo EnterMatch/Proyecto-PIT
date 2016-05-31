@@ -44,6 +44,7 @@ public class EmpleadoService implements IService<Empleado> {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			result = session.update("EmpleadoMapper.update", empleado);
+			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -58,6 +59,7 @@ public class EmpleadoService implements IService<Empleado> {
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try {
 			result = session.delete("EmpleadoMapper.delete", idPersona);
+			session.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {

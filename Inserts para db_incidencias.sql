@@ -29,8 +29,10 @@ insert into tb_persona (nombre_persona, ape_pat_persona, ape_mat_persona, email_
 -- Operadores
 /* 13 */('Machin', 'Alberto', 'Lopez', 'malberto@gmail.com'), # Jef
 /* 14 */('Cesar', 'Pozo', 'Gimenez', 'cpozo@gmail.com'), #Tec
-/* 15 */('Luis', 'Gamarra', 'Mina', 'lgamarra@live`PRIMARY`.com'); #Esp
+/* 15 */('Luis', 'Gamarra', 'Mina', 'lgamarra@live`PRIMARY`.com'), #Esp
 
+# Extra para testing
+/* 16 */('Nombre', 'ApePat', 'ApeMat', 'na@gmail.com`.com');
 
 insert into tb_empleado (id_empleado, id_rol, id_grupo) values
 (1, 1, 1),

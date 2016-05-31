@@ -11,19 +11,7 @@ import mybatis.MyBatisUtil;
 
 public class EstadoPrioridadServices {
 
-	public static void main(String[] args) throws IOException {
-		
-		EstadoPrioridadServices testService=new EstadoPrioridadServices();
-			List<Estado> lista1 = testService.estados();
-			for (Estado e:lista1){
-				System.out.println(e.getDescrip_est());
-			}
-			
-			List<Prioridad> lista2 = testService.prioridades();
-			for (Prioridad p:lista2){
-				System.out.println(p.getDescrip_pri());
-			}
-	}
+	
 	
 	public static  List<Estado> estados()  {	
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession(); 

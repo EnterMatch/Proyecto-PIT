@@ -6,18 +6,18 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="model.Cliente" alias="clienteBean" />
-		<typeAlias type="model.Empresa" alias="empresaBean" />
-		<typeAlias type="model.EmpresaCliente" alias="empresaClienteBean" />
-		<typeAlias type="model.Estado" alias="estado" />
-		<typeAlias type="model.Grupo" alias="grupoBean" />
-		<typeAlias type="model.Incidencia" alias="incidenciaBean" />
-		<typeAlias type="model.Operador" alias="operadorBean" />
-		<typeAlias type="model.Persona" alias="personaBean" />
-		<typeAlias type="model.Prioridad" alias="prioridad" />
-		<typeAlias type="model.Tipo_Operador" alias="tipoOperadorBean" />
-		<typeAlias type="model.Tipo_Usuario" alias="tipoUsuarioBean" />
-		<typeAlias type="model.Usuario" alias="usuarioBean" />
+		<typeAlias type="model.Cliente" alias="clienteModel" />
+		<typeAlias type="model.Empleado" alias="empleadoModel" />
+		<typeAlias type="model.Empresa" alias="empresaModel" />
+		<typeAlias type="model.EmpresaCliente" alias="empresaClienteModel" />
+		<typeAlias type="model.Estado" alias="estadoModel" />
+		<typeAlias type="model.Grupo" alias="grupoModel" />
+		<typeAlias type="model.Incidencia" alias="incidenciaModel" />
+		<typeAlias type="model.Operador" alias="operadorModel" />
+		<typeAlias type="model.Persona" alias="personaModel" />
+		<typeAlias type="model.Prioridad" alias="prioridadModel" />
+		<typeAlias type="model.Rol" alias="rolModel" />
+		<typeAlias type="model.Usuario" alias="usuarioModel" />
 	</typeAliases>
 	
 	<environments default="proyectoPIT">
@@ -35,9 +35,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 
 	<mappers>
-<!-- 		<package name="mybatis.mapper"/> -->  
-		<mapper resource="mybatis/mapper/EstadoPrioridadMapper.xml"/> 
-		<mapper resource="mybatis/mapper/EmpresaMapper.xml"/> 
+		<mapper resource="mybatis/mapper/ClienteMapper.xml"/>
+		<mapper resource="mybatis/mapper/EmpleadoMapper.xml"/>
 	</mappers>
 
 </configuration>

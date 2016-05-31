@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="model.Cliente" alias="clienteModel" />
+		<typeAlias type="model.Empleado" alias="empleadoModel" />
+		<typeAlias type="model.Empresa" alias="empresaModel" />
+		<typeAlias type="model.EmpresaCliente" alias="empresaClienteModel" />
+		<typeAlias type="model.Estado" alias="estadoModel" />
+		<typeAlias type="model.Grupo" alias="grupoModel" />
+		<typeAlias type="model.Incidencia" alias="incidenciaModel" />
+		<typeAlias type="model.Operador" alias="operadorModel" />
+		<typeAlias type="model.Persona" alias="personaModel" />
+		<typeAlias type="model.Prioridad" alias="prioridadModel" />
+		<typeAlias type="model.Rol" alias="rolModel" />
+		<typeAlias type="model.Usuario" alias="usuarioModel" />
+	</typeAliases>
+	
+	<environments default="proyectoPIT">
+
+		<environment id="proyectoPIT">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://localhost/db_incidencias"/>
+				<property name="username" value="root" />
+				<property name="password" value="mysql" />
+			</dataSource>
+
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="mybatis/mapper/ClienteMapper.xml"/>
+		<mapper resource="mybatis/mapper/EmpleadoMapper.xml"/>
+	</mappers>
+
+</configuration>
+
+

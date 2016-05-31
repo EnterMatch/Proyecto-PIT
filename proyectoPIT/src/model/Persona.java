@@ -2,72 +2,55 @@ package model;
 
 public class Persona {
 	
-	private int id_per;
-	private String nombre;
-	private String apepat;
-	private String apemat;
-	private String email;
-	private int id_usu;
+	protected int idPersona;
+	protected String nombrePersona;
+	protected String apePatPersona;
+	protected String apeMatPersona;
+	protected String emailPersona;
 	
-	public Persona(int id_per, String nombre, String apepat, String apemat,
-			String email, int id_usu) {
+	
+	public int getIdPersona() {
+		return idPersona;
+	}
+	public void setIdPersona(int idPersona) {
+		this.idPersona = idPersona;
+	}
+	public String getNombrePersona() {
+		return nombrePersona;
+	}
+	public void setNombrePersona(String nombrePersona) {
+		this.nombrePersona = nombrePersona;
+	}
+	public String getApePatPersona() {
+		return apePatPersona;
+	}
+	public void setApePatPersona(String apePatPersona) {
+		this.apePatPersona = apePatPersona;
+	}
+	public String getApeMatPersona() {
+		return apeMatPersona;
+	}
+	public void setApeMatPersona(String apeMatPersona) {
+		this.apeMatPersona = apeMatPersona;
+	}
+	public String getEmailPersona() {
+		return emailPersona;
+	}
+	public void setEmailPersona(String emailPersona) {
+		this.emailPersona = emailPersona;
+	}
+	
+	public Persona(){}
+	
+	public Persona(int idPersona, String nombrePersona, String apePatPersona, String apeMatPersona,
+			String emailPersona) {
 		super();
-		this.id_per = id_per;
-		this.nombre = nombre;
-		this.apepat = apepat;
-		this.apemat = apemat;
-		this.email = email;
-		this.id_usu = id_usu;
-	}
-
-	public int getId_per() {
-		return id_per;
-	}
-
-	public void setId_per(int id_per) {
-		this.id_per = id_per;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApepat() {
-		return apepat;
-	}
-
-	public void setApepat(String apepat) {
-		this.apepat = apepat;
-	}
-
-	public String getApemat() {
-		return apemat;
-	}
-
-	public void setApemat(String apemat) {
-		this.apemat = apemat;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public int getId_usu() {
-		return id_usu;
-	}
-
-	public void setId_usu(int id_usu) {
-		this.id_usu = id_usu;
+		this.idPersona = idPersona;
+		this.nombrePersona = nombrePersona;
+		this.apePatPersona = apePatPersona;
+		this.apeMatPersona = apeMatPersona;
+		this.emailPersona = emailPersona;
 	}
 	
 	
-
 }

@@ -6,19 +6,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <mapper namespace="ClienteMapper">
  
- 	<insert id="registrar" parameterType="cliente">
- 		insert into tb_cliente
- 		values (#{id_per})
+ 	<resultMap type="clienteModel" id="clienteResultMap">
+ 		<result property="idCliente" column="id_cliente"/>
+ 		<result property="nombreCliente" column="nombre_cliente"/>
+ 		<result property="emailCliente" column="email_cliente"/>
+ 	</resultMap>
+ 	<insert id="create" parameterType="clienteModel" statementType="CALLABLE">
+ 		{call usp_tb_cliente_create(#{idCliente, mode=OUT, jdbcType=NUMERIC},#{nombreCliente},#{emailCliente})}
  	</insert>
  	
- 	<delete id="eliminar" parameterType="int">
- 		delete from tb_cliente
- 		where id_per=#{id}
- 	</delete>
- 	
- 	<select id="getClientes" resultMap="cliente">
- 		select 	id_per
- 		from tb_cliente
+ 	<select id="read" resultMap="clienteResultMap">
+ 		{call usp_tb_cliente_read()}
  	</select>
  	
+ 	<update id="update" parameterType="clienteModel">
+ 		{call usp_tb_cliente_update(#{idCliente},#{nombreCliente},#{emailCliente})}
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="int">
+ 		{call usp_tb_cliente_delete(#{idCliente})}
+ 	</delete>
+ 	
+ 	<select id="obtain" parameterType="int" resultMap="clienteResultMap">
+ 		{call usp_tb_cliente_obtain(#{idCliente})}
+ 	</select>
  </mapper>

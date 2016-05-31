@@ -1,24 +1,34 @@
 package model;
 
 public class Estado {
-	private int id_est;
-    private String descrip_est;
-    
-	public int getId_est() {
-		return id_est;
+	
+	private int idEstado;
+	private String descripEstado;
+	
+	public int getIdEstado() {
+		return idEstado;
 	}
-	public void setId_est(int id_est) {
-		this.id_est = id_est;
+	public void setIdEstado(int idEstado) {
+		this.idEstado = idEstado;
 	}
-	public String getDescrip_est() {
-		return descrip_est;
+	public String getDescripEstado() {
+		return descripEstado;
 	}
-	public void setDescrip_est(String descrip_est) {
-		this.descrip_est = descrip_est;
+	public void setDescripEstado(String descripEstado) {
+		this.descripEstado = descripEstado;
 	}
+	
+	public Estado() {}
+	
+	public Estado(int idEstado, String descripEstado) {
+		super();
+		this.idEstado = idEstado;
+		this.descripEstado = descripEstado;
+	}
+	
 	@Override
 	public String toString() {
-		return "Estado [id_est=" + id_est + ", descrip_est=" + descrip_est +"]";
+		return "Estado [idEstado=" + idEstado + ", descripEstado=" + descripEstado + "]";
 	}
-    
+	
 }

@@ -1,27 +1,34 @@
 package model;
 
 public class Prioridad {
-	private int id_pri;
-    private String descrip_pri;
-    
-	public int getId_pri() {
-		return id_pri;
+	
+	private int idPrioridad;
+	private String descripPrioridad;
+	
+	public int getIdPrioridad() {
+		return idPrioridad;
 	}
-
-	public void setId_pri(int id_pri) {
-		this.id_pri = id_pri;
+	public void setIdPrioridad(int idPrioridad) {
+		this.idPrioridad = idPrioridad;
 	}
-
-	public String getDescrip_pri() {
-		return descrip_pri;
+	public String getDescripPrioridad() {
+		return descripPrioridad;
 	}
-
-	public void setDescrip_pri(String descrip_pri) {
-		this.descrip_pri = descrip_pri;
+	public void setDescripPrioridad(String descripPrioridad) {
+		this.descripPrioridad = descripPrioridad;
 	}
+	
+	public Prioridad() {}
+	
+	public Prioridad(int idPrioridad, String descripPrioridad) {
+		super();
+		this.idPrioridad = idPrioridad;
+		this.descripPrioridad = descripPrioridad;
+	}
+	
 	@Override
 	public String toString() {
-		return "Prioridad [id_pri=" + id_pri + ", descrip_pri=" + descrip_pri +"]";
+		return "Prioridad [idPrioridad=" + idPrioridad + ", descripPrioridad=" + descripPrioridad + "]";
 	}
-    
+	
 }

@@ -1,0 +1,83 @@
+package service;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import model.Empleado;
+import mybatis.MyBatisUtil;
+
+public class EmpleadoService implements IService<Empleado> {
+
+	@Override
+	public int create(Empleado empleado) {
+		int result = 0;
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			result = session.insert("EmpleadoMapper.create",empleado);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+
+	@Override
+	public List<Empleado> read() {
+		List<Empleado> empleados = null;
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			empleados = session.selectList("EmpleadoMapper.read");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return empleados;
+	}
+
+	@Override
+	public int update(Empleado empleado) {
+		int result = 0;
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			result = session.update("EmpleadoMapper.update", empleado);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int delete(int idPersona) {
+		int result = 0;
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			result = session.delete("EmpleadoMapper.delete", idPersona);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return result; 
+	}
+
+	@Override
+	public Empleado obtain(int idPersona) {
+		Empleado empleado = null;
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		try {
+			empleado = session.selectOne("EmpleadoMapper.obtain", idPersona);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return empleado; 
+	}
+
+}

@@ -1,30 +1,33 @@
 package model;
 
 public class EmpresaCliente {
-	private int id_emp;
-    private int id_per;
-    
-	public EmpresaCliente(int id_emp, int id_per) {
+	private int idEmpresa;
+	private int idCliente;
+	
+	public int getIdEmpresa() {
+		return idEmpresa;
+	}
+	public void setIdEmpresa(int idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
+	public int getIdCliente() {
+		return idCliente;
+	}
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+	
+	public EmpresaCliente() {}
+	
+	public EmpresaCliente(int idEmpresa, int idCliente) {
 		super();
-		this.id_emp = id_emp;
-		this.id_per = id_per;
+		this.idEmpresa = idEmpresa;
+		this.idCliente = idCliente;
 	}
-
-	public int getId_emp() {
-		return id_emp;
+	@Override
+	public String toString() {
+		return "EmpresaCliente [idEmpresa=" + idEmpresa + ", idCliente=" + idCliente + "]";
 	}
-
-	public void setId_emp(int id_emp) {
-		this.id_emp = id_emp;
-	}
-
-	public int getId_per() {
-		return id_per;
-	}
-
-	public void setId_per(int id_per) {
-		this.id_per = id_per;
-	}
-    
-    
+	
+	
 }

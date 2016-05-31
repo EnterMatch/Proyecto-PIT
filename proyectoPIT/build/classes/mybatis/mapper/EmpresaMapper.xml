@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="EmpresaMapper">
+
+	 <select id="listadoEmpresa" resultType="empresaBean">
+        SELECT *
+        FROM tb_empresa
+     </select>
+	
+	<select id="obtener" resultType="empresaBean" parameterType="int">
+		SELECT *
+        FROM tb_empresa WHERE id_emp = #{id_emp}
+	</select>
+     
+        
+        <insert id="registrar" parameterType="empresaBean">
+        	insert into tb_empresa(id_emp, razSoc)
+        	values(#{id},#{razonSocial});
+        </insert>
+        <delete id="eliminar" parameterType="int">
+        	DELETE FROM tb_empresa
+        	WHERE id_emp=#{id}
+        </delete>
+        
+        <update id="modificar" parameterType="empresaBean">
+        	UPDATE tb_empresa 
+        	set razSoc=#{razonSocial}
+        	WHERE id_emp=#{id}
+        </update>
+        
+        <select id="ConsultaEmpresa" parameterType="empresaBean">
+        SELECT id_emp as id,
+        	   razSoc as razonSocial
+        FROM tb_empresa
+        WHERE id_emp=#{id}
+     </select>
+        
+        
+</mapper>

@@ -1,20 +1,44 @@
 package model;
 
 public class Cliente {
-	private int id_per;
-
-	public Cliente(int id_per) {
-		super();
-		this.id_per = id_per;
+	private int idCliente;
+	private String nombreCliente;
+	private String emailCliente;
+	
+	public int getIdCliente() {
+		return idCliente;
 	}
-
-	public int getId_per() {
-		return id_per;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
-
-	public void setId_per(int id_per) {
-		this.id_per = id_per;
+	public String getNombreCliente() {
+		return nombreCliente;
+	}
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
+	}
+	public String getEmailCliente() {
+		return emailCliente;
+	}
+	public void setEmailCliente(String emailCliente) {
+		this.emailCliente = emailCliente;
 	}
 	
+	
+	
+	public Cliente() {
+		super();
+	}
+	public Cliente(int idCliente, String nombreCliente, String emailCliente) {
+		super();
+		this.idCliente = idCliente;
+		this.nombreCliente = nombreCliente;
+		this.emailCliente = emailCliente;
+	}
+	@Override
+	public String toString() {
+		return "Cliente [idCliente=" + idCliente + ", nombreCliente=" + nombreCliente + ", emailCliente=" + emailCliente
+				+ "]";
+	}
 	
 }

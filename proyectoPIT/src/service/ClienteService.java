@@ -25,16 +25,16 @@ public class ClienteService implements IService<Cliente>{
 	
 	@Override
 	public List<Cliente> read(){
-		List<Cliente> lista = null;
+		List<Cliente> clientes = null;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			lista = session.selectList("ClienteMapper.read");
+			clientes = session.selectList("ClienteMapper.read");
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			session.close();
 		}
-		return lista;
+		return clientes;
 	}
 	
 	@Override

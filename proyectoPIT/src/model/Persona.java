@@ -2,11 +2,11 @@ package model;
 
 public class Persona {
 	
-	private int idPersona;
-	private String nombrePersona;
-	private String apePatPersona;
-	private String apeMatPersona;
-	private String emailPersona;
+	protected int idPersona;
+	protected String nombrePersona;
+	protected String apePatPersona;
+	protected String apeMatPersona;
+	protected String emailPersona;
 	
 	
 	public int getIdPersona() {

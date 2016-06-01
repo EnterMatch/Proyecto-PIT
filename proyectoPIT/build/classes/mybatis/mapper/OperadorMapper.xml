@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <mapper namespace="mybatis.mapper.OperadorMapper">
  
+<<<<<<< HEAD
  	<resultMap type="operadorModel" id="operadorResultMap">
  		<result property="idPersona" column="id_persona"/>
  		<result property="nombrePersona" column="nombre_persona"/>
@@ -34,6 +35,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	
  	<select id="obtain" parameterType="int" resultMap="operadorResultMap">
  		{call USP_TB_OPERADOR_OBTAIN(#{idPersona})}
+=======
+ 	<insert id="registrar" parameterType="operador">
+ 		insert into tb_operador
+ 		values (#{id_per},#{id_tipo_ope},#{id_gru})
+ 	</insert>
+ 	
+ 	<update id="actualizar" parameterType="operador">
+ 		update tb_operador set  id_tipo_ope=#{id_tipo_ope},
+ 								id_gru=#{id_gru}
+ 		where id_per=#{id_per}
+ 	</update>
+ 	
+ 	<delete id="eliminar" parameterType="int">
+ 		delete from tb_operador
+ 		where id_per=#{id}
+ 	</delete>
+ 	
+ 	<select id="getOperadores" resultMap="operador">
+ 		select 	id_per,
+				id_tipo_ope,
+				id_grupo,
+ 		from tb_operador
+>>>>>>> master
  	</select>
  
  </mapper>

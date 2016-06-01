@@ -37,6 +37,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<mapper resource="mybatis/mapper/ClienteMapper.xml"/>
 		<mapper resource="mybatis/mapper/EmpleadoMapper.xml"/>
+		<mapper resource="mybatis/mapper/RolMapper.xml"/>
+		<mapper resource="mybatis/mapper/UsuarioMapper.xml"/>
+		<mapper resource="mybatis/mapper/EmpresaMapper.xml"/>
+		<mapper resource="mybatis/mapper/EmpresaClienteMapper.xml"/>
 	</mappers>
 
 </configuration>

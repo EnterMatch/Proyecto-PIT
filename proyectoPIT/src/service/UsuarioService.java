@@ -4,63 +4,86 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-
 import model.Usuario;
 import mybatis.MyBatisUtil;
-import mybatis.mapper.UsuarioMapper;
 
-public class UsuarioService {
-	
-	public int registrar(Usuario reg){
-		int ok = 0;
-		
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			UsuarioMapper usuarioMapper = session.getMapper(UsuarioMapper.class);
-			ok = usuarioMapper.registrar(reg);
-			//System.out.println(ok);
-		}catch(Exception e){
+public class UsuarioService implements IService<Usuario>{
+
+	@Override
+	public int create(Usuario usuario) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		try {
+			result = session.insert("UsuarioMapper.create",usuario);
+			session.commit();
+		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return ok;
+		return result;
 	}
-	
-	public int actualizar(Usuario reg){
-		int ok = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			UsuarioMapper usuarioMapper = session.getMapper(UsuarioMapper.class);
-			ok = usuarioMapper.actualizar(reg);
-		}catch(Exception e){
+
+	@Override
+	public List<Usuario> read() {
+		List<Usuario> usuarios = null;
+		SqlSession session = getSqlSession();
+		try {
+			usuarios = session.selectList("UsuarioMapper.read");
+		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return ok;
+		return usuarios;
 	}
-	
-	public int eliminar(int id){
-		int ok = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			UsuarioMapper usuarioMapper = session.getMapper(UsuarioMapper.class);
-			ok = usuarioMapper.eliminar(id);
-		}catch(Exception e){
+
+	@Override
+	public int update(Usuario usuario) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		try {
+			result = session.update("UsuarioMapper.update", usuario);
+			session.commit();
+		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return ok;
+		return result;
 	}
-	
-	
-	
-	public List<Usuario> listadoUsuarios(){
-		List<Usuario> lista = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			UsuarioMapper usuarioMapper = session.getMapper(UsuarioMapper.class);
-			lista = usuarioMapper.getUsuarios();
-		}catch(Exception e){
+
+	@Override
+	public int delete(int idUsuario) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		try {
+			result = session.delete("UsuarioMapper.delete", idUsuario);
+			session.commit();
+		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			session.close();
 		}
-		return lista;
+		return result;
+	}
+
+	@Override
+	public Usuario obtain(int idUsuario) {
+		Usuario usuario = null;
+		SqlSession session = getSqlSession();
+		try {
+			usuario = session.selectOne("UsuarioMapper.obtain", idUsuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return usuario;
+	}
+
+	private SqlSession getSqlSession() {
+		return MyBatisUtil.getSqlSessionFactory().openSession();
 	}
 
 }

@@ -3,6 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="IncidenciaMapper">
+<<<<<<< HEAD
  	
  	<resultMap type="idIncidencia" id="clienteResultMap">
  		<result property="descripIncidencia" 	column="id_incidencia"/>
@@ -31,5 +32,34 @@
 	</delete>
 	<select id="obtain" parameterType="int" resultType = "incidenciaBean">
 	{call USP_TB_INCIDENCIA_OBTAIN(#{id_incidencia, mode=OUT, jdbcType=NUMERIC})}
+=======
+	<insert id="create" parameterType="incidenciaBean">
+		INSERT tb_incidencia 
+		VALUES(null,#{descrip_inc},#{fec_ing_inc},#{resumen_inc},
+				#{solucion_inc},#{id_per_cli},#{id_gru},#{id_per_ope},#{id_est},#{id_pri})
+	</insert>
+	<select id = "read" resultType = "incidenciaBean">
+		SELECT * FROM tb_incidencia
+	</select>
+	<update id="update" parameterType="incidenciaBean">
+		UPDATE tb_incidencia SET
+			  	descrip_inc = #{descrip_inc}, 
+				fec_ing_inc = #{fec_ing_inc},
+				resumen_inc = #{resumen_inc}, 
+				solucion_inc = #{solucion_inc},
+				id_per_cli = #{id_per_cli},
+				id_gru = #{id_gru},
+				id_per_ope = #{id_per_ope},
+				id_est = #{id_est},
+				id_pri = #{id_pri}
+		WHERE 	id_inc = #{id_inc}
+	</update>
+	<delete id="delete" parameterType="int">
+		DELETE FROM tb_incidencia WHERE id_inc = #{id_inc}
+	</delete>
+	<select id="obtain" parameterType="int" resultType = "incidenciaBean">
+		SELECT * FROM tb_incidencia
+		WHERE id_inc = #{id_inc}
+>>>>>>> master
 	</select>
 </mapper>

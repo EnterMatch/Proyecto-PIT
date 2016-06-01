@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="EmpresaMapper">
 
+<<<<<<< HEAD
 	 <select id="listadoEmpresa" resultType="empresaBean">
         SELECT *
         FROM tb_empresa
@@ -41,4 +42,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      </select>
         
         
+=======
+     <resultMap type="empresaModel" id="empresaResultMap">
+     <id  property="idEmpresa" column="id_empresa" />
+     <result property="razSocEmpresa" column="raz_soc_empresa"/>
+     </resultMap>
+     
+    <select id="read" resultMap="clienteResultMap">
+ 		{call usp_tb_empresa_read()}
+ 	</select>
+ 	
+ 	<select id="obtain" parameterType="int" resultMap="empresaResultMap">
+ 		{call usp_tb_empresa_obtain(#{idEmpresa})}
+ 	</select>
+     
+
+	 
+>>>>>>> master
 </mapper>

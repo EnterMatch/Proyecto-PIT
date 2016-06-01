@@ -1,82 +1,56 @@
 package service;
 
 import java.util.List;
-import mybatis.MyBatisUtil;
+
 import org.apache.ibatis.session.SqlSession;
-import model.Cliente;
+
 import model.Rol;
+import mybatis.MyBatisUtil;
 
 public class RolService implements IService<Rol>{
-	
+
 	@Override
-	public int create(Rol rol){
-		int result = 0;
-		
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			result = session.insert("RolMapper.create", rol);
-			session.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return result;
+	public int create(Rol rol) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
+
 	@Override
-	public List<Rol> read(){
-		List<Rol> rol = null;
+	public List<Rol> read() {
+		List<Rol> rols = null;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			rol = session.selectList("RolMapper.read");
-		}catch(Exception e){
+		try {
+			rols = session.selectList("RolMapper.read");
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		}finally {
 			session.close();
 		}
-		return rol;
+		return rols;
 	}
-	
+
 	@Override
-	public int update(Rol rol) {
-		int result = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			result = session.update("RolMapper.update",rol);
-			session.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return result;
+	public int update(Rol object) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
-	
+
 	@Override
-	public int delete(int idRol) {
-		int result = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			result = session.delete("RolMapper.delete", idRol);
-			session.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			session.close();
-		}
-		return result;
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public Rol obtain(int idRol) {
+		// TODO Auto-generated method stub
 		Rol rol = null;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
+		try {
 			rol = session.selectOne("RolMapper.obtain", idRol);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		}finally {
 			session.close();
 		}
 		return rol;

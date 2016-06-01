@@ -1,33 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper 
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="RolMapper"> 
-
-	<resultMap type="rolModel" id="rolResultMap">
+ 
+ <mapper namespace="RolMapper">
+ 
+ 	<resultMap type="rolModel" id="rolResultMap">
  		<result property="idRol" column="id_rol"/>
  		<result property="descripRol" column="descrip_rol"/>
  	</resultMap>
-	
-	<insert id="create" parameterType="rolModel" statementType="CALLABLE">
- 		{call USP_TB_ROL_CREATE(#{descrip_rol})}
- 	</insert>
  	
-	<select id="read" resultMap="rolResultMap">
- 		{call USP_TB_ROL_READ()}
+ 	<select id="read" resultMap="rolResultMap">
+ 		{call usp_tb_rol_read()}
  	</select>
- 	
- 	<update id="update" parameterType="rolModel">
- 		{call USP_TB_ROL_UPDATE(#{idRol},#{descripRol})}
- 	</update>
- 	
- 	<delete id="delete" parameterType="int">
- 		{call USP_TB_ROL_DELETE(#{idRol})}
- 	</delete>
  	
  	<select id="obtain" parameterType="int" resultMap="rolResultMap">
- 		{call USP_TB_ROL_OBTAIN(#{idRol})}
+ 		{call usp_tb_rol_obtain(#{idRol})}
  	</select>
-
-</mapper>
+ </mapper>

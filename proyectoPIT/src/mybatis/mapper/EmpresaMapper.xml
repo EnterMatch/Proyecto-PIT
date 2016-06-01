@@ -7,38 +7,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="EmpresaMapper">
 
-	 <select id="listadoEmpresa" resultType="empresaBean">
-        SELECT *
-        FROM tb_empresa
-     </select>
-	
-	<select id="obtener" resultType="empresaBean" parameterType="int">
-		SELECT *
-        FROM tb_empresa WHERE id_emp = #{id_emp}
-	</select>
+     <resultMap type="empresaModel" id="empresaResultMap">
+     <id  property="idEmpresa" column="id_empresa" />
+     <result property="razSocEmpresa" column="raz_soc_empresa"/>
+     </resultMap>
      
-        
-        <insert id="registrar" parameterType="empresaBean">
-        	insert into tb_empresa(id_emp, razSoc)
-        	values(#{id},#{razonSocial});
-        </insert>
-        <delete id="eliminar" parameterType="int">
-        	DELETE FROM tb_empresa
-        	WHERE id_emp=#{id}
-        </delete>
-        
-        <update id="modificar" parameterType="empresaBean">
-        	UPDATE tb_empresa 
-        	set razSoc=#{razonSocial}
-        	WHERE id_emp=#{id}
-        </update>
-        
-        <select id="ConsultaEmpresa" parameterType="empresaBean">
-        SELECT id_emp as id,
-        	   razSoc as razonSocial
-        FROM tb_empresa
-        WHERE id_emp=#{id}
-     </select>
-        
-        
+    <select id="read" resultMap="clienteResultMap">
+ 		{call usp_tb_empresa_read()}
+ 	</select>
+ 	
+ 	<select id="obtain" parameterType="int" resultMap="empresaResultMap">
+ 		{call usp_tb_empresa_obtain(#{idEmpresa})}
+ 	</select>
+     
+
+	 
 </mapper>

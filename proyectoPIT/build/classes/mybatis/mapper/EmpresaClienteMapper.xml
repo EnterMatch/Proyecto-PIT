@@ -7,6 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="EmpresaClienteMapper">
 
+<<<<<<< HEAD
 	<resultMap id="datosEmpresa" type="empresaClienteBean">
         	<id column="id_emp" property="id" jdbcType="INTEGER"/>
         	<result column="id_per" property="idPersona" jdbcType="INTEGER"/>
@@ -43,5 +44,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE id_emp=#{id}
      </select>
         
+=======
+	<resultMap type="empresaClienteModel" id="empresaclienteResultMap">
+        	<id property="idEmpresa" column="id_empresa"/>
+        	<id property="idCliente" column="id_cliente" />
+    </resultMap>
+
+     <select id="read" resultMap="empresaclienteResultMap">
+ 		{call usp_tb_empresa_cliente_read()}
+ 	</select>
+
+    <select id="obtain" parameterType="empresaClienteModel" resultMap="empresaclienteResultMap">
+ 		{call usp_tb_empresa_cliente_obtain(#{idEmpresa},#{idCliente})}
+ 	</select>
+>>>>>>> master
         
 </mapper>

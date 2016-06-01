@@ -3,19 +3,18 @@ package service;
 import java.util.List;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
-
 import model.Cliente;
-import model.Operador;
+import model.Rol;
 
-public class OperadorService implements IService<Operador>{
-
+public class RolService implements IService<Rol>{
+	
 	@Override
-	public int create(Operador operador){
+	public int create(Rol rol){
 		int result = 0;
 		
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			result = session.insert("OperadorMapper.create", operador);
+			result = session.insert("RolMapper.create", rol);
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -26,25 +25,25 @@ public class OperadorService implements IService<Operador>{
 	}
 	
 	@Override
-	public List<Operador> read(){
-		List<Operador> operador = null;
+	public List<Rol> read(){
+		List<Rol> rol = null;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			operador = session.selectList("OperadorMapper.read");
+			rol = session.selectList("RolMapper.read");
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			session.close();
 		}
-		return operador;
+		return rol;
 	}
 	
 	@Override
-	public int update(Operador operador) {
+	public int update(Rol rol) {
 		int result = 0;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			result = session.update("OperadorMapper.update",operador);
+			result = session.update("RolMapper.update",rol);
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -55,11 +54,11 @@ public class OperadorService implements IService<Operador>{
 	}
 	
 	@Override
-	public int delete(int idOperador) {
+	public int delete(int idRol) {
 		int result = 0;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			result = session.delete("OperadorMapper.delete", idOperador);
+			result = session.delete("RolMapper.delete", idRol);
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -70,16 +69,17 @@ public class OperadorService implements IService<Operador>{
 	}
 
 	@Override
-	public Operador obtain(int idOperador) {
-		Operador operador = null;
+	public Rol obtain(int idRol) {
+		Rol rol = null;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			operador = session.selectOne("OperadorMapper.obtain", idOperador);
+			rol = session.selectOne("RolMapper.obtain", idRol);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			session.close();
 		}
-		return operador;
+		return rol;
 	}
+	
 }

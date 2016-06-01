@@ -3,32 +3,33 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="IncidenciaMapper">
+ 	
+ 	<resultMap type="idIncidencia" id="clienteResultMap">
+ 		<result property="descripIncidencia" 	column="id_incidencia"/>
+ 		<result property="fecIngIncidencia" 	column="fec_ing_inc"/>
+ 		<result property="resumenIncidencia" 	column="resumen_inc"/>
+ 		<result property="solucionIncidencia" 	column="solucion_inc"/>
+ 		<result property="idCliente" 			column="id_per_cli"/>
+ 		<result property="idGrupo" 				column="id_gru"/>
+ 		<result property="idOperador" 			column="id_per_ope"/>
+ 		<result property="idEmpleado" 			column="id_empleado"/>
+ 		<result property="idEstado" 			column="id_est"/>
+ 		<result property="idPrioridad" 			column="id_pri"/>
+ 	</resultMap>
+
 	<insert id="create" parameterType="incidenciaBean">
-		INSERT tb_incidencia 
-		VALUES(null,#{descrip_inc},#{fec_ing_inc},#{resumen_inc},
-				#{solucion_inc},#{id_per_cli},#{id_gru},#{id_per_ope},#{id_est},#{id_pri})
+	 {call USP_TB_INCIDENCIA_CREATE(#{id_incidencia, mode=OUT, jdbcType=NUMERIC},#{fec_ing_inc},#{resumen_inc},#{solucion_inc},#{id_per_cli},#{id_gru},{id_per_ope},#{id_empleado},#{id_est},#{id_pri})}
 	</insert>
-	<select id = "read" resultType = "incidenciaBean">
-		SELECT * FROM tb_incidencia
+	<select id = "read" resultType = "incidenciaModel">
+	{call USP_TB_INCIDENCIA_READ () }
 	</select>
-	<update id="update" parameterType="incidenciaBean">
-		UPDATE tb_incidencia SET
-			  	descrip_inc = #{descrip_inc}, 
-				fec_ing_inc = #{fec_ing_inc},
-				resumen_inc = #{resumen_inc}, 
-				solucion_inc = #{solucion_inc},
-				id_per_cli = #{id_per_cli},
-				id_gru = #{id_gru},
-				id_per_ope = #{id_per_ope},
-				id_est = #{id_est},
-				id_pri = #{id_pri}
-		WHERE 	id_inc = #{id_inc}
+	<update id="update" parameterType="incidenciaModel" statementType="CALLABLE">
+	{call USP_TB_INCIDENCIA_UPDATE(#{id_incidencia, mode=OUT, jdbcType=NUMERIC},#{fec_ing_inc},#{resumen_inc},#{solucion_inc},#{id_per_cli},#{id_gru},{id_per_ope},#{id_empleado},#{id_est},#{id_pri})}
 	</update>
 	<delete id="delete" parameterType="int">
-		DELETE FROM tb_incidencia WHERE id_inc = #{id_inc}
+	{call USP_TB_INCIDENCIA_DELETE(#{id_incidencia, mode=OUT, jdbcType=NUMERIC}) }
 	</delete>
 	<select id="obtain" parameterType="int" resultType = "incidenciaBean">
-		SELECT * FROM tb_incidencia
-		WHERE id_inc = #{id_inc}
+	{call USP_TB_INCIDENCIA_OBTAIN(#{id_incidencia, mode=OUT, jdbcType=NUMERIC})}
 	</select>
 </mapper>

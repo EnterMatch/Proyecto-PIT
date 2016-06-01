@@ -6,54 +6,71 @@ import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import model.Grupo;
 
-public class GrupoService {
+public class GrupoService implements IService<Grupo> {
 
-	public int registrar(Grupo reg){
-		int ok = 0;
+	@Override
+	public int create(Grupo object) {
+		int result = 0;
 		
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			ok = session.insert("GrupoMapper.registrar", reg);
+			result = session.insert("GrupoMapper.create", object);
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
-		return ok;
+		return result;
 	}
-	
-	public int actualizar(Grupo reg){
-		int ok = 0;
+
+	@Override
+	public List<Grupo> read() {
+		List<Grupo> grupo = null;
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
 		try{
-			ok = session.update("GrupoMapper.actualizar", reg);
+			grupo = session.selectList("GrupoMapper.read");
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return grupo;
+	}
+
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Grupo obtain(int id) {
+		Grupo incidente = null;
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		try{
+			incidente = session.selectOne("GrupoMapper.obtain", id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return incidente;
+	}
+
+	@Override
+	public int update(Grupo object) {
+		int result = 0;
+		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		try{
+			result = session.update("GrupoMapper.update",object);
 			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
+		}finally{
+			session.close();
 		}
-		return ok;
-	}
-	
-	public int eliminar(int id){
-		int ok = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			ok = session.delete("GrupoMapper.eliminar", id);
-			session.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return ok;
-	}
-	
-	public List<Grupo> listadoGrupos(){
-		List<Grupo> lista = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
-		try{
-			lista = session.selectList("GrupoMapper.getGrupos");
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return lista;
-	}
+		return result;
+	}	
 	
 }

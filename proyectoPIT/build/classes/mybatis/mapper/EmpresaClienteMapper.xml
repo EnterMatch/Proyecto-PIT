@@ -7,41 +7,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="EmpresaClienteMapper">
 
-	<resultMap id="datosEmpresa" type="empresaClienteBean">
-        	<id column="id_emp" property="id" jdbcType="INTEGER"/>
-        	<result column="id_per" property="idPersona" jdbcType="INTEGER"/>
+	<resultMap type="empresaClienteModel" id="empresaclienteResultMap">
+        	<id property="idEmpresa" column="id_empresa"/>
+        	<id property="idCliente" column="id_cliente" />
     </resultMap>
 
+     <select id="read" resultMap="empresaclienteResultMap">
+ 		{call usp_tb_empresa_cliente_read()}
+ 	</select>
 
-    <select id="listadoEmpresaCliente" resultType="model.Empresa">
-        SELECT id_emp as id,
-        	   id_per as idPersona
-        FROM tb_empresa_cliente
-     </select>
-
-     
-        
-        <insert id="registrar" parameterType="empresaCliente">
-        	insert into tb_empresa_cliente(id_emp, id_per)
-        	values(#{id},#{idPersona});
-        </insert>
-        <delete id="eliminar" parameterType="int">
-        	DELETE FROM tb_empresa_cliente
-        	WHERE id_emp=#{id}
-        </delete>
-        
-        <update id="modificar" parameterType="empresaCliente">
-        	UPDATE tb_empresa_cliente 
-        	set id_per=#{idPersona}
-        	WHERE id_emp=#{id}
-        </update>
-        
-        <select id="ConsultaEmpresaCliente" parameterType="empresaCliente">
-        SELECT id_emp as id,
-        	   id_per as idPersona
-        FROM tb_empresa_cliente
-        WHERE id_emp=#{id}
-     </select>
-        
+    <select id="obtain" parameterType="empresaClienteModel" resultMap="empresaclienteResultMap">
+ 		{call usp_tb_empresa_cliente_obtain(#{idEmpresa},#{idCliente})}
+ 	</select>
         
 </mapper>

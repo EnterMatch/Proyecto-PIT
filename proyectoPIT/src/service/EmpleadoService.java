@@ -12,7 +12,7 @@ public class EmpleadoService implements IService<Empleado> {
 	@Override
 	public int create(Empleado empleado) {
 		int result = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try {
 			result = session.insert("EmpleadoMapper.create",empleado);
 			session.commit();
@@ -24,10 +24,11 @@ public class EmpleadoService implements IService<Empleado> {
 		return result;
 	}
 
+
 	@Override
 	public List<Empleado> read() {
 		List<Empleado> empleados = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try {
 			empleados = session.selectList("EmpleadoMapper.read");
 		} catch (Exception e) {
@@ -41,7 +42,7 @@ public class EmpleadoService implements IService<Empleado> {
 	@Override
 	public int update(Empleado empleado) {
 		int result = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try {
 			result = session.update("EmpleadoMapper.update", empleado);
 			session.commit();
@@ -56,7 +57,7 @@ public class EmpleadoService implements IService<Empleado> {
 	@Override
 	public int delete(int idPersona) {
 		int result = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try {
 			result = session.delete("EmpleadoMapper.delete", idPersona);
 			session.commit();
@@ -71,7 +72,7 @@ public class EmpleadoService implements IService<Empleado> {
 	@Override
 	public Empleado obtain(int idPersona) {
 		Empleado empleado = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try {
 			empleado = session.selectOne("EmpleadoMapper.obtain", idPersona);
 		} catch (Exception e) {
@@ -82,4 +83,7 @@ public class EmpleadoService implements IService<Empleado> {
 		return empleado; 
 	}
 
+	private SqlSession getSqlSession() {
+		return MyBatisUtil.getSqlSessionFactory().openSession();
+	}
 }

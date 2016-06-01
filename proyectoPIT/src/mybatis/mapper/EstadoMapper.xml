@@ -4,12 +4,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="EstadoPrioridadMapper">
-
-    <select id="getEstados" resultType="estado">
-		select * from tb_estado
-    </select>
-    <select id="getPrioridades" resultType="prioridad">
-        select * from tb_prioridad
+<mapper namespace="EstadoMapper">
+	<resultMap type="estadoModel" id="estadoResultMap">
+		<id property="idEstado" column="id_estado"/>
+		<result property="descripEstado" column="descrip_estado"/>
+	</resultMap>
+	
+    <select id="read" resultMap="estadoResultMap">
+		{call usp_tb_estado_read()}
     </select>
 </mapper>

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import model.Cliente;
 import model.EmpresaCliente;
 import mybatis.MyBatisUtil;
 
@@ -56,11 +55,8 @@ public class EmpresaClienteService implements IService<EmpresaCliente> {
 		}
 		return empresa_cliente;
 	}
-	
-	private SqlSession getSQLSession() {
-		return MyBatisUtil.getSqlSessionFactory().openSession();
-	}
 
+	
 	@Override
 	public EmpresaCliente obtain(int id) {
 		// TODO Auto-generated method stub
@@ -68,5 +64,8 @@ public class EmpresaClienteService implements IService<EmpresaCliente> {
 	}
 
 	
+	private SqlSession getSQLSession() {
+		return MyBatisUtil.getSqlSessionFactory().openSession();
+	}
 
 }

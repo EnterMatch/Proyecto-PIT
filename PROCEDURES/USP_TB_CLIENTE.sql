@@ -1,4 +1,4 @@
-USE bd_incidencias;
+USE db_incidencias;
 
 
 -- ------- CREATE PROCEDURE ----------

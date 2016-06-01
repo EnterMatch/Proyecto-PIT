@@ -1,1 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PrioridadMapper.xml">
+	<resultMap type="prioridadModel" id="prioridadResultMap">
+		<id property="idPrioridad" column="id_prioridad"/>
+		<result property="descripPrioridad" column="descrip_prioridad"/>
+	</resultMap>
+
+	<select id="read" resultMap="prioridadResultMap">
+		{call usp_tb_prioridad_read()}
+	</select>
+</mapper>

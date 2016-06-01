@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="TipoUsuarioMapper">
+ 
+  <select id="getTipoUsuario" resultType="tipoUsuarioBean">
+        SELECT id_tipo_usu,
+               descrip_tipo_usu as descripcion
+        FROM tb_tipo_usuario
+    </select>
+ 
+   <insert id="registrar" parameterType="tipoUsuarioBean">
+    	insert into tb_tipo_usuario(id_tipo_usu,descrip_tipo_usu)
+    	values(#{id_tipo_usu},#{descripcion});
+    </insert> 
+ 
+    <update id="actualizar" parameterType="tipoUsuarioBean">
+    	update tb__tipo_usuario set decrip_tipo_usu = #{descripcion},
+    				where id_tipo_usu = #{id_tipo_usu};
+    </update>
+    
+     <delete id="eliminar" parameterType="int">
+    	DELETE FROM tb_tipo_usuario
+    	WHERE id_tipo_usu = #{id_tipo_usu}
+    </delete>
+ 
+ </mapper>

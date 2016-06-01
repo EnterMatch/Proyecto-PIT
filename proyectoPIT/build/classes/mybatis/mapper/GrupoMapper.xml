@@ -4,6 +4,28 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
+<<<<<<< HEAD
+ <mapper namespace="GrupoMapper">
+ 	<resultMap type="idGrupo" 				id="clienteResultMap">
+ 		<result property="idEstado" 			column="id_gru"/>
+ 		<result property="idPrioridad" 			column="nombre_gru"/>
+ 	</resultMap>
+ 	
+ 	<insert id="registrar" parameterType="grupo">
+ 	{call USP_TB_GRUPO_CREATE (#{id_gru}  ,  #{nombre_gru}) }
+ 	</insert>
+ 	
+ 	<update id="actualizar" parameterType="grupo">
+ 	{call USP_TB_GRUPO_UPDATE (#{id_gru } , #{ nombre_gru}) }
+ 	</update>
+ 	
+ 	<delete id="eliminar" parameterType="int">
+ 	{call USP_TB_GRUPO_DELETE (#{id_gru}) }
+ 	</delete>
+ 	
+ 	<select id="getGrupos" resultMap="grupo">
+ 	{call USP_TB_GRUPO_OBTAIN(#{id_gru}) }
+=======
  <mapper namespace="mybatis.mapper.GrupoMapper">
  
  	<insert id="registrar" parameterType="grupo">
@@ -25,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  		select 	id_gru,
 				nombre_gru
  		from tb_grupo
+>>>>>>> master
  	</select>
  
  </mapper>

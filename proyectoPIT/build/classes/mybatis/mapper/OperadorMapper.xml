@@ -6,6 +6,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <mapper namespace="mybatis.mapper.OperadorMapper">
  
+<<<<<<< HEAD
+ 	<resultMap type="operadorModel" id="operadorResultMap">
+ 		<result property="idPersona" column="id_persona"/>
+ 		<result property="nombrePersona" column="nombre_persona"/>
+ 		<result property="apePatPersona" column="ape_pat_persona"/>
+ 		<result property="apeMatPersona" column="ape_mat_persona"/>
+ 		<result property="emailPersona" column="email_persona"/>
+ 	</resultMap>
+ 	
+ 	<insert id="create" parameterType="operadorModel" statementType="CALLABLE">
+ 		{call USP_TB_OPERADOR_CREATE(#{idPersona, mode=OUT, jdbcType=NUMERIC},#{nombrePersona},#{apePatPersona},
+ 		#{apeMatPersona},#{emailPersona})}
+ 	</insert>
+ 	
+ 	<select id="read" resultMap="operadorResultMap">
+ 		{call USP_TB_OPERADOR_READ()}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="operadorModel">
+ 		{call USP_TB_OPERADOR_UPDATE(#{idPersona,#{nombrePersona},#{apePatPersona},
+ 		#{apeMatPersona},#{emailPersona})}
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="int">
+ 		{call USP_TB_OPERADOR_DELETE(#{idPersona})}
+ 	</delete>
+ 	
+ 	<select id="obtain" parameterType="int" resultMap="operadorResultMap">
+ 		{call USP_TB_OPERADOR_OBTAIN(#{idPersona})}
+=======
  	<insert id="registrar" parameterType="operador">
  		insert into tb_operador
  		values (#{id_per},#{id_tipo_ope},#{id_gru})
@@ -27,6 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				id_tipo_ope,
 				id_grupo,
  		from tb_operador
+>>>>>>> master
  	</select>
  
  </mapper>

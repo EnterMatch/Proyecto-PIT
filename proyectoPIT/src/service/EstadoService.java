@@ -9,9 +9,8 @@ import model.Estado;
 import model.Prioridad;
 import mybatis.MyBatisUtil;
 
-public class EstadoService {
 
-	
+public class EstadoService {
 	
 	public static  List<Estado> estados()  {	
 		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession(); 

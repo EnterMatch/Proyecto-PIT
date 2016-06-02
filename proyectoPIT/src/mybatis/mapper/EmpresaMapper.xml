@@ -12,7 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      <result property="razSocEmpresa" column="raz_soc_empresa"/>
      </resultMap>
      
-    <select id="read" resultMap="clienteResultMap">
+    <select id="read" resultMap="empresaResultMap">
  		{call usp_tb_empresa_read()}
  	</select>
  	

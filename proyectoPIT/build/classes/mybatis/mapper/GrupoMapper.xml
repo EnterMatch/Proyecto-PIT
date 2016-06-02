@@ -4,50 +4,30 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
-<<<<<<< HEAD
  <mapper namespace="GrupoMapper">
- 	<resultMap type="idGrupo" 				id="clienteResultMap">
- 		<result property="idEstado" 			column="id_gru"/>
- 		<result property="idPrioridad" 			column="nombre_gru"/>
+ 	<resultMap type="grupoModel" id="grupoResultMap">
+ 		<result property="idGrupo" 			column="id_grupo"/>
+ 		<result property="nombreGrupo" 			column="nombre_grupo"/>
  	</resultMap>
  	
- 	<insert id="registrar" parameterType="grupo">
- 	{call USP_TB_GRUPO_CREATE (#{id_gru}  ,  #{nombre_gru}) }
+ 	<insert id="create" parameterType="grupoModel" statementType="CALLABLE">
+ 		{call USP_TB_GRUPO_CREATE (#{idGrupo, mode=OUT, jdbcType=NUMERIC}, #{nombreGrupo}) }
  	</insert>
  	
- 	<update id="actualizar" parameterType="grupo">
- 	{call USP_TB_GRUPO_UPDATE (#{id_gru } , #{ nombre_gru}) }
- 	</update>
- 	
- 	<delete id="eliminar" parameterType="int">
- 	{call USP_TB_GRUPO_DELETE (#{id_gru}) }
- 	</delete>
- 	
- 	<select id="getGrupos" resultMap="grupo">
- 	{call USP_TB_GRUPO_OBTAIN(#{id_gru}) }
-=======
- <mapper namespace="mybatis.mapper.GrupoMapper">
- 
- 	<insert id="registrar" parameterType="grupo">
- 		insert into tb_grupo
- 		values (#{id_gru},#{nombre_gru})
- 	</insert>
- 	
- 	<update id="actualizar" parameterType="grupo">
- 		update tb_grupo set  nombre_gru=#{nombre_gru}
- 		where id_gru=#{id_gru}
- 	</update>
- 	
- 	<delete id="eliminar" parameterType="int">
- 		delete from tb_grupo
- 		where id_gru=#{id}
- 	</delete>
- 	
- 	<select id="getGrupos" resultMap="grupo">
- 		select 	id_gru,
-				nombre_gru
- 		from tb_grupo
->>>>>>> master
+ 	<select id="read" resultMap="grupoResultMap">
+ 		{call USP_TB_GRUPO_read() }
  	</select>
- 
+ 	
+ 	<update id="update" parameterType="grupoModel">
+ 		{call USP_TB_GRUPO_UPDATE (#{idGrupo} , #{ nombreGrupo}) }
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="int">
+ 		{call usp_tb_grupo_delete(#{idGrupo})} 	
+ 	</delete>
+ 	
+ 	<select id="obtain" parameterType="int" resultMap="grupoResultMap">
+ 		{call usp_tb_grupo_obtain(#{idGrupo})}
+ 	</select>
+ 	
  </mapper>

@@ -4,7 +4,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="mybatis.mapper.OperadorMapper">
+ <mapper namespace="OperadorMapper">
  
  	<resultMap type="operadorModel" id="operadorResultMap">
  		<result property="idPersona" column="id_persona"/>
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	</select>
  	
  	<update id="update" parameterType="operadorModel">
- 		{call USP_TB_OPERADOR_UPDATE(#{idPersona,#{nombrePersona},#{apePatPersona},
+ 		{call USP_TB_OPERADOR_UPDATE(#{idPersona},#{nombrePersona},#{apePatPersona},
  		#{apeMatPersona},#{emailPersona})}
  	</update>
  	

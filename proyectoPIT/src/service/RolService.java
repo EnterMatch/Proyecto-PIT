@@ -18,7 +18,7 @@ public class RolService implements IService<Rol>{
 	@Override
 	public List<Rol> read() {
 		List<Rol> rols = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try {
 			rols = session.selectList("RolMapper.read");
 		} catch (Exception e) {
@@ -45,7 +45,7 @@ public class RolService implements IService<Rol>{
 	public Rol obtain(int idRol) {
 		// TODO Auto-generated method stub
 		Rol rol = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try {
 			rol = session.selectOne("RolMapper.obtain", idRol);
 		} catch (Exception e) {
@@ -54,6 +54,10 @@ public class RolService implements IService<Rol>{
 			session.close();
 		}
 		return rol;
+	}
+	
+	private SqlSession getSqlSession() {
+		return MyBatisUtil.getSqlSessionFactory().openSession();
 	}
 	
 }

@@ -12,7 +12,7 @@ public class GrupoService implements IService<Grupo> {
 	public int create(Grupo object) {
 		int result = 0;
 		
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try{
 			result = session.insert("GrupoMapper.create", object);
 			session.commit();
@@ -24,10 +24,11 @@ public class GrupoService implements IService<Grupo> {
 		return result;
 	}
 
+
 	@Override
 	public List<Grupo> read() {
 		List<Grupo> grupo = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try{
 			grupo = session.selectList("GrupoMapper.read");
 		}catch(Exception e){
@@ -45,11 +46,11 @@ public class GrupoService implements IService<Grupo> {
 	}
 
 	@Override
-	public Grupo obtain(int id) {
+	public Grupo obtain(int idGrupo) {
 		Grupo incidente = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try{
-			incidente = session.selectOne("GrupoMapper.obtain", id);
+			incidente = session.selectOne("GrupoMapper.obtain", idGrupo);
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
@@ -61,7 +62,7 @@ public class GrupoService implements IService<Grupo> {
 	@Override
 	public int update(Grupo object) {
 		int result = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try{
 			result = session.update("GrupoMapper.update",object);
 			session.commit();
@@ -73,4 +74,7 @@ public class GrupoService implements IService<Grupo> {
 		return result;
 	}	
 	
+	private SqlSession getSqlSession() {
+		return MyBatisUtil.getSqlSessionFactory().openSession();
+	}
 }

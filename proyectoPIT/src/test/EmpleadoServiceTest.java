@@ -12,7 +12,6 @@ import service.EmpleadoService;
 public class EmpleadoServiceTest {
 
 	EmpleadoService empleadoService = new EmpleadoService();
-	int result = 0;
 	@Before
 	public void setUp() throws Exception {
 		
@@ -21,14 +20,11 @@ public class EmpleadoServiceTest {
 	@Test
 	public void crudTest() {
 		Empleado empleado = new Empleado(0, "Nombre", "ApePat", "ApeMat", "email@gmail.com", 1, 1);
-		result = empleadoService.create(empleado);
-		assertEquals(1, result);
-		result = empleadoService.update(new Empleado(empleado.getIdPersona(), "Nombre", "ApePat", "ApeMat", "email@gmail.com", 1, 1));
-		assertEquals(1, result);
+		assertEquals(1, empleadoService.create(empleado));
+		assertEquals(1, empleadoService.update(empleado));
 		assertNotNull(empleadoService.read());
 		assertNotNull(empleadoService.obtain(empleado.getIdPersona()));
-		result = empleadoService.delete(empleado.getIdPersona());
-		assertEquals(1, result);
+		assertEquals(1, empleadoService.delete(empleado.getIdPersona()));
 	}
 
 }

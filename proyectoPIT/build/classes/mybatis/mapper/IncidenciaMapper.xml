@@ -3,63 +3,34 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="IncidenciaMapper">
-<<<<<<< HEAD
  	
- 	<resultMap type="idIncidencia" id="clienteResultMap">
- 		<result property="descripIncidencia" 	column="id_incidencia"/>
- 		<result property="fecIngIncidencia" 	column="fec_ing_inc"/>
- 		<result property="resumenIncidencia" 	column="resumen_inc"/>
- 		<result property="solucionIncidencia" 	column="solucion_inc"/>
- 		<result property="idCliente" 			column="id_per_cli"/>
- 		<result property="idGrupo" 				column="id_gru"/>
- 		<result property="idOperador" 			column="id_per_ope"/>
+ 	<resultMap type="incidenciaModel" id="incidenciaResultMap">
+ 		<id property="idIncidencia" column="id_incidencia"/>
+ 		<result property="descripIncidencia" 	column="descrip_incidencia"/>
+ 		<result property="fecIngIncidencia" 	column="fec_ing_incidencia"/>
+ 		<result property="resumenIncidencia" 	column="resumen_incidencia"/>
+ 		<result property="solucionIncidencia" 	column="solucion_incidencia"/>
+ 		<result property="idCliente" 			column="id_cliente"/>
+ 		<result property="idGrupo" 				column="id_grupo"/>
+ 		<result property="idOperador" 			column="id_operador"/>
  		<result property="idEmpleado" 			column="id_empleado"/>
- 		<result property="idEstado" 			column="id_est"/>
- 		<result property="idPrioridad" 			column="id_pri"/>
+ 		<result property="idEstado" 			column="id_estado"/>
+ 		<result property="idPrioridad" 			column="id_prioridad"/>
  	</resultMap>
 
-	<insert id="create" parameterType="incidenciaBean">
-	 {call USP_TB_INCIDENCIA_CREATE(#{id_incidencia, mode=OUT, jdbcType=NUMERIC},#{fec_ing_inc},#{resumen_inc},#{solucion_inc},#{id_per_cli},#{id_gru},{id_per_ope},#{id_empleado},#{id_est},#{id_pri})}
+	<insert id="create" parameterType="incidenciaModel" statementType="CALLABLE">
+	 {call USP_TB_INCIDENCIA_CREATE(#{idIncidencia, mode=OUT, jdbcType=NUMERIC},#{descripIncidencia},#{fecIngIncidencia},#{resumenIncidencia},#{solucionIncidencia},#{idCliente},#{idGrupo},#{idOperador},#{idEmpleado},#{idEstado},#{idPrioridad})}
 	</insert>
-	<select id = "read" resultType = "incidenciaModel">
+	<select id = "read" resultMap = "incidenciaResultMap">
 	{call USP_TB_INCIDENCIA_READ () }
 	</select>
-	<update id="update" parameterType="incidenciaModel" statementType="CALLABLE">
-	{call USP_TB_INCIDENCIA_UPDATE(#{id_incidencia, mode=OUT, jdbcType=NUMERIC},#{fec_ing_inc},#{resumen_inc},#{solucion_inc},#{id_per_cli},#{id_gru},{id_per_ope},#{id_empleado},#{id_est},#{id_pri})}
+	<update id="update" parameterType="incidenciaModel">
+	{call USP_TB_INCIDENCIA_UPDATE(#{idIncidencia},#{descripIncidencia},#{fecIngIncidencia},#{resumenIncidencia},#{solucionIncidencia},#{idCliente},#{idGrupo},#{idOperador},#{idEmpleado},#{idEstado},#{idPrioridad})}
 	</update>
 	<delete id="delete" parameterType="int">
-	{call USP_TB_INCIDENCIA_DELETE(#{id_incidencia, mode=OUT, jdbcType=NUMERIC}) }
+	{call USP_TB_INCIDENCIA_DELETE(#{idIncidencia}) }
 	</delete>
-	<select id="obtain" parameterType="int" resultType = "incidenciaBean">
-	{call USP_TB_INCIDENCIA_OBTAIN(#{id_incidencia, mode=OUT, jdbcType=NUMERIC})}
-=======
-	<insert id="create" parameterType="incidenciaBean">
-		INSERT tb_incidencia 
-		VALUES(null,#{descrip_inc},#{fec_ing_inc},#{resumen_inc},
-				#{solucion_inc},#{id_per_cli},#{id_gru},#{id_per_ope},#{id_est},#{id_pri})
-	</insert>
-	<select id = "read" resultType = "incidenciaBean">
-		SELECT * FROM tb_incidencia
-	</select>
-	<update id="update" parameterType="incidenciaBean">
-		UPDATE tb_incidencia SET
-			  	descrip_inc = #{descrip_inc}, 
-				fec_ing_inc = #{fec_ing_inc},
-				resumen_inc = #{resumen_inc}, 
-				solucion_inc = #{solucion_inc},
-				id_per_cli = #{id_per_cli},
-				id_gru = #{id_gru},
-				id_per_ope = #{id_per_ope},
-				id_est = #{id_est},
-				id_pri = #{id_pri}
-		WHERE 	id_inc = #{id_inc}
-	</update>
-	<delete id="delete" parameterType="int">
-		DELETE FROM tb_incidencia WHERE id_inc = #{id_inc}
-	</delete>
-	<select id="obtain" parameterType="int" resultType = "incidenciaBean">
-		SELECT * FROM tb_incidencia
-		WHERE id_inc = #{id_inc}
->>>>>>> master
+	<select id="obtain" parameterType="int" resultMap = "incidenciaResultMap">
+	{call USP_TB_INCIDENCIA_OBTAIN(#{idIncidencia})}
 	</select>
 </mapper>

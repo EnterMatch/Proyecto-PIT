@@ -11,7 +11,7 @@ public class ClienteService implements IService<Cliente>{
 	public int create(Cliente cliente){
 		int result = 0;
 		
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try{
 			result = session.insert("ClienteMapper.create", cliente);
 			session.commit();
@@ -26,7 +26,7 @@ public class ClienteService implements IService<Cliente>{
 	@Override
 	public List<Cliente> read(){
 		List<Cliente> clientes = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try{
 			clientes = session.selectList("ClienteMapper.read");
 		}catch(Exception e){
@@ -36,11 +36,11 @@ public class ClienteService implements IService<Cliente>{
 		}
 		return clientes;
 	}
-	
+
 	@Override
 	public int update(Cliente cliente) {
 		int result = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try{
 			result = session.update("ClienteMapper.update",cliente);
 			session.commit();
@@ -55,7 +55,7 @@ public class ClienteService implements IService<Cliente>{
 	@Override
 	public int delete(int idCliente) {
 		int result = 0;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try{
 			result = session.delete("ClienteMapper.delete", idCliente);
 			session.commit();
@@ -70,7 +70,7 @@ public class ClienteService implements IService<Cliente>{
 	@Override
 	public Cliente obtain(int idCliente) {
 		Cliente cliente = null;
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession();
+		SqlSession session = getSqlSession();
 		try{
 			cliente = session.selectOne("ClienteMapper.obtain", idCliente);
 		}catch(Exception e){
@@ -81,4 +81,7 @@ public class ClienteService implements IService<Cliente>{
 		return cliente;
 	}
 	
+	private SqlSession getSqlSession() {
+		return MyBatisUtil.getSqlSessionFactory().openSession();
+	}
 }

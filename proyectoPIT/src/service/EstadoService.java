@@ -1,29 +1,49 @@
 package service;
 
-import java.io.IOException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
 import model.Estado;
-import model.Prioridad;
 import mybatis.MyBatisUtil;
 
 
-public class EstadoService {
-	
-	public static  List<Estado> estados()  {	
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession(); 
-		List<Estado> estados = session.selectList("EstadoPrioridadMapper.getEstados");
+public class EstadoService implements IService<Estado>{
+
+	@Override
+	public int create(Estado object) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Estado> read() {
+		SqlSession session = getSqlSession(); 
+		List<Estado> estados = session.selectList("EstadoMapper.read");
 		session.close();
 		return estados; 
 	}
-	
-	public static  List<Prioridad> prioridades()  {
-		SqlSession session = MyBatisUtil.getSqlSessionFactory().openSession(); 
-		List<Prioridad> prioridades = session.selectList("EstadoPrioridadMapper.getPrioridades");
-		session.close();
-		return prioridades;
+
+
+	@Override
+	public int update(Estado object) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(int id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Estado obtain(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
+	private SqlSession getSqlSession() {
+		return MyBatisUtil.getSqlSessionFactory().openSession();
+	}
 }

@@ -18,6 +18,8 @@ public class Empresa {
 		this.razSocEmpresa = razSocEmpresa;
 	}
 	
+	public Empresa() {}
+	
 	public Empresa(int idEmpresa, String razSocEmpresa) {
 		super();
 		this.idEmpresa = idEmpresa;

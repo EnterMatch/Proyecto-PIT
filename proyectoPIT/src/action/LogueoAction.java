@@ -8,8 +8,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import model.Estado;
 import model.Prioridad;
 import service.EstadoService;
+import service.PrioridadService;
 
 public class LogueoAction extends ActionSupport{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String usu;
 	private String cla;
 	private String nom;
@@ -18,8 +23,8 @@ public class LogueoAction extends ActionSupport{
 	
 	
 	public void	cargarCombosEstadosPrioridad() throws IOException{
-		estados = EstadoService.estados();
-		prioridades = EstadoService.prioridades();
+		estados = new EstadoService().read();
+		prioridades = new PrioridadService().read();
 	}
 	
 	

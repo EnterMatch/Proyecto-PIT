@@ -17,8 +17,9 @@ public class UsuarioServiceTest {
 
 	@Test
 	public void test() {
-		assertEquals(1, usuarioService.create(new Usuario(16, "Nombre", "Clave")));
-		assertEquals(1, usuarioService.update(new Usuario(16, "Nombre", "Clave")));
+		Usuario usuario = new Usuario(16, "Nombre", "Clave");
+		assertEquals(1, usuarioService.create(usuario));
+		assertEquals(1, usuarioService.update(usuario));
 		assertNotNull(usuarioService.read());
 		assertNotNull(usuarioService.obtain(16));
 		assertEquals(1, usuarioService.delete(16));

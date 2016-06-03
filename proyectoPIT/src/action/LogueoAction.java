@@ -7,65 +7,56 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import model.Estado;
 import model.Prioridad;
+import model.Usuario;
 import service.EstadoService;
 import service.PrioridadService;
+import service.UsuarioService;
 
 public class LogueoAction extends ActionSupport{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String usu;
-	private String cla;
-	private String nom;
+	private Usuario usuario;
 	public List<Estado> estados;
 	public List<Prioridad> prioridades;
 	
 	
-	public void	cargarCombosEstadosPrioridad() throws IOException{
+	public void	cargarCombosEstadosPrioridad(){
 		estados = new EstadoService().read();
 		prioridades = new PrioridadService().read();
 	}
 	
 	
-	public String loguear() throws IOException{
-		
-		if (usu.equals("admin")&&cla.equals("1234")){
-
-			nom = " Prof :)";
-			
+	public String loguear(){
+		if(getUsuario().getNombreUsuario().equals("") || getUsuario().getClaveUsuario().equals("")){
+			addActionError("Campos vacíos");
+			return "error";
+		}else if (new UsuarioService().buscarPorNombreYClave(usuario) == null){
+			addActionError("Datos incorrectos");
+			return "error";
+		}else{
 			cargarCombosEstadosPrioridad();
-
 			return "ok";
-			}
-		//Método para mostrar errores
-		if(getUsu().equals("") && cla.equals("")){
-			addActionError("Capos vacíos");
 		}
-		if (getUsu()!="admin" && cla!="1234"){
-		addActionError("Usuario o clave Incorrectos");
-		}
-		return "error";
 	}
 	
-	public String getUsu() {
-		return usu;
+	public String cargarCombos(){
+		cargarCombosEstadosPrioridad();
+		return "ok";
 	}
-	public void setUsu(String usu) {
-		this.usu = usu;
+
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
-	public String getCla() {
-		return cla;
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
-	public void setCla(String cla) {
-		this.cla = cla;
-	}
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+	
+	
 	
 	
 }

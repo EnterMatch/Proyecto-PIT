@@ -16,11 +16,11 @@ StrutsConfiguration
 		
 		<action name="bienvenido" class="action.LogueoAction" method="loguear">
 			<result name="ok" type="tiles">plantilla_principal</result>
-			<result name="error">error.jsp</result>
+			<result name="error">index.jsp</result>
 		</action>
 		
-		<action name="RegistroIncidente">
-			<result type="tiles">plantilla_principal</result>
+		<action name="RegistroIncidente" class="action.LogueoAction" method="cargarCombos">
+			<result name="ok" type="tiles">plantilla_principal</result>
 		</action>
 		
 		<action name="ConsultarIncidente">
@@ -43,11 +43,11 @@ StrutsConfiguration
 			<result type="tiles">plantilla_RegistrarUsuario</result>
 		</action>
 		
-		<action name="listar" class="action.AsignarAction" method="asignar">
+		<action name="listar" class="action.AsignarIncidenciaAction" method="asignar">
 			<result type="tiles" name="asignar">plantilla_AsignarIncidente</result>
 		</action>
 		
-		<action name="consultar" class="action.MantenerAction" method="mantener">
+		<action name="consultar" class="action.MantenerIncidenciaAction" method="mantener">
 			<result type="tiles" name="mantener">plantilla_MantenerIncidente</result>
 		</action>
 		

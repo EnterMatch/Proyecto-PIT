@@ -69,11 +69,11 @@
 		<div class="col-md-4">
     	<div class="form-group">
     	<s:label>Estado del incidente</s:label>
-    	<s:select cssClass="form-control select2" name="estado"  headerValue="Seleccion Estado" listKey="id_est" listValue="descrip_est" list="%{estados}" />
+    	<s:select cssClass="form-control select2" name="estado"  headerValue="Seleccion Estado" listKey="idEstado" listValue="descripEstado" list="%{estados}" />
 		</div>
 		<div class="form-group">
 		<s:label>Prioridad del incidente</s:label>
-		<s:select cssClass="form-control select2" name="prioridad" headerValue="Seleccione Prioridad" listKey="id_pri" listValue="descrip_pri" list="%{prioridades}" />
+		<s:select cssClass="form-control select2" name="prioridad" headerValue="Seleccione Prioridad" listKey="idPrioridad" listValue="descripPrioridad" list="%{prioridades}" />
 		</div>
 		</div>
    		</div>

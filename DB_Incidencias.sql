@@ -73,7 +73,7 @@ CREATE TABLE tb_rol(
 
 CREATE TABLE tb_usuario(
 	id_usuario				INTEGER			NOT NULL PRIMARY KEY,
-    nombre_usuario			VARCHAR(50)		NOT NULL,
+    nombre_usuario			VARCHAR(50)		NOT NULL UNIQUE,
     clave_usuario			VARCHAR(50)		NOT NULL
 );
 

@@ -37,13 +37,13 @@
 		<div class="col-md-4">
     	<div class="form-group">
 		<s:label>Empresa</s:label>
-		<s:select cssClass="form-control select2" name="empresa" list="#{'1':'Seleccione empresa', '2':''}"/>
+    	<s:select cssClass="form-control select2" name="empresa"  headerValue="Seleccione Empresa" listKey="idEmpresa" listValue="razSocEmpresa" list="%{empresas}" />
 		</div>
 		</div>
 		<div class="col-md-4">
 		<div class="form-group">
 		<s:label>Cliente</s:label>
-		<s:select cssClass="form-control select2" name="empresa" list="#{'1':'Seleccione cliente', '2':''}"/>
+    	<s:select cssClass="form-control select2" name="cliente"  headerValue="Seleccione Cliente" listKey="idCliente" listValue="nombreCliente" list="%{clientes}" />
 		</div>
 		</div>
 	</div>
@@ -69,7 +69,7 @@
 		<div class="col-md-4">
     	<div class="form-group">
     	<s:label>Estado del incidente</s:label>
-    	<s:select cssClass="form-control select2" name="estado"  headerValue="Seleccion Estado" listKey="idEstado" listValue="descripEstado" list="%{estados}" />
+    	<s:select cssClass="form-control select2" name="estado"  headerValue="Seleccione Estado" listKey="idEstado" listValue="descripEstado" list="%{estados}" />
 		</div>
 		<div class="form-group">
 		<s:label>Prioridad del incidente</s:label>
@@ -89,7 +89,7 @@
    		<div class="box-body">
 		<div class="form-group">
 		<s:label>Asignar Grupo</s:label>
-		<s:select cssClass="form-control select2" name="grupo" list="#{'1':'Seleccione grupo', '2':''}"/>
+    	<s:select cssClass="form-control select2" name="grupo"  headerValue="Seleccione Grupo" listKey="idGrupo" listValue="nombreGrupo" list="%{grupos}" />
 		</div>  
 		</div>
 		<br><br><br>

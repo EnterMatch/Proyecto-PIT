@@ -29,76 +29,33 @@
 		<div class="table-responsive">
 		<table class="table no-margin">
 			<thead>
-              <tr>
-           	  <th>Id Incidente</th>
-              <th>Empresa</th>
-              <th>Cliente</th>
-              <th>Estado</th>
-              <th>Prioridad</th>
-              </tr>
+			<tr>
+           	<th>Id Incidente</th>
+            <th>Descripción Incidente</th>
+            <th>Fecha registrada de Incidente</th>
+            <th>Resumen Incidente</th>
+            <th>Estado</th>
+            <th>Prioridad</th>
+			</tr>
 			</thead>
-            <tbody> 
-			  <tr>
-              <td>#IdIncidente</td>
-              <td>#Empresa</td>
-              <td>#Cliente</td>
-              <td>#Estado</td>
-              <td>#Prioridad</td>
-              <td>
-              <div class="checkbox">
-              <label>
-              <input type="checkbox">
-              </label>                    
-              </div>
-              </td>
-              </tr>
-              <tr>
-              <td>#IdIncidente</td>
-              <td>#Empresa</td>
-              <td>#Cliente</td>
-              <td>#Estado</td>
-              <td>#Prioridad</td>
-              <td>
-              <div class="checkbox">
-              <label>
-              <input type="checkbox">
-              </label>                    
-              </div>
-              </td>
-              </tr>
-              <tr>
-              <td>#IdIncidente</td>
-              <td>#Empresa</td>
-              <td>#Cliente</td>
-              <td>#Estado</td>
-              <td>#Prioridad</td>
-              <td>
-              <div class="checkbox">
-              <label>
-              <input type="checkbox">
-              </label>                    
-              </div>
-              </td>
-              </tr>
-              <tr>
-              <td>#IdIncidente</td>
-              <td>#Empresa</td>
-              <td>#Cliente</td>
-              <td>#Estado</td>
-              <td>#Prioridad</td>
-              <td>
-              <div class="checkbox">
-              <label><input type="checkbox"></label>                    
-              </div>
-              </td>
-              </tr>
-              </tbody>
+			<tbody>
+			<s:iterator value="lstIncidente" >
+			<tr >
+			<td><s:property value="idIncidencia"/></td>
+			<td><s:property value="descripIncidencia"/></td>
+			<td><s:property value="fecIngIncidencia"/></td>
+			<td><s:property value="resumenIncidencia"/></td>
+			<td><s:property value="idEstado"/></td>
+			<td><s:property value="idPrioridad"/></td>
+			<td>
+			<div class="checkbox">
+            <label><input type="checkbox" ></label>                    
+            </div>
+            </td>
+			</tr>
+			</s:iterator>
+			</tbody>
 		</table>
-		<div class="form-group" align="center">
-			<form action="listar">
-			<input type="submit"  value="Asignar" class="btn btn-danger" name="submit">
-			</form>
-		</div>
         </div>
 		</div>
 

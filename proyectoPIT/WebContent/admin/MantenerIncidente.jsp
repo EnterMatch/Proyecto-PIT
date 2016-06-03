@@ -1,4 +1,4 @@
-
+<%@ taglib uri="/struts-tags" prefix="s" %>  
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 <div class="content-wrapper">
@@ -93,10 +93,8 @@ PING localhost (127.0.0.1): 56 data bytes
               	</div>
               	<div class="box-body">
               	<div class="form-group">
-              	<label>Estado</label>
-              	<select class="form-control select2" style="width: 100%;">
-              	<option selected="selected">Resuelto</option>
-              	</select>
+    	<s:label>Estado del incidente</s:label>
+    	<s:select cssClass="form-control select2" name="estado"  headerValue="Seleccione Estado" listKey="idEstado" listValue="descripEstado" list="%{estados}" />
               	</div>
               	<div class="box-body pad">
               	<label>Solución</label>

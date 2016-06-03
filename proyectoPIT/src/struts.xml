@@ -19,16 +19,21 @@ StrutsConfiguration
 			<result name="error">index.jsp</result>
 		</action>
 		
+		
 		<action name="RegistroIncidente" class="action.LogueoAction" method="cargarCombos">
 			<result name="ok" type="tiles">plantilla_principal</result>
 		</action>
-		
+		 
 		<action name="ConsultarIncidente">
 			<result type="tiles">plantilla_ConsultarIncidente</result>
 		</action>
 		
-		<action name="ListarIncidente">
-			<result type="tiles">plantilla_ListarIncidente</result>
+		<action name="ListarIncidente" class="action.ListarIncidenciaAction" method="listarIncidentes">
+			<result name="ok"  type="tiles">plantilla_ListarIncidente</result>
+		</action>
+		
+		<action name="registroIncidente" class="action.RegistroIncidenciaAction" method="cargarCombos">
+			<result name="ok" type="tiles">plantilla_RegistrarSolucion</result>
 		</action>
 		
 		<action name="RegistrarSolucion">

@@ -65,3 +65,20 @@ BEGIN
     WHERE id_usuario = id;
 END //
 DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------------------
+-- --------------------------------------------FIN DEL CRUD----------------------------------------------------
+-- ------------------------------------------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------------------
+
+
+
+-- ---------BUSCAR USUARIO POR NOMBRE Y CLAVE-----------
+DROP PROCEDURE IF EXISTS USP_TB_USUARIO_BUSCAR_POR_NOMBRE_Y_CLAVE;
+DELIMITER //
+CREATE PROCEDURE USP_TB_USUARIO_BUSCAR_POR_NOMBRE_Y_CLAVE(nombre VARCHAR(50), clave VARCHAR(50))
+BEGIN
+	SELECT * FROM TB_USUARIO WHERE nombre_usuario = nombre AND clave_usuario = clave;
+END
+// DELIMITER ;

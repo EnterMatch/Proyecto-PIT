@@ -2,6 +2,8 @@ package service;
 
 import java.util.List;
 
+import javax.websocket.Session;
+
 import org.apache.ibatis.session.SqlSession;
 
 import model.Usuario;
@@ -82,8 +84,30 @@ public class UsuarioService implements IService<Usuario>{
 		return usuario;
 	}
 
+	// FIN DEL CRUD
+	
+	
+	public Usuario buscarPorNombreYClave(Usuario usuarioAProbar){
+		Usuario usuario = null;
+		SqlSession session = getSqlSession();
+		try {
+			usuario = session.selectOne("UsuarioMapper.buscarPorNombreYClave", usuarioAProbar);
+		} catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return usuario;
+	}
+	
+	
+	
+	
+	
 	private SqlSession getSqlSession() {
 		return MyBatisUtil.getSqlSessionFactory().openSession();
 	}
+	
+	
 
 }

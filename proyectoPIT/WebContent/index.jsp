@@ -21,9 +21,10 @@
   
   <s:form action="bienvenido" method="post" cssClass="login" theme="simple">
   <p class="titulo">Ingreso</p>
-	<s:textfield type="text"  placeholder="Usuario" name="usu" />
+  	<s:actionerror cssStyle="color: red"/>
+	<s:textfield type="text"  placeholder="Usuario" name="usuario.nombreUsuario" />
 	<i class="fa fa-user"></i>
-	<s:textfield type="password" placeholder="Contraseña" name="cla"/>
+	<s:textfield type="password" placeholder="Contraseña" name="usuario.claveUsuario"/>
 	<i class="fa fa-key"></i>
 	<br>
     <a href="">Olvido su contraseña?</a>

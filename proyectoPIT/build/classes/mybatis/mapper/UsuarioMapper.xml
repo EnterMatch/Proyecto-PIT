@@ -30,4 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="obtain" parameterType="int" resultMap="usuarioResultMap">
     	{call usp_tb_usuario_obtain(#{idUsuario})}
     </select>
+    
+    <!-- FIN DEL CRUD -->
+    
+    <select id="buscarPorNombreYClave" parameterType="usuarioModel" resultMap="usuarioResultMap">
+    	{call USP_TB_USUARIO_BUSCAR_POR_NOMBRE_Y_CLAVE(#{nombreUsuario},#{claveUsuario})}
+    </select>
 </mapper>    

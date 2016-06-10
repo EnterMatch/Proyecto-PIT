@@ -1,3 +1,4 @@
+<%@page import="model.Incidencia"%>
 <%@ taglib uri="/struts-tags" prefix="s" %>  
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -26,42 +27,31 @@
         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
         </div>
         </div>
-    
-		<div class="box-body">
-        	<div class="col-md-6">
-            <h4>Filtrar</h4>
-            <div class="form-group">
-            <select class="form-control select2" style="width: 100%;">
-            <option selected="selected">Seleccione un filtro</option>
-            </select>
-            </div>
-            </div>
-            <div class="col-md-6">
-            <br><br>
-            <input type="submit" value="Verificar" class="btn btn-danger" name="submit"/>
-            </div>
-        </div>        
             
         <div class="box-body">
             <div class="table-responsive">
             <form action="consultar">
-              <table class="table no-margin">
-                <thead>
+            <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Id Incidente</th>
+                        <th>Resumen</th>
+                        <th>Cliente</th>
+                        <th>Estado de Incidente</th>
+                        <th>Prioridad</th>
+                        <th><li class="fa fa-check-square-o"></li></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                 <s:iterator value="lstIncidente">
+                
                   <tr>
-                    <th>Id Incidente</th>
-                    <th>Empresa</th>
-                    <th>Cliente</th>
-                    <th>Estado de Incidente</th>
-                    <th>Prioridad</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>#Id Incidente</td>
-                    <td>#Empresa</td>
-                    <td>#Cliente</td>
-                    <td>#Estado de Incidente</td>
-                    <td>#Prioridad</td>
+                    <td><s:property value="idIncidencia"/></td>
+                    <td><s:property value="resumenIncidencia"/></td>
+                    <td><s:property value="nombre_cliente"/></td>
+                    <td><s:property value="descrip_estado"/></td>
+                    <td><s:property value="descrip_prioridad"/></td>
                     <td>
                     <div class="checkbox">
                     <label>
@@ -70,52 +60,14 @@
                   	 </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>#Id Incidente</td>
-                    <td>#Empresa</td>
-                    <td>#Cliente</td>
-                    <td>#Estado de Incidente</td>
-                    <td>#Prioridad</td>
-                    <td>
-                    <div class="checkbox">
-                    <label>
-                    <input type="checkbox">
-                    </label>                    
-                     </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>#Id Incidente</td>
-                    <td>#Empresa</td>
-                    <td>#Cliente</td>
-                    <td>#Estado de Incidente</td>
-                    <td>#Prioridad</td>
-                    <td>
-                    <div class="checkbox">
-                    <label>
-                    <input type="checkbox">
-                    </label>                    
-                     </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>#Id Incidente</td>
-                    <td>#Empresa</td>
-                    <td>#Cliente</td>
-                    <td>#Estado de Incidente</td>
-                    <td>#Prioridad</td>
-                    <td>
-                    <div class="checkbox">
-                    <label>
-                    <input type="checkbox">
-                    </label>                    
-                     </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              
-              
+                  
+                  </s:iterator>
+                      
+                    </tbody>
+                    
+                  </table>
+            
+               
               <div class="form-group">
               	<div class="col-md-12" align="center">   
                 <input type="submit" value="Resolver incidente" class="btn btn-danger" name="submit"/>

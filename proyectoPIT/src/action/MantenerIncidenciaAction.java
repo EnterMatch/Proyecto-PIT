@@ -42,7 +42,7 @@ public class MantenerIncidenciaAction extends ActionSupport {
 	}
 	
 	public String mantenerIncidente(){
-		Incidencia incidente=new Incidencia(idIncidencia, descripIncidencia, fecIngIncidencia, resumenIncidencia, solucionIncidencia, idCliente, idGrupo, idOperador, idEmpleado, idEstado, idPrioridad);
+		Incidencia incidente=new Incidencia(descripIncidencia,fecIngIncidencia ,resumenIncidencia,"",idCliente,idGrupo,idOperador,idEmpleado,idEstado,idPrioridad);
 		new IncidenciaService().update(incidente);
 		return "ok";
 	}

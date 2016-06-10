@@ -82,8 +82,22 @@ public class Incidencia {
 	public void setIdPrioridad(int idPrioridad) {
 		this.idPrioridad = idPrioridad;
 	}
-	
 	public Incidencia() {}
+	
+	public Incidencia(String descripIncidencia, String fecIngIncidencia, String resumenIncidencia,
+			String solucionIncidencia, int idCliente, int idGrupo, int idOperador, int idEmpleado, int idEstado,
+			int idPrioridad) {
+		this.descripIncidencia = descripIncidencia;
+		this.fecIngIncidencia = fecIngIncidencia;
+		this.resumenIncidencia = resumenIncidencia;
+		this.solucionIncidencia = solucionIncidencia;
+		this.idCliente = idCliente;
+		this.idGrupo = idGrupo;
+		this.idOperador = idOperador;
+		this.idEmpleado = idEmpleado;
+		this.idEstado = idEstado;
+		this.idPrioridad = idPrioridad;
+	}
 	
 	public Incidencia(int idIncidencia, String descripIncidencia, String fecIngIncidencia, String resumenIncidencia,
 			String solucionIncidencia, int idCliente, int idGrupo, int idOperador, int idEmpleado, int idEstado,

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="EstadoMapper">
+	<resultMap type="estadoModel" id="estadoResultMap">
+		<id property="idEstado" column="id_estado"/>
+		<result property="descripEstado" column="descrip_estado"/>
+	</resultMap>
+	
+    <select id="read" resultMap="estadoResultMap">
+		{call usp_tb_estado_read()}
+    </select>
+</mapper>

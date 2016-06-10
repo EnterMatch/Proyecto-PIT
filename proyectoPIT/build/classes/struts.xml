@@ -9,21 +9,27 @@ StrutsConfiguration
 	<constant name="struts.custom.i18n.resources" value="LogueoAction"/>
 		<package name="Proyecto" extends="struts-default">
 		
+		<!-- Definición de tiles -->
 		<result-types>
 			<result-type name="tiles"
 			class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
+		<!-- Fin Definición de tiles -->
 		
+		
+		<!-- Action para logueo -->
 		<action name="bienvenido" class="action.LogueoAction" method="loguear">
 			<result name="ok" type="tiles">plantilla_principal</result>
 			<result name="error">index.jsp</result>
 		</action>
+		<!-- Fin Action para logueo -->
 		
 		
+		<!-- Actions de navegación --> 
 		<action name="RegistroIncidente" class="action.LogueoAction" method="cargarCombos">
 			<result name="ok" type="tiles">plantilla_principal</result>
 		</action>
-		 
+		
 		<action name="ConsultarIncidente">
 			<result type="tiles">plantilla_ConsultarIncidente</result>
 		</action>
@@ -44,8 +50,8 @@ StrutsConfiguration
 			<result type="tiles">plantilla_ListarBD</result>
 		</action>
 		
-		<action name="RegistrarUsuario">
-			<result type="tiles">plantilla_RegistrarUsuario</result>
+		<action name="RegistrarUsuario" class="action.RegistroUsuarioAction" method="cargarSelects">
+			<result name="cargarSelects" type="tiles">plantilla_RegistrarUsuario</result>
 		</action>
 		
 		<action name="listar" class="action.AsignarIncidenciaAction" method="asignar">
@@ -59,6 +65,6 @@ StrutsConfiguration
 		<action name="ReporteIncidente">
 			<result type="tiles">plantilla_ReporteIncidente</result>
 		</action>
-
+		<!-- Fin de actions de navegación -->
 	</package>
 </struts>

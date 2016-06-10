@@ -1,6 +1,8 @@
 <script src="js/jQuery-2.2.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/select2.full.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.bootstrap.min.js"></script>
 <script src="js/jquery.inputmask.js"></script>
 <script src="js/jquery.inputmask.date.extensions.js"></script>
 <script src="js/jquery.inputmask.extensions.js"></script>
@@ -15,6 +17,19 @@
 <script src="js/demo.js"></script>
 <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 <script src="js/bootstrap3-wysihtml5.all.min.js"></script>
+<script>
+      $(function () {
+        $("#example1").DataTable();
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });
+      });
+</script>
 <script>
   $(function () {
     CKEDITOR.replace('editor1');

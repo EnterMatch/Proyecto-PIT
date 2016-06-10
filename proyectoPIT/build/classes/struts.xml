@@ -15,7 +15,7 @@ StrutsConfiguration
 		</result-types>
 		
 		<action name="bienvenido" class="action.LogueoAction" method="loguear">
-			<result name="ok" type="tiles">plantilla_principal</result>
+			<result name="ok" type="tiles">plantilla_ListarIncidente</result>
 			<result name="error">index.jsp</result>
 		</action>
 		
@@ -59,6 +59,17 @@ StrutsConfiguration
 		<action name="ReporteIncidente">
 			<result type="tiles">plantilla_ReporteIncidente</result>
 		</action>
+		
+		<action name="ConsultarIncidente" class="action.ListarIncidenciaAction" method="listarIncidentes"> 
+			<result name="ok" type="tiles">plantilla_ConsultarIncidente</result>
+		</action>
+		
+		<action name="registrando" class="action.RegistroIncidenciaAction" method="registrar"> 
+			<result name="Exito" type="tiles">plantilla_ConsultarIncidente</result>
+			<result name="Error" type="tiles">plantilla_ConsultarIncidente</result>
+		</action>
+		
+
 
 	</package>
 </struts>

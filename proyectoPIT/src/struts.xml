@@ -50,7 +50,7 @@ StrutsConfiguration
 			<result type="tiles">plantilla_ListarBD</result>
 		</action>
 		
-		<action name="RegistrarUsuario" class="action.RegistroUsuarioAction" method="cargarSelects">
+		<action name="CargarRegistrarUsuario" class="action.RegistroUsuarioAction" method="cargarData">
 			<result name="cargarSelects" type="tiles">plantilla_RegistrarUsuario</result>
 		</action>
 		
@@ -65,17 +65,23 @@ StrutsConfiguration
 		<action name="ReporteIncidente">
 			<result type="tiles">plantilla_ReporteIncidente</result>
 		</action>
-		<!-- Fin de actions de navegación -->
+		<!-- Fin de Actions de Navegación -->
 
-		
-		<action name="ConsultarIncidente" class="action.ListarIncidenciaAction" method="listarIncidentes"> 
-			<result name="ok" type="tiles">plantilla_ConsultarIncidente</result>
+		<!-- Actions de Mantenimiento -->
+		<action name="RegistrarUsuario" class="action.RegistroUsuarioAction" method="registrarUsuario">
+			<result name="registrarUsuario" type="tiles">plantilla_RegistrarUsuario</result>
 		</action>
 		
 		<action name="registrando" class="action.RegistroIncidenciaAction" method="registrar"> 
 			<result name="Exito" type="tiles">plantilla_ConsultarIncidente</result>
 			<result name="Error" type="tiles">plantilla_ConsultarIncidente</result>
 		</action>
-
+		<!-- Fin de Actions de Mantenimiento -->
+		
+		<!-- Actions de Reporte y Listado -->
+		<action name="ConsultarIncidente" class="action.ListarIncidenciaAction" method="listarIncidentes"> 
+			<result name="ok" type="tiles">plantilla_ConsultarIncidente</result>
+		</action>
+		<!-- Fin de Actions de Reporte y Listado -->
 	</package>
 </struts>

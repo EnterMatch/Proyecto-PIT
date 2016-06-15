@@ -116,7 +116,7 @@
             <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="RegistrarUsuario"><i class="fa fa-circle-o"></i>Registro de Usuario</a></li>
+            <li><a href="CargarRegistrarUsuario"><i class="fa fa-circle-o"></i>Registro de Usuario</a></li>
           </ul>
         </li>
         <li class="treeview">

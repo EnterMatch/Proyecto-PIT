@@ -3,16 +3,22 @@ package action;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.opensymphony.xwork2.ActionSupport;
+
 import model.Empleado;
 import model.Grupo;
+import model.Operador;
 import model.Persona;
 import model.Rol;
 import model.TipoUsuario;
 import model.Usuario;
+import service.EmpleadoService;
 import service.GrupoService;
+import service.OperadorService;
 import service.RolService;
+import service.UsuarioService;
 
-public class RegistroUsuarioAction {
+public class RegistroUsuarioAction extends ActionSupport{
 	// Atributos privados
 	// Listas para llenar selects
 	private List<Rol> lstRoles;
@@ -25,9 +31,12 @@ public class RegistroUsuarioAction {
 	private Empleado empleado;
 	private Usuario usuario;
 	
-	// Instanciar el servicio
+	// Instanciar los servicios
 	RolService rolService = new RolService();
 	GrupoService grupoService = new GrupoService();
+	EmpleadoService empleadoService = new EmpleadoService();
+	OperadorService operadorService = new OperadorService();
+	UsuarioService usuarioService = new UsuarioService();
 
 	// Carga el jsp Registrar Usuario
 	public String cargarData() {
@@ -42,6 +51,7 @@ public class RegistroUsuarioAction {
 		System.out.println(persona.toString());
 		System.out.println(empleado.toString());
 		System.out.println(usuario.toString());
+		registrarPorTipoUsuario(tipoUsuario);
 		return "registrarUsuario";
 	}
 
@@ -52,6 +62,21 @@ public class RegistroUsuarioAction {
 		lstTipoUsuarios.add(new TipoUsuario(1, "Empleado"));
 		lstTipoUsuarios.add(new TipoUsuario(2, "Operador"));
 	}
+	
+	// Método para registrar un usuario de acuerdo a su tipo
+	private void registrarPorTipoUsuario(String tipoUsuario) {
+		if(tipoUsuario.equals("1")){
+			empleado = new Empleado(persona, empleado.getIdGrupo(), empleado.getIdRol());
+			empleadoService.create(empleado);
+			usuarioService.create(new Usuario(empleado.getIdPersona(), usuario.getNombreUsuario(), usuario.getClaveUsuario()));
+			System.out.println("Id empleado: " + empleado.getIdPersona());
+		}else{
+			Operador operador = new Operador(persona);
+			operadorService.create(operador);
+			usuarioService.create(new Usuario(operador.getIdPersona(), usuario.getNombreUsuario(), usuario.getClaveUsuario()));
+		}
+	}
+	
 
 	// Getters y Setters para manejo de data desde y hacia el jsp
 	public List<Rol> getLstRoles() {

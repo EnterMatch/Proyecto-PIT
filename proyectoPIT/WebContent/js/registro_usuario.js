@@ -1,4 +1,6 @@
 $(function(){
+	// Muestra u oculta los campos grupo y rol de acuerdo 
+	// al tipo de usuario seleccionado 
 	$('#slcTipoUsuario').change(function(){
 		var opcion = $('#slcTipoUsuario option:selected').text();
 		if(opcion == "Empleado"){
@@ -13,7 +15,15 @@ $(function(){
 			$('#SegundoBloque').removeClass("col-md-4");
 			$('#SegundoBloque').addClass("col-md-6");
 			$('#GrupoYRol').hide();
-			
+		}
+	});
+	// Valida que ambas claves sean iguales antes de enviar el formulario
+	$('#formRegistrarUsuario').submit(function(){
+		var txtClave = $('#txtClave').val();
+		var txtClaveRepetir = $('#txtClaveRepetir').val();
+		if(txtClave != txtClaveRepetir){
+			alert("Las claves no son iguales");
+			return false;
 		}
 	});
 });

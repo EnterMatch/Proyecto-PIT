@@ -11,6 +11,7 @@
 <title><tiles:insertAttribute name="title" ignore="true"/></title>
 <tiles:insertAttribute name="header"/>
 <tiles:insertAttribute name="js"/>
+<tiles:insertAttribute name="js2"/>
 </head>
 <body>
 	

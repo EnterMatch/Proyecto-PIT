@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.Empleado;
+import model.Persona;
 import service.EmpleadoService;
 
 public class EmpleadoServiceTest {
@@ -19,7 +20,7 @@ public class EmpleadoServiceTest {
 
 	@Test
 	public void crudTest() {
-		Empleado empleado = new Empleado(0, "Nombre", "ApePat", "ApeMat", "email@gmail.com", 1, 1);
+		Empleado empleado = new Empleado(new Persona(0, "Nombre", "ApePat", "ApeMat", "email@gmail.com"), 1, 1);
 		assertEquals(1, empleadoService.create(empleado));
 		assertEquals(1, empleadoService.update(empleado));
 		assertNotNull(empleadoService.read());

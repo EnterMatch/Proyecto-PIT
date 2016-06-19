@@ -14,7 +14,7 @@
 
 			<section class="content">
 				<!-- INICIO DEL FORMULARIO REGISTRAR USUARIO -->
-				<s:form cssClass="form" action="RegistrarUsuario" theme="simple">
+				<s:form id="formRegistrarUsuario" cssClass="form" action="RegistrarUsuario" theme="simple">
 					<div class="box box-default">
 						<div class="box-header with-border">
 							<h3 class="box-title">Datos generales</h3>

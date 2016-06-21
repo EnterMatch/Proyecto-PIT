@@ -47,10 +47,6 @@ public class RegistroUsuarioAction extends ActionSupport{
 	// Registra un usuario nuevo en la BD
 	public String registrarUsuario() {
 		cargarSelects();
-		System.out.println(tipoUsuario);
-		System.out.println(persona.toString());
-		System.out.println(empleado.toString());
-		System.out.println(usuario.toString());
 		registrarPorTipoUsuario(tipoUsuario);
 		return "registrarUsuario";
 	}
@@ -65,15 +61,37 @@ public class RegistroUsuarioAction extends ActionSupport{
 	
 	// Método para registrar un usuario de acuerdo a su tipo
 	private void registrarPorTipoUsuario(String tipoUsuario) {
+		// Validar que todos los campos estén llenos
+		if(persona.getNombrePersona().equals("")||persona.getApePatPersona().equals("")||
+				persona.getApePatPersona().equals("")||persona.getEmailPersona().equals("")||
+				usuario.getNombreUsuario().equals("")||usuario.getClaveUsuario().equals("")){
+			addActionError("Falta completar datos");
+			return;
+		}
+		
+		// Validar que el usuario ingresado no exista
+		for(Usuario usuarioItem : usuarioService.read()){
+			if(usuarioItem.getNombreUsuario().equals(usuario.getNombreUsuario())){
+				addActionError("El usuario ingresado ya existe");
+				return;
+			}
+		}
+		
+		int result = 0;
 		if(tipoUsuario.equals("1")){
 			empleado = new Empleado(persona, empleado.getIdGrupo(), empleado.getIdRol());
 			empleadoService.create(empleado);
-			usuarioService.create(new Usuario(empleado.getIdPersona(), usuario.getNombreUsuario(), usuario.getClaveUsuario()));
-			System.out.println("Id empleado: " + empleado.getIdPersona());
+			result = usuarioService.create(new Usuario(empleado.getIdPersona(), usuario.getNombreUsuario(), usuario.getClaveUsuario()));
+			
 		}else{
 			Operador operador = new Operador(persona);
 			operadorService.create(operador);
-			usuarioService.create(new Usuario(operador.getIdPersona(), usuario.getNombreUsuario(), usuario.getClaveUsuario()));
+			result = usuarioService.create(new Usuario(operador.getIdPersona(), usuario.getNombreUsuario(), usuario.getClaveUsuario()));
+		}
+		if(result!=1){
+			addActionError("Error al ingresar el registro");
+		}else{
+			addActionMessage("Registro Agregado");
 		}
 	}
 	

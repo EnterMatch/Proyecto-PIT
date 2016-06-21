@@ -1,5 +1,5 @@
 
-
+<%@ taglib uri="/struts-tags" prefix="s" %>  
 	<header class="main-header">
     <a href="../../index2.html" class="logo">
       <span class="logo-mini"><b>A</b>LT</span>
@@ -43,7 +43,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="image/usuario/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Hola Alan Brito!</span>
+              <span class="hidden-xs">Hola <s:property value="NombreUsuario"/>  !</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->

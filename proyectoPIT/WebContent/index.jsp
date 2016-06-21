@@ -19,7 +19,7 @@
 
 <div class="fondo">
   
-  <s:form name="form" action="bienvenido" method="post" cssClass="login" theme="simple">
+  <s:form name="form" action="bienvenidosss" method="post" cssClass="login" theme="simple">
   <p class="titulo">Ingreso</p>
   	<s:actionerror cssStyle="color: red"/>
 	<s:textfield type="text"  placeholder="Usuario" name="usuario.nombreUsuario" />

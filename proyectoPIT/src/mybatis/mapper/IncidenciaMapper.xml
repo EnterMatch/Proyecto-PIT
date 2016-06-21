@@ -33,4 +33,5 @@
 	<select id="obtain" parameterType="int" resultMap = "incidenciaResultMap">
 	{call USP_TB_INCIDENCIA_OBTAIN(#{idIncidencia})}
 	</select>
+	
 </mapper>

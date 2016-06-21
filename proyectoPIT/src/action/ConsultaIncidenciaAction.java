@@ -9,14 +9,8 @@ import service.PrioridadService;;
 
 public class ConsultaIncidenciaAction {
 	
-	public List<Incidencia> lstIncidente;
-	
-	
 	public String listarIncidentes(){
 		IncidenciaService servicio = new IncidenciaService();
-		
-		lstIncidente = servicio.read();
-		
 		return "ok";
 	}
 	

@@ -25,12 +25,12 @@
             
 			<div class="col-md-4">
 			<div class="form-group">
-			<label for="exampleInputEmail1">Id de la incidente</label>
-			<input value="I0000001" readonly type="email" class="form-control" id="exampleInputEmail1" placeholder="Id incidente">
+				<label for="exampleInputEmail1">Id de la incidente</label>
+				<input value="<s:text name=""><s:property value="id"/></s:text>" readonly class="form-control">
 			</div>
 			<div class="form-group">
-			<label>Empresa</label>
-			<select disabled class="form-control select2" style="width: 100%;">
+				<label>Empresa</label>
+				<select disabled class="form-control select2" style="width: 100%;">
 			<option selected="selected">Instituto Cibertec</option>
 			</select>
 			</div>	

@@ -6,76 +6,90 @@ StrutsConfiguration
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
+    <constant name="struts.devMode" value="true" />
 	<constant name="struts.custom.i18n.resources" value="LogueoAction"/>
-		<package name="Proyecto" extends="struts-default">
+		<package name="Proyecto" extends="struts-default" namespace="/">
 		
-		<!-- Definición de tiles -->
+		
 		<result-types>
 			<result-type name="tiles"
 			class="org.apache.struts2.views.tiles.TilesResult" />
 		</result-types>
-		<!-- Fin Definición de tiles -->
+				
+		<interceptors >
+				
+				<interceptor name="rolesInterceptor" class="interceptor.RolesInterceptor"/>
+				
+				<interceptor-stack name="rolesStack">
+					<interceptor-ref name="rolesInterceptor"/>
+					<interceptor-ref name="defaultStack" />
+				</interceptor-stack>
+				
+		</interceptors>		
+		
+		<default-interceptor-ref name="rolesStack" />
+		
+		<global-results>
+			<result name="login">index.jsp</result>
+		</global-results>
 		
 		
-		<!-- Action para logueo -->
-		<action name="bienvenido" class="action.LogueoAction" method="loguear">
-			<result name="ok" type="tiles">plantilla_ListarIncidente</result>
+		<!-- TODOS -->
+		<action name="bienvenidosss" class="action.LogueoAction" method="loguear" >
+			<result  name="ok" type="tiles" >plantilla_principal</result>
 			<result name="error">index.jsp</result>
 		</action>
-		<!-- Fin Action para logueo -->
-		
-		
-		<!-- Actions de navegación --> 
-		<action name="RegistroIncidente" class="action.LogueoAction" method="cargarCombos">
-			<result name="ok" type="tiles">plantilla_principal</result>
-		</action>
-		
-		<action name="ConsultarIncidente">
-			<result type="tiles">plantilla_ConsultarIncidente</result>
-		</action>
-		
-		<action name="ListarIncidente" class="action.ListarIncidenciaAction" method="listarIncidentes">
-			<result name="ok"  type="tiles">plantilla_ListarIncidente</result>
-		</action>
-		
-		<action name="registroIncidente" class="action.RegistroIncidenciaAction" method="cargarCombos">
-			<result name="ok" type="tiles">plantilla_RegistrarSolucion</result>
-		</action>
-		
-		<action name="RegistrarSolucion">
-			<result type="tiles">plantilla_RegistrarSolucion</result>
-		</action>
-		
 		<action name="ListarBD">
 			<result type="tiles">plantilla_ListarBD</result>
 		</action>
+		<!-- ....................................................................................... -->
 		
-		<action name="RegistrarUsuario" class="action.RegistroUsuarioAction" method="cargarSelects">
-			<result name="cargarSelects" type="tiles">plantilla_RegistrarUsuario</result>
-		</action>
 		
-		<action name="listar" class="action.AsignarIncidenciaAction" method="asignar">
-			<result type="tiles" name="asignar">plantilla_AsignarIncidente</result>
-		</action>
-		
-		<action name="consultar" class="action.MantenerIncidenciaAction" method="mantener">
-			<result type="tiles" name="mantener">plantilla_MantenerIncidente</result>
-		</action>
-		
-		<action name="ReporteIncidente">
-			<result type="tiles">plantilla_ReporteIncidente</result>
-		</action>
-		<!-- Fin de actions de navegación -->
-
-		
-		<action name="ConsultarIncidente" class="action.ListarIncidenciaAction" method="listarIncidentes"> 
-			<result name="ok" type="tiles">plantilla_ConsultarIncidente</result>
-		</action>
-		
+		<!-- OPERADOR -->
 		<action name="registrando" class="action.RegistroIncidenciaAction" method="registrar"> 
 			<result name="Exito" type="tiles">plantilla_ConsultarIncidente</result>
 			<result name="Error" type="tiles">plantilla_ConsultarIncidente</result>
 		</action>
-
+				<action name="RegistroIncidente">
+					<result type="tiles">plantilla_principal</result>
+				</action>
+				<action name="registroIncidente">
+					<result name="ok" type="tiles">plantilla_RegistrarSolucion</result>
+				</action>
+		<action name="ConsultarIncidente">
+			<result type="tiles">plantilla_ConsultarIncidente</result>
+		</action>
+				<action name="ConsultarIncidente"> 
+					<result type="tiles">plantilla_ConsultarIncidente</result>
+				</action>
+		<action name="RegistrarUsuario" >
+			<result type="tiles">plantilla_RegistrarUsuario</result>
+		</action>
+		<!-- ....................................................................................... -->
+		
+		
+		<!-- TECNICO o ESPECIALISTA -->
+		<action name="ListarIncidente">
+			<result type="tiles">plantilla_ListarIncidente</result>
+		</action>
+		<action name="consultar" class="action.MantenerIncidenciaAction" method="mantener">
+			<result type="tiles" name="mantener">plantilla_MantenerIncidente</result>
+		</action>
+		<!-- ....................................................................................... -->
+		
+		
+		<!-- JEFE DE EQUIPO -->
+		<action name="listar" class="action.AsignarIncidenciaAction" method="asignar">
+			<result type="tiles" name="asignar">plantilla_AsignarIncidente</result>
+		</action>
+		<action name="RegistrarSolucion">
+			<result type="tiles">plantilla_RegistrarSolucion</result>
+		</action>
+		<action name="ReporteIncidente">
+			<result type="tiles">plantilla_ReporteIncidente</result>
+		</action>
+		<!-- ....................................................................................... -->
+		
+		
 	</package>
 </struts>

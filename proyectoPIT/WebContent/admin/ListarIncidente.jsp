@@ -24,45 +24,103 @@
         <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
         </div>
 		</div>
-            
+            Hello  <s:property value="name"/>  !!
 		<div class="box-body">
 		<div class="table-responsive">
-		<table class="table no-margin">
+		<table class="table no-margin" class="hoverTable">
 			<thead>
 			<tr>
-           	<th>Id Incidente</th>
-            <th>Descripción Incidente</th>
-            <th>Fecha registrada de Incidente</th>
-            <th>Resumen Incidente</th>
+           	<th>Id</th>
+           	<th>Prioridad</th>
+            <th>Fecha de registro</th>
+            <th>Resumen</th>
+            <th>Descripción</th>
             <th>Estado</th>
-            <th>Prioridad</th>
+            <th>Resolver</th>
 			</tr>
 			</thead>
 			<tbody>
 			<s:iterator value="lstIncidente" >
-			<tr >
-			<td><s:property value="idIncidencia"/></td>
-			<td><s:property value="descripIncidencia"/></td>
-			<td><s:property value="fecIngIncidencia"/></td>
-			<td><s:property value="resumenIncidencia"/></td>
-			<td><s:property value="idEstado"/></td>
-			<td><s:property value="idPrioridad"/></td>
-			<td>
-			<div class="checkbox">
-            <label><input type="checkbox" ></label>                    
+			<tr >				
+				<td><s:property value="idIncidencia"/></td>
+				<td><s:property value="idPrioridad"/></td>
+				<td><s:property value="fecIngIncidencia"/></td>
+				<td><s:property value="resumenIncidencia"/></td>
+				<td><s:property value="descripIncidencia"/></td>
+				<td><s:property value="idEstado"/></td>
+				<td>
+                	<button class="btn btn-info mensajeConstruccion" data-toggle="modal" data-target="#<s:property value="idIncidencia"/>" >
+                		Resolver
+                	</button>
+	<div class="modal fade" id="<s:property value="idIncidencia"/>" tabindex="-1" role="article" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		<h3 align="center">Resolver Incidente</h3>
+            <div class="box-body">
+            
+            <form action="mantenerIncidente">
+            <div class="col-md-12">
+            <h4 class="box-title">Datos del incidente</h4>
+            	<div class="col-md-2">
+				<label>Id</label>
+				<input value="<s:text name=""><s:property value="idIncidencia"/></s:text>" disabled="disabled" readonly class="form-control">
+				</div>
+				<div class="col-md-3">
+					<label>Empresa</label>
+					<input value="<s:property value="idEstado"/>" disabled="disabled" readonly class="form-control">
+				</div>
+				<div class="col-md-3">	
+	            	<label>Cliente</label>
+	            	<input value="<s:property value="idEstado"/>" disabled="disabled" readonly class="form-control">
+				</div>
+				<div class="col-md-4">
+    	        	<label>Resumen</label>
+            		<input value="<s:property value="resumenIncidencia"/>" disabled="disabled" readonly class="form-control">
+            	</div>
+            	<div class="col-md-12">
+        			<label>Descripción</label>
+					<textarea disabled="disabled" class="form-control"  >
+						<s:property value="descripIncidencia"/>
+					</textarea>
+           		</div>
+           		
+            <h4 class="box-title">Datos del mantenimiento</h4>
+            	<div class="col-md-12">
+        			<label>Nueva Descripción</label>
+        			<textarea class="form-control" placeholder="Nueva descripción" style="width: 100%; height: 50px; font-size: 14px; "> 
+					</textarea>
+				</div>
+				<div class="col-md-12">
+              		<label>Solución</label>
+              		<textarea class="form-control" placeholder="Solución" style="width: 100%; height: 150px; font-size: 14px; ">
+              		</textarea>
+        			<div class="col-sm-6"><center><button type="submit" class="btn btn-danger">Grabar</button></center></div>
+        			<div class="col-sm-6"><center><button type="submit" class="btn btn-danger">Cancelar</button></center></div>
+        		</div>
             </div>
-            </td>
+            </form>
+			
+			</div>
+		</div>
+		</div>
+	</div>
+                
+                
+				</td>
 			</tr>
 			</s:iterator>
 			</tbody>
 		</table>
         </div>
 		</div>
-
 	</div>
 	</section>
-	
-</div>
-</div>
+			
+
+            
+            
+            
+        </div>
+    </div>
 </body>
 

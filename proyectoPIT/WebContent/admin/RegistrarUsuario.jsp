@@ -64,7 +64,7 @@
 	            <div id="GrupoYRol" class="col-md-4">
 	               <div class="form-group">
 	               		<label>Grupo de trabajo</label>
-	                	<s:select id="slcGrupo" cssClass="form-control" list="lstGrupos" listKey="idGrupo" listValue="nombreGrupo"/>
+	                	<s:select id="slcGrupo" cssClass="form-control" list="grupos" listKey="idGrupo" listValue="nombreGrupo"/>
 	                </div>
 	                
 	                <div class="form-group">

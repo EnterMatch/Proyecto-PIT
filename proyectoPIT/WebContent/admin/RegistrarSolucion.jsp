@@ -28,7 +28,7 @@
 
         <div class="box-body">
 
-
+		<form action="registroSolucion">
             <div class="col-md-6">
               <div class="form-group">
               <label>Id de Solución</label>
@@ -51,10 +51,10 @@
               <button type="submit" class="btn btn-danger">Grabar</button>
             </div>
             <div class="col-xs-6" align="center">
-              <button type="submit" class="btn btn-danger">Cancelar</button>
+              <button  class="btn btn-danger">Cancelar</button>
             </div>
       </div>
-
+	</form>
 
 
         </div>

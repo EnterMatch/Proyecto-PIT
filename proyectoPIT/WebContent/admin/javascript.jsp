@@ -19,6 +19,7 @@
 <script src="js/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Scripts para jsp específicos -->
 <script src="js/registro_usuario.js"></script>
+
 <script>
       $(function () {
         $("#example1").DataTable();

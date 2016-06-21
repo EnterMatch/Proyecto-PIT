@@ -1,5 +1,2 @@
-/mybatis/
 /action/
-/model/
-/test/
-/service/
+/interceptor/

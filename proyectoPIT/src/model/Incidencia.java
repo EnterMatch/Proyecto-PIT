@@ -99,6 +99,8 @@ public class Incidencia {
 		this.idPrioridad = idPrioridad;
 	}
 	
+
+	
 	public Incidencia(int idIncidencia, String descripIncidencia, String fecIngIncidencia, String resumenIncidencia,
 			String solucionIncidencia, int idCliente, int idGrupo, int idOperador, int idEmpleado, int idEstado,
 			int idPrioridad) {

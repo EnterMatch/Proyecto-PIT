@@ -51,6 +51,13 @@ public class Persona {
 		this.apeMatPersona = apeMatPersona;
 		this.emailPersona = emailPersona;
 	}
+	@Override
+	public String toString() {
+		return "Persona [idPersona=" + idPersona + ", nombrePersona=" + nombrePersona + ", apePatPersona="
+				+ apePatPersona + ", apeMatPersona=" + apeMatPersona + ", emailPersona=" + emailPersona + "]";
+	}
+	
+	
 	
 	
 }

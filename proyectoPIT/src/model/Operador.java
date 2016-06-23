@@ -4,9 +4,8 @@ public class Operador extends Persona{
 	
 	public Operador() {}
 
-	public Operador(int idPersona, String nombrePersona, String apePatPersona, String apeMatPersona,
-			String emailPersona) {
-		super(idPersona, nombrePersona, apePatPersona, apeMatPersona, emailPersona);
+	public Operador(Persona persona) {
+		super(persona.idPersona, persona.nombrePersona, persona.apePatPersona, persona.apeMatPersona, persona.emailPersona);
 	}
 
 	@Override

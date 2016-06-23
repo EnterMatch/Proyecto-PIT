@@ -20,9 +20,8 @@ public class Empleado extends Persona{
 	
 	public Empleado(){}
 	
-	public Empleado(int idPersona, String nombrePersona, String apePatPersona, String apeMatPersona,
-			String emailPersona, int idRol, int idGrupo) {
-		super(idPersona, nombrePersona, apePatPersona, apeMatPersona, emailPersona);
+	public Empleado(Persona persona, int idRol, int idGrupo) {
+		super(persona.idPersona, persona.nombrePersona, persona.apePatPersona, persona.apeMatPersona, persona.emailPersona);
 		this.idRol = idRol;
 		this.idGrupo = idGrupo;
 	}

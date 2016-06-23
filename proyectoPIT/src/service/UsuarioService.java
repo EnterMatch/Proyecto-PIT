@@ -2,8 +2,6 @@ package service;
 
 import java.util.List;
 
-import javax.websocket.Session;
-
 import org.apache.ibatis.session.SqlSession;
 
 import model.Usuario;

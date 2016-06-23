@@ -4,7 +4,6 @@ import java.util.List;
 import mybatis.MyBatisUtil;
 import org.apache.ibatis.session.SqlSession;
 
-import model.Cliente;
 import model.Operador;
 
 public class OperadorService implements IService<Operador>{

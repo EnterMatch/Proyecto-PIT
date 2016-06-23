@@ -12,69 +12,45 @@
 	<put-attribute name="js2" value=""></put-attribute>
 	</definition>
 	
-	<definition name="plantilla_ConsultarIncidente" template="plantilla.jsp">
+	<definition name="plantilla_ConsultarIncidente" extends="plantilla_principal">
 	<put-attribute name="title" value="Consultar incidente" />
-	<put-attribute name="header" value="/admin/head.jsp"/>
-	<put-attribute name="menu" value="/admin/menu.jsp"/>
 	<put-attribute name="body" value="/admin/ConsultarIncidente.jsp"/>
-	<put-attribute name="js" value="/admin/javascript.jsp"/>
 	</definition>
 	
-	<definition name="plantilla_ListarIncidente" template="plantilla.jsp">
+	<definition name="plantilla_ListarIncidente" extends="plantilla_principal">
 	<put-attribute name="title" value="Listar incidente" />
-	<put-attribute name="header" value="/admin/head.jsp"/>
-	<put-attribute name="menu" value="/admin/menu.jsp"/>
 	<put-attribute name="body" value="/admin/ListarIncidente.jsp"/>
-	<put-attribute name="js" value="/admin/javascript.jsp"/>
 	</definition>
 	
-	<definition name="plantilla_RegistrarSolucion" template="plantilla.jsp">
+	<definition name="plantilla_RegistrarSolucion" extends="plantilla_principal">
 	<put-attribute name="title" value="Registrar Solucion" />
-	<put-attribute name="header" value="/admin/head.jsp"/>
-	<put-attribute name="menu" value="/admin/menu.jsp"/>
 	<put-attribute name="body" value="/admin/RegistrarSolucion.jsp"/>
-	<put-attribute name="js" value="/admin/javascript.jsp"/>
 	</definition>
 	
-	<definition name="plantilla_ListarBD" template="plantilla.jsp">
+	<definition name="plantilla_ListarBD" extends="plantilla_principal">
 	<put-attribute name="title" value="Listar BD" />
-	<put-attribute name="header" value="/admin/head.jsp"/>
-	<put-attribute name="menu" value="/admin/menu.jsp"/>
 	<put-attribute name="body" value="/admin/ListarBD.jsp"/>
-	<put-attribute name="js" value="/admin/javascript.jsp"/>
 	</definition>	
 	
-	<definition name="plantilla_RegistrarUsuario" template="plantilla.jsp">
+	<definition name="plantilla_RegistrarUsuario" extends="plantilla_principal">
 	<put-attribute name="title" value="Registrar Usuario" />
-	<put-attribute name="header" value="/admin/head.jsp"/>
-	<put-attribute name="menu" value="/admin/menu.jsp"/>
 	<put-attribute name="body" value="/admin/RegistrarUsuario.jsp"/>
-	<put-attribute name="js" value="/admin/javascript.jsp"/>
 	<put-attribute name="js2" value="/admin/RegistrarUsuarioScripts.jsp"/>
 	</definition>
 	
-	<definition name="plantilla_AsignarIncidente" template="plantilla.jsp">
+	<definition name="plantilla_AsignarIncidente" extends="plantilla_principal">
 	<put-attribute name="title" value="Asignar incidente" />
-	<put-attribute name="header" value="/admin/head.jsp"/>
-	<put-attribute name="menu" value="/admin/menu.jsp"/>
 	<put-attribute name="body" value="/admin/AsignarIncidente.jsp"/>
-	<put-attribute name="js" value="/admin/javascript.jsp"/>
 	</definition>
 	
-	<definition name="plantilla_MantenerIncidente" template="plantilla.jsp">
+	<definition name="plantilla_MantenerIncidente" extends="plantilla_principal">
 	<put-attribute name="title" value="Mantener incidente" />
-	<put-attribute name="header" value="/admin/head.jsp"/>
-	<put-attribute name="menu" value="/admin/menu.jsp"/>
 	<put-attribute name="body" value="/admin/MantenerIncidente.jsp"/>
-	<put-attribute name="js" value="/admin/javascript.jsp"/>
 	</definition>
 	
-	<definition name="plantilla_ReporteIncidente" template="plantilla.jsp">
+	<definition name="plantilla_ReporteIncidente" extends="plantilla_principal">
 	<put-attribute name="title" value="Reporte incidente" />
-	<put-attribute name="header" value="/admin/head.jsp"/>
-	<put-attribute name="menu" value="/admin/menu.jsp"/>
 	<put-attribute name="body" value="/admin/ReporteIncidente.jsp"/>
-	<put-attribute name="js" value="/admin/javascript.jsp"/>
 	</definition>	
 		
 </tiles-definitions>

@@ -34,7 +34,7 @@ public class ListarIncidenciaAction {
 	}
 	
 	public String listarIncidentes() throws IOException {
-		lstIncidente = new IncidenciaService().read();
+		lstIncidente = new IncidenciaService().listado();
 		return "ok";
 	}
 

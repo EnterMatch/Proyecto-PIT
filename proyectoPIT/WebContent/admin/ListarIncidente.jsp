@@ -45,12 +45,9 @@
 			<td><s:property value="descripIncidencia"/></td>
 			<td><s:property value="fecIngIncidencia"/></td>
 			<td><s:property value="resumenIncidencia"/></td>
-			<td><s:property value="idEstado"/></td>
-			<td><s:property value="idPrioridad"/></td>
+			<td><s:property value="descripEstado"/></td>
+			<td><s:property value="descripPrioridad"/></td>
 			<td>
-			<div class="checkbox">
-            <label><input type="checkbox" ></label>                    
-            </div>
             </td>
 			</tr>
 			</s:iterator>

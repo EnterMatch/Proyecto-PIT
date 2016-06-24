@@ -49,13 +49,13 @@
                   <tr>
                     <td><s:property value="idIncidencia"/></td>
                     <td><s:property value="resumenIncidencia"/></td>
-                    <td><s:property value="nombre_cliente"/></td>
-                    <td><s:property value="descrip_estado"/></td>
-                    <td><s:property value="descrip_prioridad"/></td>
+                    <td><s:property value="nombreCliente"/></td>
+                    <td><s:property value="descripEstado"/></td>
+                    <td><s:property value="descripPrioridad"/></td>
                     <td>
                     <div class="checkbox">
                     <label>
-                    <input type="checkbox">
+                    <input type="checkbox" name="rd">
                     </label>                    
                   	 </div>
                     </td>

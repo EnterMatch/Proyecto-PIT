@@ -94,7 +94,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="RegistroIncidente">	<i class="fa fa-circle-o"></i>	Registro de incidente	</a></li>
-            <li><a href="ConsultarIncidente">	<i class="fa fa-circle-o"></i>	Consultar Incidente		</a></li><!-- MantenerIncidente -->
+            <li><a href="CargarConsultarIncidente">	<i class="fa fa-circle-o"></i>	Consultar Incidente		</a></li><!-- MantenerIncidente -->
             <li><a href="ListarIncidente">		<i class="fa fa-circle-o"></i>	Listar Incidente		</a></li><!-- AsignarIncidente -->
             <li><a href="RegistrarSolucion">	<i class="fa fa-circle-o"></i>	Registrar Solucion		</a></li>
           </ul>

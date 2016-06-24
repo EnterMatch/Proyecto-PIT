@@ -30,8 +30,8 @@ StrutsConfiguration
 			<result name="ok" type="tiles">plantilla_principal</result>
 		</action>
 		
-		<action name="ConsultarIncidente">
-			<result type="tiles">plantilla_ConsultarIncidente</result>
+		<action name="CargarConsultarIncidente" class="action.ConsultaIncidenciaAction" method="listarIncidentes">
+			<result name="ok" type="tiles">plantilla_ConsultarIncidente</result>
 		</action>
 		
 		<action name="ListarIncidente" class="action.ListarIncidenciaAction" method="listarIncidentes">

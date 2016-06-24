@@ -16,6 +16,12 @@
  		<result property="idEmpleado" 			column="id_empleado"/>
  		<result property="idEstado" 			column="id_estado"/>
  		<result property="idPrioridad" 			column="id_prioridad"/>
+ 		<result property="nombreCliente"		column="nombre_cliente"/>
+ 		<result property="nombreGrupo"			column="nombre_grupo"/>
+ 		<result property="nombreOperador"		column="nombre_operador"/>
+ 		<result property="nombreEmpleado"		column="nombre_empleado"/>
+ 		<result property="descripEstado"		column="descrip_estado"/>
+ 		<result property="descripPrioridad"		column="descrip_prioridad"/>
  	</resultMap>
 
 	<insert id="create" parameterType="incidenciaModel" statementType="CALLABLE">
@@ -32,5 +38,8 @@
 	</delete>
 	<select id="obtain" parameterType="int" resultMap = "incidenciaResultMap">
 	{call USP_TB_INCIDENCIA_OBTAIN(#{idIncidencia})}
+	</select>
+	<select id="listado" resultMap="incidenciaResultMap">
+	{call USP_TB_INCIDENCIA_LISTADO()}
 	</select>
 </mapper>

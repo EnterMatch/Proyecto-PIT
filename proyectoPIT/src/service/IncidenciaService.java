@@ -82,6 +82,19 @@ public class IncidenciaService implements IService<Incidencia>{
 		return incidente;
 	}
 	
+	public List<Incidencia> listado() {
+		List<Incidencia> incidentes = null;
+		SqlSession session = getSqlSession();
+		try{
+			incidentes = session.selectList("IncidenciaMapper.listado");
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return incidentes;
+	}
+	
 	private SqlSession getSqlSession() {
 		return MyBatisUtil.getSqlSessionFactory().openSession();
 	}

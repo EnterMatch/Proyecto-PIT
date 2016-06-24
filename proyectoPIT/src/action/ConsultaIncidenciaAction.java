@@ -15,7 +15,7 @@ public class ConsultaIncidenciaAction {
 	public String listarIncidentes(){
 		IncidenciaService servicio = new IncidenciaService();
 		
-		lstIncidente = servicio.read();
+		lstIncidente = servicio.listado();
 		
 		return "ok";
 	}

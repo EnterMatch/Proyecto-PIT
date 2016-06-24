@@ -15,6 +15,7 @@
 	<definition name="plantilla_ConsultarIncidente" extends="plantilla_principal">
 	<put-attribute name="title" value="Consultar incidente" />
 	<put-attribute name="body" value="/admin/ConsultarIncidente.jsp"/>
+	<put-attribute name="js2" value="/scriptsIndividuales/ConsultarIncidentesScripts.jsp"></put-attribute>
 	</definition>
 	
 	<definition name="plantilla_ListarIncidente" extends="plantilla_principal">
@@ -35,7 +36,7 @@
 	<definition name="plantilla_RegistrarUsuario" extends="plantilla_principal">
 	<put-attribute name="title" value="Registrar Usuario" />
 	<put-attribute name="body" value="/admin/RegistrarUsuario.jsp"/>
-	<put-attribute name="js2" value="/admin/RegistrarUsuarioScripts.jsp"/>
+	<put-attribute name="js2" value="/scriptsIndividuales/RegistrarUsuarioScripts.jsp"/>
 	</definition>
 	
 	<definition name="plantilla_AsignarIncidente" extends="plantilla_principal">

@@ -30,4 +30,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="obtain" parameterType="int" resultMap="clienteResultMap">
  		{call usp_tb_cliente_obtain(#{idCliente})}
  	</select>
+ 	
+ 	<select id="filtrar" parameterType="int" resultMap="clienteResultMap">
+ 		{call usp_tb_cliente_filtrar(#{idEmpresa})}
+ 	</select>
  </mapper>

@@ -9,7 +9,7 @@
 	<put-attribute name="menu" value="/admin/menu.jsp"/>
 	<put-attribute name="body" value="/admin/RegistroIncidente.jsp"/>
 	<put-attribute name="js" value="/admin/javascript.jsp"/>
-	<put-attribute name="js2" value=""></put-attribute>
+	<put-attribute name="js2" value="/scriptsIndividuales/RegistroIncidenteScripts.jsp"></put-attribute>
 	</definition>
 	
 	<definition name="plantilla_ConsultarIncidente" extends="plantilla_principal">

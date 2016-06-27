@@ -26,7 +26,7 @@ StrutsConfiguration
 		
 		
 		<!-- Actions de navegación --> 
-		<action name="RegistroIncidente" class="action.LogueoAction" method="cargarCombos">
+		<action name="CargarRegistroIncidente" class="action.LogueoAction" method="cargarCombos">
 			<result name="ok" type="tiles">plantilla_principal</result>
 		</action>
 		

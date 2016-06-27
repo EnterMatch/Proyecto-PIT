@@ -81,6 +81,20 @@ public class ClienteService implements IService<Cliente>{
 		return cliente;
 	}
 	
+	
+	public List<Cliente> filtrar(int idEmpresa){
+		List<Cliente> clientes = null;
+		SqlSession session = getSqlSession();
+		try{
+			clientes = session.selectList("ClienteMapper.filtrar", idEmpresa);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return clientes;
+	}
+	
 	private SqlSession getSqlSession() {
 		return MyBatisUtil.getSqlSessionFactory().openSession();
 	}

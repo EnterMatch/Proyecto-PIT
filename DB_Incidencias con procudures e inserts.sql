@@ -1109,6 +1109,36 @@ BEGIN
 END
 // DELIMITER ;
 
+-- -------- OBTENER INCIDENTES PARA LISTADO -----------
+DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_LISTADO;
+DELIMITER //
+CREATE PROCEDURE USP_TB_INCIDENCIA_LISTADO ()
+BEGIN
+  SELECT I.id_incidencia, I.descrip_incidencia, I.fec_ing_incidencia, I.resumen_incidencia, 
+      I.solucion_incidencia, C.nombre_cliente, G.nombre_grupo, PER.nombre_persona AS nombre_operador, 
+            PERS.nombre_persona AS nombre_empleado, EST.descrip_estado, P.descrip_prioridad
+    FROM TB_INCIDENCIA I 
+    JOIN TB_CLIENTE C ON I.ID_CLIENTE = C.ID_CLIENTE
+    JOIN TB_GRUPO G ON I.ID_GRUPO = G.ID_GRUPO
+    JOIN TB_OPERADOR O ON I.ID_OPERADOR = O.ID_OPERADOR
+    JOIN TB_EMPLEADO EMP ON I.ID_EMPLEADO = EMP.ID_EMPLEADO
+    JOIN TB_ESTADO EST ON I.ID_ESTADO = EST.ID_ESTADO
+    JOIN TB_PRIORIDAD P ON I.ID_PRIORIDAD = P.ID_PRIORIDAD
+    JOIN TB_PERSONA PER ON O.ID_OPERADOR = PER.ID_PERSONA
+    JOIN TB_PERSONA PERS ON EMP.ID_EMPLEADO = PERS.ID_PERSONA;
+END //
+DELIMITER ;
+
+-- -------- FILTRAR PROCEDURE -----------
+DROP PROCEDURE IF EXISTS USP_TB_CLIENTE_FILTRAR;
+DELIMITER //
+CREATE PROCEDURE USP_TB_CLIENTE_FILTRAR (idEmp INT)
+BEGIN
+	SELECT * FROM TB_CLIENTE C
+    JOIN TB_EMPRESA_CLIENTE EC ON C.ID_CLIENTE = EC.ID_CLIENTE
+    WHERE EC.id_empresa = idEmp;
+END //
+DELIMITER ;
 
 -- ------------------------------------------------------------
 -- ---------------------INSERTS -------------------------------

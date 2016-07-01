@@ -140,6 +140,7 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_incidencias`.`tb_operador` (
   `id_operador` INT(11) NOT NULL COMMENT '',
+  `id_rol` INT(11) NOT NULL COMMENT '',
   PRIMARY KEY (`id_operador`)  COMMENT '',
   CONSTRAINT `tb_operador_ibfk_1`
     FOREIGN KEY (`id_operador`)
@@ -781,7 +782,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `db_incidencias`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_OPERADOR_CREATE`(OUT id INT, nombre VARCHAR(50), ape_pat VARCHAR(50), ape_mat VARCHAR(50), email VARCHAR(70))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_OPERADOR_CREATE`(OUT id INT,id_rol INT, nombre VARCHAR(50), ape_pat VARCHAR(50), ape_mat VARCHAR(50), email VARCHAR(70))
 BEGIN
 	INSERT INTO `db_incidencias`.`tb_persona`
 				(`nombre_persona`,
@@ -795,9 +796,9 @@ BEGIN
 				email);
 	
     INSERT INTO `db_incidencias`.`tb_operador`
-				(`id_operador`)
+				(`id_operador`, `id_rol`)
 	VALUES
-				(LAST_INSERT_ID());
+				(LAST_INSERT_ID(), id_rol);
 
 	SELECT LAST_INSERT_ID() INTO id;
 END$$
@@ -1115,8 +1116,9 @@ END
 -- ------------------------------------------------------------
 insert into tb_rol (descrip_rol) values
 /* 1 */('Jefe de equipo'),
-/* 2 */('Técnico'),
-/* 3 */('Especialista');
+/* 2 */('TÃ©cnico'),
+/* 3 */('Especialista'),
+/* 4 */('Operador');
 
 insert into tb_grupo(nombre_grupo) values
 /* 1 */('Administracion'),
@@ -1125,7 +1127,7 @@ insert into tb_grupo(nombre_grupo) values
 /* 4 */('Programacion');
 
 insert into tb_persona (nombre_persona, ape_pat_persona, ape_mat_persona, email_persona) values
--- Empleados Administración
+-- Empleados AdministraciÃ³n
 /* 1 */('Carlos', 'Sanchez', 'Gimenez', 'csanchez@gmail.com'), # Jef
 /* 2 */('Alan', 'Brito', 'Delgado', 'abrito@live.com'),  #Tec
 /* 3 */('Maria', 'Arriola', 'Ruiz', 'marriola@hotmail.com'), #Esp
@@ -1137,7 +1139,7 @@ insert into tb_persona (nombre_persona, ape_pat_persona, ape_mat_persona, email_
 /* 7 */('Alexander', 'De la flor', 'Delgado', 'adelaflor@live.com'), # Jef
 /* 8 */('Andres', 'Cacimiro', 'Caceres', 'acacimiro@hotmail.com'), #Tec
 /* 9 */('Pedro', 'Drago', 'Rodriguez', 'ddrago@gmail.com'), #Esp
--- Empleados Programación
+-- Empleados ProgramaciÃ³n
 /* 10 */('Raul', 'Damaso', 'Lopez', 'rdamaso@gmail.com'), # Jef
 /* 11 */('Luis', 'Atuncar', 'Gimenez', 'latuncar@gmail.com'), #Tec
 /* 12 */('Julio', 'De la flor', 'Flores', 'jdelaflor@live.com'), #Esp
@@ -1163,10 +1165,10 @@ insert into tb_empleado (id_empleado, id_rol, id_grupo) values
 (11, 2, 4),
 (12, 3, 4);
 
-insert into tb_operador (id_operador) values
-(13),
-(14),
-(15);
+insert into tb_operador (id_operador, id_rol) values
+(13, 4),
+(14, 4),
+(15, 4);
 
 insert into tb_usuario (id_usuario, nombre_usuario, clave_usuario) values
 -- Empleados
@@ -1188,7 +1190,7 @@ insert into tb_usuario (id_usuario, nombre_usuario, clave_usuario) values
 (15, 'lgamarra', 'admin123');
 
 insert into tb_cliente (nombre_cliente, email_cliente) values
-/* 1 */('Lucía', 'latoche@gmail.com'),
+/* 1 */('LucÃ­a', 'latoche@gmail.com'),
 /* 2 */('Luisa', 'ljanampa@gmail.com'),
 /* 3 */('Pedro', 'ppastor@live.com');
 
@@ -1228,6 +1230,43 @@ id_estado,
 id_prioridad) values 
 ('No puedo conectar a la base de datos al moneto de entrar a la intranet', '2016-05-22', 'No conecta a la BD', 'Se tuvo que reasignar
  con los permisos necesarios para poder entrar a la intranet, ya que no tenia los suficientes permisos', 1, 2, 13, 6, 6, 2),
-('No entra mi facebook', '2016-05-24', 'No entra su FB', 'La empresa bloque los permisos para ciertas páginas, para que sus empleados
- no se distraigan, asi que no puede ni podrá entrar al FACEBOOK', 2, 3, 14, 8, 6, 3),
+('No entra mi facebook', '2016-05-24', 'No entra su FB', 'La empresa bloque los permisos para ciertas pÃ¡ginas, para que sus empleados
+ no se distraigan, asi que no puede ni podrÃ¡ entrar al FACEBOOK', 2, 3, 14, 8, 6, 3),
 ('Cuando entro a la intranet me notifica que no existe el usuario', '2016-05-26', 'No existe usuario', '', 3, 3, 15, 7, 2, 1);
+
+-- -----------------------------------------------------
+-- procedure USP_TB_INCIDENCIA_READ POR MATEO
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `db_incidencias`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_READ_ID_USUARIO`(id INT)
+BEGIN
+	SELECT I.* FROM TB_INCIDENCIA I join tb_usuario 
+    on id_empleado = id_usuario
+    where id_empleado = id;
+END$$
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure USP_TB_INCIDENCIA_UPDATE_SOLUCION
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `db_incidencias`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_UPDATE2`(
+id INT, descrip VARCHAR(200), fec_ing DATETIME, resumen VARCHAR(500), solucion VARCHAR(1000),id_grupo INT, id_empleado INT, id_estado INT, id_prioridad INT)
+BEGIN
+	UPDATE `db_incidencias`.`tb_incidencia`
+	SET		`descrip_incidencia` = descrip,
+			`resumen_incidencia` = resumen,
+			`solucion_incidencia` = solucion,
+			`id_grupo` = id_grupo,
+			`id_empleado` = id_empleado,
+			`id_estado` = id_estado
+	WHERE `id_incidencia` = id;
+
+END$$
+
+DELIMITER ;
+

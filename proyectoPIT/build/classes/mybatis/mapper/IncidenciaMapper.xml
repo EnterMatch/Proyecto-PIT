@@ -42,4 +42,7 @@
 	<select id="listado" resultMap="incidenciaResultMap">
 	{call USP_TB_INCIDENCIA_LISTADO()}
 	</select>
+	<select id="read_Empleado" parameterType="int" resultMap = "incidenciaResultMap">
+	{call USP_TB_INCIDENCIA_READ_ID_USUARIO(#{idEmpleado})}
+	</select>
 </mapper>

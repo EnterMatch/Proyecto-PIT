@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <mapper namespace="UsuarioMapper">
  
 	<resultMap type="usuarioModel" id="usuarioResultMap">
- 		<id property="idUsuario" column="is_usuario"/>
+ 		<id property="idUsuario" column="id_usuario"/>
  		<result property="nombreUsuario" column="nombre_usuario"/>
  		<result property="claveUsuario" column="clave_usuario"/>
  	</resultMap>

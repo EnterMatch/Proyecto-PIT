@@ -21,18 +21,25 @@ public class RegistroIncidenciaAction {
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
 	private String fecIngIncidencia = dateFormat.format(new Date());
-
-	public String registrar(){
-		
+	
+	public String registrar(  ){
+		System.out.println("idCliente: "+idCliente);
+		System.out.println("fecIngIncidencia: "+fecIngIncidencia);
+		System.out.println("resumenIncidencia: "+resumenIncidencia);
+		System.out.println("idCliente: "+idCliente);
+		System.out.println("idGrupo: "+idGrupo);
+		System.out.println("idOperador: "+idOperador);
+		System.out.println("idEmpleado: "+idEmpleado);
+		System.out.println("idEstado: "+idEstado);
+		System.out.println("idPrioridad: "+idPrioridad);
 		Incidencia incidente = new Incidencia(
 				descripIncidencia,fecIngIncidencia ,resumenIncidencia,"",idCliente,idGrupo,idOperador,idEmpleado,idEstado,idPrioridad);
 		int ok = new IncidenciaService().create(incidente);
 		if(ok == 0){
 			return "Error";
-		}else {		
+		}else {
 			return "Exito";
 		}
-		
 	}
 	
 	public int getIdCliente() {

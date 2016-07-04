@@ -16,6 +16,9 @@
 	</ol>
     </section>
 <s:form action="registrando"  theme="simple">
+
+	<s:hidden name="idOperador"></s:hidden>
+
     <section class="content">
     
     <div class="col-md-12">
@@ -32,7 +35,8 @@
     	<div class="col-md-4">        	
 		<div class="form-group">
 		<s:label>Id del Incidente</s:label>
-		<s:textfield name="idIncidencia" cssClass="form-control" placeholder="Id incidente"/>
+		
+		<input name="idIncidencia" value="<s:property value="codNuevaInciden"/>" readonly="readonly"  Class="form-control" placeholder="Id incidente"/>
 		</div>
 		</div>
 		<div class="col-md-4">
@@ -68,10 +72,6 @@
 		</div>      
 		</div>
 		<div class="col-md-4">
-    	<div class="form-group">
-    	<s:label>Estado del incidente</s:label>
-    	<s:select cssClass="form-control select2" name="idEstado"  headerValue="Seleccion Estado" listKey="idEstado" listValue="descripEstado" list="%{estados}" />
-		</div>
 		<div class="form-group">
 		<s:label>Prioridad del incidente</s:label>
 		<s:select cssClass="form-control select2" name="idPrioridad" headerValue="Seleccione Prioridad" listKey="idPrioridad" listValue="descripPrioridad" list="%{prioridades}" />
@@ -82,8 +82,7 @@
    	</div>
    	
    	
-   		<s:hidden name="idOperador" value="13"/>
-   		<s:hidden name="idEmpleado" value="3"/>
+   		
    	
    	
    	<div class="col-md-4">

@@ -24,7 +24,7 @@
             <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
             </div>
-        <form action="listarCliente.php" method="post">    
+        <form action="" method="post">    
             <div class="box-body">
           <div class="row">
             <div class="col-md-6">
@@ -111,9 +111,9 @@
   	<div class="Vmodal-contenido">
   	<a class="close" href="#">&times;</a>
   	<section class="content">
-	<form method="post" name="agregarCli" action="RegistrarCliente.php">
+	<form method="post" action="">
 	<div class="box-header with-border">
-	<h3 class="box-title">Consulta baase de datos de conocimiento</h3>
+	<h3 class="box-title">Consulta base de datos de conocimiento</h3>
 	</div>
 	<div class="box-body pad">
 	<textarea class="textarea" placeholder="Resumen" style="width: 100%; height: 220px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">

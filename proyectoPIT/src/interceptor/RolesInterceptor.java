@@ -43,7 +43,7 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 	private static final String USER_HANDLE = "QUADRAN_USER_SESSSION_HANDLE";
 	private static final String USERNAME = "nombreUsuario";
 	private static final String PASSWORD = "claveUsuario";
-
+	
 	Usuario usuario;
 	
 	private List<Empresa> 		empresas;
@@ -73,20 +73,22 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 
 	public void listados (ActionInvocation invocation, int id){
 		System.out.println("Inicio del listado");
-		
+		int codNuevaInciden=0;
 		lstIncidente 	= new IncidenciaService().read_Empleado(id);
+		codNuevaInciden = new IncidenciaService().read().size()+1;
 		estados 		= new EstadoService().read();
 		prioridades 	= new PrioridadService().read();
 		empresas		= new EmpresaService().read();
 		clientes		= new ClienteService().read();
 		grupos			= new GrupoService().read();
-		
+		System.out.println("COD: "+codNuevaInciden);
 		lstRoles 		= new RolService().read();
 		lstTipoUsuarios.add(new TipoUsuario(1, "Empleado"));
 		lstTipoUsuarios.add(new TipoUsuario(2, "Operador"));
 		
 		ValueStack stack=invocation.getStack(); 
         stack.set("lstIncidente",lstIncidente);
+        stack.set("codNuevaInciden", codNuevaInciden);
         stack.set("estados", estados);
         stack.set("prioridades", prioridades);
         stack.set("estados", estados);
@@ -99,6 +101,7 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
         
 		if(new EmpleadoService().obtain(id) != null){
 			Empleado e = new EmpleadoService().obtain(id);
+			stack.set("idEmpleado", id);
 	        stack.set("NombrePersona", e.getNombrePersona());
 	        stack.set("ApeMatPersona", e.getApeMatPersona());
 	        stack.set("ApePatPersona", e.getApePatPersona());
@@ -110,6 +113,8 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 		}
 		else if(new OperadorService().obtain(id)!=null){
 			Operador o = new OperadorService().obtain(id);
+			System.out.println(id);
+			stack.set("idOperador", id);
 	        stack.set("NombrePersona", o.getNombrePersona());
 	        stack.set("ApeMatPersona", o.getApeMatPersona());
 	        stack.set("ApePatPersona", o.getApePatPersona());
@@ -139,28 +144,16 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 		}
 	}
 	
-	public List<String> identificacion (ActionInvocation invocation, int id){
-		if(new EmpleadoService().obtain(id) != null){
-			Empleado e = new EmpleadoService().obtain(id);
-			ValueStack stack=invocation.getStack(); 
-	        stack.set("NombrePersona", e.getNombrePersona());
-	        stack.set("ApeMatPersona", e.getApeMatPersona());
-	        stack.set("ApePatPersona", e.getApePatPersona());
-	        stack.set("EmailPersona", e.getEmailPersona());
-	        Grupo g =new GrupoService().obtain(e.getIdGrupo());
-	        stack.set("NombreGrupo", g.getNombreGrupo());
-	        Rol r = new RolService().obtain(e.getIdRol());
-	        stack.set("DescripRol", r.getDescripRol());
-		}
-		else if(new OperadorService().obtain(id)!=null){
-			Operador o = new OperadorService().obtain(id);
-			ValueStack stack=invocation.getStack(); 
-	        stack.set("NombrePersona", o.getNombrePersona());
-	        stack.set("ApeMatPersona", o.getApeMatPersona());
-	        stack.set("ApePatPersona", o.getApePatPersona());
-	        stack.set("EmailPersona", o.getEmailPersona());
-		}
-		return null; 
+	public String rol (int idUsuario){
+		EmpleadoService es = new EmpleadoService();
+		Empleado e = es.obtain(idUsuario);
+		OperadorService os = new OperadorService();
+		Operador o = os.obtain(idUsuario);
+		RolService rs = new RolService();
+
+		String rolUsuario = e==null ? (rolUsuario = rs.obtain(o.getId_rol()).getDescripRol()) :
+			(rolUsuario = rs.obtain(e.getIdRol()).getDescripRol());
+		return rolUsuario;
 	}
 	
 	public String intercept(ActionInvocation invocation) throws Exception {
@@ -181,9 +174,11 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 			if( session.getAttribute (USER_HANDLE)!=null) {
 				Usuario user = (Usuario) session.getAttribute (USER_HANDLE);
 				System.out.println("SesionActual: "+user);
+				System.out.println("CODIGO: "+user.getIdUsuario());
 				listados(invocation, user.getIdUsuario());
 				System.out.println("Fin interceptor");
-				return "success";
+				String r = rol(user.getIdUsuario());
+				return r;
 			}
 			else {
 				System.out.println("Fin interceptor");
@@ -201,6 +196,5 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 		System.out.println("Fin interceptor");
 		return "error";
 	}
-
 }
 

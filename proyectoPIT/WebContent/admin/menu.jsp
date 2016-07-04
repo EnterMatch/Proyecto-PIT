@@ -85,6 +85,7 @@
         <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Inicio</span></a></li>
 
         <s:set name="privilegios" value="DescripRol"/>
+        
         <s:if test="%{#privilegios=='Jefe de equipo'}">
         		<li class="treeview">
           			<a href="#">
@@ -118,6 +119,7 @@
           			</ul>
         		</li>	
         </s:if>
+        
         <s:elseif test="%{#privilegios=='Técnico'}">
         	   	<li class="treeview">
           			<a href="#">
@@ -130,6 +132,7 @@
           			</ul>
         		</li>
         </s:elseif>
+        
         <s:elseif test="%{#privilegios=='Especialista'}">
         	   	<li class="treeview">
           			<a href="#">
@@ -142,6 +145,7 @@
           			</ul>
         		</li>
         </s:elseif>
+        
         <s:else>
                 <li class="treeview">
           			<a href="#">
@@ -150,7 +154,7 @@
             			<i class="fa fa-angle-left pull-right"></i>
           			</a>
           			<ul class="treeview-menu">
-            			<li><a href="RegistroIncidente">	<i class="fa fa-circle-o"></i>	Registro de incidente	</a></li>
+            			<li><a href="RegistrarIncidente">	<i class="fa fa-circle-o"></i>	Registro de incidente	</a></li>
             			<li><a href="ConsultarIncidente">	<i class="fa fa-circle-o"></i>	Consultar Incidente		</a></li><!-- MantenerIncidente -->
           			</ul>
         		</li>

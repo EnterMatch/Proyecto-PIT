@@ -1,7 +1,5 @@
 package model;
 
-import java.sql.Date;
-/** fecIngIncidencia debe ser parseado como fecha */
 public class Incidencia {
 	
 	private int idIncidencia;
@@ -15,6 +13,7 @@ public class Incidencia {
 	private int idEmpleado;
 	private int idEstado;
 	private int idPrioridad;
+	private String raz_soc_empresa;
 	private String nombreCliente;
 	private String nombreGrupo;
 	private String nombreOperador;
@@ -22,7 +21,53 @@ public class Incidencia {
 	private String descripEstado;
 	private String descripPrioridad;
 
+	public Incidencia() {}
 	
+	public Incidencia(int idIncidencia,String descripIncidencia, String resumenIncidencia, String solucionIncidencia) {
+		this.idIncidencia = idIncidencia;
+		this.descripIncidencia = descripIncidencia;
+		this.resumenIncidencia = resumenIncidencia;
+		this.solucionIncidencia = solucionIncidencia;
+	}
+	
+	public Incidencia(int idIncidencia,String descripIncidencia, String resumenIncidencia, String solucion_incidencia, 
+			 int idGrupo, int idEmpleado, int idEstado,int idPrioridad) {
+		this.idIncidencia = idIncidencia;
+		this.descripIncidencia = descripIncidencia;
+		this.resumenIncidencia = resumenIncidencia;
+		this.idGrupo = idGrupo;
+		this.idEmpleado = idEmpleado;
+		this.idEstado = idEstado;
+		this.idPrioridad = idPrioridad;
+	}
+	
+	public Incidencia(String descripIncidencia, String resumenIncidencia,
+			int idCliente, int idGrupo, int idOperador, int idEstado,int idPrioridad) {
+		this.descripIncidencia = descripIncidencia;
+		this.resumenIncidencia = resumenIncidencia;
+		this.idCliente = idCliente;
+		this.idGrupo = idGrupo;
+		this.idOperador = idOperador;
+		this.idEstado = idEstado;
+		this.idPrioridad = idPrioridad;
+	}
+	
+	@Override
+	public String toString() {
+		return "Incidencia [idIncidencia="+idIncidencia
+				+", descripIncidencia="+ descripIncidencia
+				+", fecIngIncidencia="+ fecIngIncidencia
+				+", resumenIncidencia="+ resumenIncidencia
+				+", solucionIncidencia="+ solucionIncidencia 
+				+", raz_soc_empresa="+ raz_soc_empresa
+				+", nombreCliente="+ nombreCliente
+				+", nombreGrupo="+ nombreGrupo
+				+", nombreOperador="+ nombreOperador
+				+", nombreEmpleado="+ nombreEmpleado
+				+", descripEstado="+ descripEstado
+				+", descripPrioridad="+ descripPrioridad
+				+"]";
+	}
 	
 	public int getIdIncidencia() {
 		return idIncidencia;
@@ -160,47 +205,12 @@ public class Incidencia {
 		this.descripPrioridad = descripPrioridad;
 	}
 
-	public Incidencia() {}
-	
-	public Incidencia(String descripIncidencia, String fecIngIncidencia, String resumenIncidencia,
-			String solucionIncidencia, int idCliente, int idGrupo, int idOperador, int idEmpleado, int idEstado,
-			int idPrioridad) {
-		this.descripIncidencia = descripIncidencia;
-		this.fecIngIncidencia = fecIngIncidencia;
-		this.resumenIncidencia = resumenIncidencia;
-		this.solucionIncidencia = solucionIncidencia;
-		this.idCliente = idCliente;
-		this.idGrupo = idGrupo;
-		this.idOperador = idOperador;
-		this.idEmpleado = idEmpleado;
-		this.idEstado = idEstado;
-		this.idPrioridad = idPrioridad;
+	public String getRaz_soc_empresa() {
+		return raz_soc_empresa;
 	}
-	
-	public Incidencia(int idIncidencia, String descripIncidencia, String fecIngIncidencia, String resumenIncidencia,
-			String solucionIncidencia, int idCliente, int idGrupo, int idOperador, int idEmpleado, int idEstado,
-			int idPrioridad) {
-		super();
-		this.idIncidencia = idIncidencia;
-		this.descripIncidencia = descripIncidencia;
-		this.fecIngIncidencia = fecIngIncidencia;
-		this.resumenIncidencia = resumenIncidencia;
-		this.solucionIncidencia = solucionIncidencia;
-		this.idCliente = idCliente;
-		this.idGrupo = idGrupo;
-		this.idOperador = idOperador;
-		this.idEmpleado = idEmpleado;
-		this.idEstado = idEstado;
-		this.idPrioridad = idPrioridad;
-	}
-	
-	@Override
-	public String toString() {
-		return "Incidencia [idIncidencia=" + idIncidencia + ", descripIncidencia=" + descripIncidencia
-				+ ", fecIngIncidencia=" + fecIngIncidencia + ", resumenIncidencia=" + resumenIncidencia
-				+ ", solucionIncidencia=" + solucionIncidencia + ", idCliente=" + idCliente + ", idGrupo=" + idGrupo
-				+ ", idOperador=" + idOperador + ", idEmpleado=" + idEmpleado + ", idEstado=" + idEstado
-				+ ", idPrioridad=" + idPrioridad + "]";
+
+	public void setRaz_soc_empresa(String raz_soc_empresa) {
+		this.raz_soc_empresa = raz_soc_empresa;
 	}
 	
 }

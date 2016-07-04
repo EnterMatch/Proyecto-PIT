@@ -38,7 +38,18 @@ public class IncidenciaService implements IService<Incidencia>{
 		}
 		return incidente;
 	}
-
+	public List<Incidencia> read2() {
+		List<Incidencia> incidente = null;
+		SqlSession session = getSqlSession();
+		try{
+			incidente = session.selectList("IncidenciaMapper.read2");
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return incidente;
+	}
 	@Override
 	public int update(Incidencia incidente) {
 		int result = 0;

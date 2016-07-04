@@ -6,6 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <configuration>
 	<typeAliases>
+		<typeAlias type="model.prueba" 		alias="pruebaModel" />
 		<typeAlias type="model.Cliente" 	alias="clienteModel" />
 		<typeAlias type="model.Empleado" 	alias="empleadoModel" />
 		<typeAlias type="model.Empresa" 	alias="empresaModel" />
@@ -35,6 +36,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 
 	<mappers>
+		<mapper resource="mybatis/mapper/pruebaMapper.xml"/>
 		<mapper resource="mybatis/mapper/ClienteMapper.xml"/>
 		<mapper resource="mybatis/mapper/EmpleadoMapper.xml"/>
 		<mapper resource="mybatis/mapper/EmpresaClienteMapper.xml"/>

@@ -16,7 +16,7 @@ public class IncidenciaServiceTest {
 
 	@Test
 	public void test() {
-		Incidencia incidencia = new Incidencia(0, null, null, null, null, 0, 0, 0, 0, 0, 0);
+		Incidencia incidencia = new Incidencia(null, null,  0, 0, 0, 0, 0);
 		assertEquals(1, incidenciaService.create(incidencia));
 		assertEquals(1, incidenciaService.update(incidencia));
 		assertNotNull(incidenciaService.read());

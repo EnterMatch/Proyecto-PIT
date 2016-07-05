@@ -39,6 +39,7 @@ public class LogueoAction extends ActionSupport{
 	private int idEmpleado;
 	private int idEstado;
 	private int idPrioridad;
+	private int idEmpresa;
 	
 	
 	
@@ -51,10 +52,11 @@ public class LogueoAction extends ActionSupport{
 	private	List<Incidencia> lstIncidente;
 	
 	public void	cargarCombosEstadosPrioridad(){
+		idEmpresa = (idEmpresa==0)? 1:idEmpresa;
 		estados 		= new EstadoService().read();
 		prioridades 	= new PrioridadService().read();
 		empresas		= new EmpresaService().read();
-		clientes		= new ClienteService().read();
+		clientes		= new ClienteService().filtrar(idEmpresa);
 		grupos			= new GrupoService().read();
 	}
 	
@@ -204,6 +206,14 @@ public class LogueoAction extends ActionSupport{
 
 	public List<Empresa> getEmpresas() {
 		return empresas;
+	}
+
+	public int getIdEmpresa() {
+		return idEmpresa;
+	}
+
+	public void setIdEmpresa(int idEmpresa) {
+		this.idEmpresa = idEmpresa;
 	}
 
 	public void setEmpresas(List<Empresa> empresas) {

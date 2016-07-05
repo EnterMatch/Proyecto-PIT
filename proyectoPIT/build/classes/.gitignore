@@ -1,5 +1,3 @@
-/model/
-/mybatis/
-/service/
-/test/
 /action/
+/mybatis/
+/model/

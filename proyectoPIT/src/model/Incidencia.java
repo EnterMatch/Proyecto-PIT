@@ -1,6 +1,4 @@
 package model;
-
-import java.sql.Date;
 /** fecIngIncidencia debe ser parseado como fecha */
 public class Incidencia {
 	

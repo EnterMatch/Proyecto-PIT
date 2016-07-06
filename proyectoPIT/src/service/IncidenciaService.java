@@ -38,7 +38,18 @@ public class IncidenciaService implements IService<Incidencia>{
 		}
 		return incidente;
 	}
-
+	public List<Incidencia> read2() {
+		List<Incidencia> incidente = null;
+		SqlSession session = getSqlSession();
+		try{
+			incidente = session.selectList("IncidenciaMapper.read2");
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return incidente;
+	}
 	@Override
 	public int update(Incidencia incidente) {
 		int result = 0;
@@ -94,7 +105,18 @@ public class IncidenciaService implements IService<Incidencia>{
 		}
 		return incidentes;
 	}
-	
+	public List<Incidencia> read_Empleado(int id) {
+		List<Incidencia> incidente = null;
+		SqlSession session = getSqlSession();
+		try{
+			incidente = session.selectList("IncidenciaMapper.read_Empleado", id);
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return incidente;
+	}
 	private SqlSession getSqlSession() {
 		return MyBatisUtil.getSqlSessionFactory().openSession();
 	}

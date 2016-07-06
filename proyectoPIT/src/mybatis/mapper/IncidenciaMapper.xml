@@ -16,6 +16,7 @@
  		<result property="idEmpleado" 			column="id_empleado"/>
  		<result property="idEstado" 			column="id_estado"/>
  		<result property="idPrioridad" 			column="id_prioridad"/>
+ 		<result property="raz_soc_empresa" 		column="raz_soc_empresa"/>
  		<result property="nombreCliente"		column="nombre_cliente"/>
  		<result property="nombreGrupo"			column="nombre_grupo"/>
  		<result property="nombreOperador"		column="nombre_operador"/>
@@ -25,13 +26,16 @@
  	</resultMap>
 
 	<insert id="create" parameterType="incidenciaModel" statementType="CALLABLE">
-	 {call USP_TB_INCIDENCIA_CREATE(#{idIncidencia, mode=OUT, jdbcType=NUMERIC},#{descripIncidencia},#{fecIngIncidencia},#{resumenIncidencia},#{solucionIncidencia},#{idCliente},#{idGrupo},#{idOperador},#{idEmpleado},#{idEstado},#{idPrioridad})}
+	 {call USP_TB_INCIDENCIA_CREATE(#{descripIncidencia},#{resumenIncidencia},#{idCliente},#{idGrupo},#{idOperador},#{idEstado},#{idPrioridad})}
 	</insert>
 	<select id = "read" resultMap = "incidenciaResultMap">
 	{call USP_TB_INCIDENCIA_READ () }
 	</select>
-	<update id="update" parameterType="incidenciaModel">
-	{call USP_TB_INCIDENCIA_UPDATE(#{idIncidencia},#{descripIncidencia},#{fecIngIncidencia},#{resumenIncidencia},#{solucionIncidencia},#{idCliente},#{idGrupo},#{idOperador},#{idEmpleado},#{idEstado},#{idPrioridad})}
+	<select id = "read2" resultMap = "incidenciaResultMap">
+	{CALL USP_TB_INCIDENCIA_LISTADO () }
+	</select>
+	<update id="update" parameterType="incidenciaModel" statementType="CALLABLE">
+	{call USP_TB_INCIDENCIA_UPDATE3 (#{idIncidencia},#{descripIncidencia},#{resumenIncidencia},#{solucionIncidencia})}
 	</update>
 	<delete id="delete" parameterType="int">
 	{call USP_TB_INCIDENCIA_DELETE(#{idIncidencia}) }
@@ -41,5 +45,8 @@
 	</select>
 	<select id="listado" resultMap="incidenciaResultMap">
 	{call USP_TB_INCIDENCIA_LISTADO()}
+	</select>
+	<select id="read_Empleado" parameterType="int" resultMap = "incidenciaResultMap">
+	{call USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO(#{idEmpleado})}
 	</select>
 </mapper>

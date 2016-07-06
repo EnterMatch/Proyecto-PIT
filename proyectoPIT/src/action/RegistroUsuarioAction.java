@@ -1,16 +1,10 @@
 package action;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.opensymphony.xwork2.ActionSupport;
 
 import model.Empleado;
-import model.Grupo;
 import model.Operador;
 import model.Persona;
-import model.Rol;
-import model.TipoUsuario;
 import model.Usuario;
 import service.EmpleadoService;
 import service.GrupoService;
@@ -19,11 +13,12 @@ import service.RolService;
 import service.UsuarioService;
 
 public class RegistroUsuarioAction extends ActionSupport{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Atributos privados
 	// Listas para llenar selects
-	private List<Rol> lstRoles;
-	private List<Grupo> lstGrupos;
-	private List<TipoUsuario> lstTipoUsuarios = new ArrayList<TipoUsuario>();
 	// Atributo para capturar el tipo de usuario
 	private String tipoUsuario;
 	// Atributos de Models
@@ -38,26 +33,6 @@ public class RegistroUsuarioAction extends ActionSupport{
 	OperadorService operadorService = new OperadorService();
 	UsuarioService usuarioService = new UsuarioService();
 
-	// Carga el jsp Registrar Usuario
-	public String cargarData() {
-		cargarSelects();
-		return "cargarSelects";
-	}
-
-	// Registra un usuario nuevo en la BD
-	public String registrarUsuario() {
-		cargarSelects();
-		registrarPorTipoUsuario(tipoUsuario);
-		return "registrarUsuario";
-	}
-
-	// Método para cargar selects en jsp
-	private void cargarSelects() {
-		lstRoles = rolService.read();
-		lstGrupos = grupoService.read();
-		lstTipoUsuarios.add(new TipoUsuario(1, "Empleado"));
-		lstTipoUsuarios.add(new TipoUsuario(2, "Operador"));
-	}
 	
 	// Método para registrar un usuario de acuerdo a su tipo
 	private void registrarPorTipoUsuario(String tipoUsuario) {
@@ -95,26 +70,6 @@ public class RegistroUsuarioAction extends ActionSupport{
 		}
 	}
 	
-
-	// Getters y Setters para manejo de data desde y hacia el jsp
-	public List<Rol> getLstRoles() {
-		return lstRoles;
-	}
-	public void setLstRoles(List<Rol> lstRoles) {
-		this.lstRoles = lstRoles;
-	}
-	public List<Grupo> getLstGrupos() {
-		return lstGrupos;
-	}
-	public void setLstGrupos(List<Grupo> lstGrupos) {
-		this.lstGrupos = lstGrupos;
-	}
-	public List<TipoUsuario> getLstTipoUsuarios() {
-		return lstTipoUsuarios;
-	}
-	public void setLstTipoUsuarios(List<TipoUsuario> lstTipoUsuarios) {
-		this.lstTipoUsuarios = lstTipoUsuarios;
-	}
 	public String getTipoUsuario() {
 		return tipoUsuario;
 	}

@@ -140,6 +140,7 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `db_incidencias`.`tb_operador` (
   `id_operador` INT(11) NOT NULL COMMENT '',
+  `id_rol` INT(11) NOT NULL COMMENT '',
   PRIMARY KEY (`id_operador`)  COMMENT '',
   CONSTRAINT `tb_operador_ibfk_1`
     FOREIGN KEY (`id_operador`)
@@ -168,11 +169,11 @@ CREATE TABLE IF NOT EXISTS `db_incidencias`.`tb_incidencia` (
   `descrip_incidencia` VARCHAR(200) NOT NULL COMMENT '',
   `fec_ing_incidencia` DATETIME NOT NULL COMMENT '',
   `resumen_incidencia` VARCHAR(500) NOT NULL COMMENT '',
-  `solucion_incidencia` VARCHAR(1000) NOT NULL COMMENT '',
+  `solucion_incidencia` VARCHAR(1000) NULL COMMENT '',
   `id_cliente` INT(11) NOT NULL COMMENT '',
   `id_grupo` INT(11) NOT NULL COMMENT '',
   `id_operador` INT(11) NOT NULL COMMENT '',
-  `id_empleado` INT(11) NOT NULL COMMENT '',
+  `id_empleado` INT(11) NULL COMMENT '',
   `id_estado` INT(11) NOT NULL COMMENT '',
   `id_prioridad` INT(11) NOT NULL COMMENT '',
   PRIMARY KEY (`id_incidencia`)  COMMENT '',
@@ -212,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `db_incidencias`.`tb_usuario` (
   `id_usuario` INT(11) NOT NULL COMMENT '',
   `nombre_usuario` VARCHAR(50) UNIQUE NOT NULL COMMENT '',
   `clave_usuario` VARCHAR(50) NOT NULL COMMENT '',
-  PRIMARY KEY (`id_usuario`)  COMMENT '',
+  PRIMARY KEY (`id_usuario`)   '',
   CONSTRAINT `tb_usuario_ibfk_1`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `db_incidencias`.`tb_persona` (`id_persona`))
@@ -676,37 +677,30 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- procedure USP_TB_INCIDENCIA_CREATE
 -- -----------------------------------------------------
-
+DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_CREATE;
 DELIMITER $$
 USE `db_incidencias`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_CREATE`(OUT id INT, descrip VARCHAR(200), fec_ing DATETIME, resumen VARCHAR(500), solucion VARCHAR(1000), id_cliente INT, id_grupo INT, id_operador INT, id_empleado INT, id_estado INT, id_prioridad INT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_CREATE`( descrip VARCHAR(200), resumen VARCHAR(500), id_cliente INT, id_grupo INT, id_operador INT, id_estado INT, id_prioridad INT)
 BEGIN
 	INSERT INTO `db_incidencias`.`tb_incidencia`
 				(`descrip_incidencia`,
 				`fec_ing_incidencia`,
 				`resumen_incidencia`,
-				`solucion_incidencia`,
 				`id_cliente`,
 				`id_grupo`,
 				`id_operador`,
-				`id_empleado`,
 				`id_estado`,
 				`id_prioridad`)
 	VALUES
 				(descrip,
-				fec_ing,
+				now(),
 				resumen,
-				solucion,
 				id_cliente,
 				id_grupo,
 				id_operador,
-				id_empleado,
 				id_estado,
 				id_prioridad);
-
-	SELECT LAST_INSERT_ID() INTO id;
 END$$
-
 DELIMITER ;
 
 -- -----------------------------------------------------
@@ -781,7 +775,7 @@ DELIMITER ;
 
 DELIMITER $$
 USE `db_incidencias`$$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_OPERADOR_CREATE`(OUT id INT, nombre VARCHAR(50), ape_pat VARCHAR(50), ape_mat VARCHAR(50), email VARCHAR(70))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_OPERADOR_CREATE`(OUT id INT,id_rol INT, nombre VARCHAR(50), ape_pat VARCHAR(50), ape_mat VARCHAR(50), email VARCHAR(70))
 BEGIN
 	INSERT INTO `db_incidencias`.`tb_persona`
 				(`nombre_persona`,
@@ -795,9 +789,9 @@ BEGIN
 				email);
 	
     INSERT INTO `db_incidencias`.`tb_operador`
-				(`id_operador`)
+				(`id_operador`, `id_rol`)
 	VALUES
-				(LAST_INSERT_ID());
+				(LAST_INSERT_ID(), id_rol);
 
 	SELECT LAST_INSERT_ID() INTO id;
 END$$
@@ -1145,8 +1139,9 @@ DELIMITER ;
 -- ------------------------------------------------------------
 insert into tb_rol (descrip_rol) values
 /* 1 */('Jefe de equipo'),
-/* 2 */('Técnico'),
-/* 3 */('Especialista');
+/* 2 */('TÃ©cnico'),
+/* 3 */('Especialista'),
+/* 4 */('Operador');
 
 insert into tb_grupo(nombre_grupo) values
 /* 1 */('Administracion'),
@@ -1155,7 +1150,7 @@ insert into tb_grupo(nombre_grupo) values
 /* 4 */('Programacion');
 
 insert into tb_persona (nombre_persona, ape_pat_persona, ape_mat_persona, email_persona) values
--- Empleados Administración
+-- Empleados AdministraciÃ³n
 /* 1 */('Carlos', 'Sanchez', 'Gimenez', 'csanchez@gmail.com'), # Jef
 /* 2 */('Alan', 'Brito', 'Delgado', 'abrito@live.com'),  #Tec
 /* 3 */('Maria', 'Arriola', 'Ruiz', 'marriola@hotmail.com'), #Esp
@@ -1167,7 +1162,7 @@ insert into tb_persona (nombre_persona, ape_pat_persona, ape_mat_persona, email_
 /* 7 */('Alexander', 'De la flor', 'Delgado', 'adelaflor@live.com'), # Jef
 /* 8 */('Andres', 'Cacimiro', 'Caceres', 'acacimiro@hotmail.com'), #Tec
 /* 9 */('Pedro', 'Drago', 'Rodriguez', 'ddrago@gmail.com'), #Esp
--- Empleados Programación
+-- Empleados ProgramaciÃ³n
 /* 10 */('Raul', 'Damaso', 'Lopez', 'rdamaso@gmail.com'), # Jef
 /* 11 */('Luis', 'Atuncar', 'Gimenez', 'latuncar@gmail.com'), #Tec
 /* 12 */('Julio', 'De la flor', 'Flores', 'jdelaflor@live.com'), #Esp
@@ -1193,10 +1188,10 @@ insert into tb_empleado (id_empleado, id_rol, id_grupo) values
 (11, 2, 4),
 (12, 3, 4);
 
-insert into tb_operador (id_operador) values
-(13),
-(14),
-(15);
+insert into tb_operador (id_operador, id_rol) values
+(13, 4),
+(14, 4),
+(15, 4);
 
 insert into tb_usuario (id_usuario, nombre_usuario, clave_usuario) values
 -- Empleados
@@ -1218,7 +1213,7 @@ insert into tb_usuario (id_usuario, nombre_usuario, clave_usuario) values
 (15, 'lgamarra', 'admin123');
 
 insert into tb_cliente (nombre_cliente, email_cliente) values
-/* 1 */('Lucía', 'latoche@gmail.com'),
+/* 1 */('LucÃ­a', 'latoche@gmail.com'),
 /* 2 */('Luisa', 'ljanampa@gmail.com'),
 /* 3 */('Pedro', 'ppastor@live.com');
 
@@ -1258,6 +1253,125 @@ id_estado,
 id_prioridad) values 
 ('No puedo conectar a la base de datos al moneto de entrar a la intranet', '2016-05-22', 'No conecta a la BD', 'Se tuvo que reasignar
  con los permisos necesarios para poder entrar a la intranet, ya que no tenia los suficientes permisos', 1, 2, 13, 6, 6, 2),
-('No entra mi facebook', '2016-05-24', 'No entra su FB', 'La empresa bloque los permisos para ciertas páginas, para que sus empleados
- no se distraigan, asi que no puede ni podrá entrar al FACEBOOK', 2, 3, 14, 8, 6, 3),
+('No entra mi facebook', '2016-05-24', 'No entra su FB', 'La empresa bloque los permisos para ciertas pÃ¡ginas, para que sus empleados
+ no se distraigan, asi que no puede ni podrÃ¡ entrar al FACEBOOK', 2, 3, 14, 8, 6, 3),
 ('Cuando entro a la intranet me notifica que no existe el usuario', '2016-05-26', 'No existe usuario', '', 3, 3, 15, 7, 2, 1);
+
+
+-- -----------------------------------------------------
+-- procedure USP_TB_INCIDENCIA_READ POR MATEO
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `db_incidencias`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_READ_ID_USUARIO`(id INT)
+BEGIN
+	SELECT I.* FROM TB_INCIDENCIA I join tb_usuario 
+    on id_empleado = id_usuario
+    where id_empleado = id;
+END$$
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure USP_TB_INCIDENCIA_UPDATE_SOLUCION
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `db_incidencias`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_UPDATE2`(
+id INT, descrip VARCHAR(200), resumen VARCHAR(500), solucion VARCHAR(1000),id_grupo INT, id_empleado INT, id_estado INT, id_prioridad INT)
+BEGIN
+	UPDATE `db_incidencias`.`tb_incidencia`
+	SET		`descrip_incidencia` = descrip,
+			`resumen_incidencia` = resumen,
+			`solucion_incidencia` = solucion,
+			`id_grupo` = id_grupo,
+			`id_empleado` = id_empleado,
+			`id_estado` = id_estado,
+            `id_prioridad` = id_prioridad
+	WHERE `id_incidencia` = id;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure USP_TB_INCIDENCIA_UPDATE_SOLUCION
+-- -----------------------------------------------------
+DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_UPDATE3;
+DELIMITER $$
+USE `db_incidencias`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_UPDATE3`(
+id INT, descrip VARCHAR(200), resumen VARCHAR(500), solucion VARCHAR(1000))
+BEGIN
+	UPDATE `db_incidencias`.`tb_incidencia`
+	SET		`descrip_incidencia` = descrip,
+			`resumen_incidencia` = resumen,
+			`solucion_incidencia`= solucion
+	WHERE `id_incidencia` = id;
+END$$
+
+DELIMITER ;
+
+-- -------- OBTENER INCIDENTES PARA LISTADO -----------
+DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_LISTADO;
+DELIMITER //
+CREATE PROCEDURE USP_TB_INCIDENCIA_LISTADO ()
+BEGIN
+	SELECT 	I.id_incidencia, 
+			I.descrip_incidencia, 
+            I.fec_ing_incidencia, 
+            I.resumen_incidencia, 
+			I.solucion_incidencia,
+            empre.raz_soc_empresa, 
+            C.nombre_cliente, 
+            G.nombre_grupo, 
+            PER.nombre_persona AS nombre_operador, 
+            PERS.nombre_persona AS nombre_empleado, 
+            EST.descrip_estado, 
+            P.descrip_prioridad
+            
+    FROM TB_INCIDENCIA I 
+    JOIN TB_CLIENTE C ON I.ID_CLIENTE = C.ID_CLIENTE
+    JOIN TB_GRUPO G ON I.ID_GRUPO = G.ID_GRUPO
+    JOIN TB_OPERADOR O ON I.ID_OPERADOR = O.ID_OPERADOR
+    JOIN TB_EMPLEADO EMP ON I.ID_EMPLEADO = EMP.ID_EMPLEADO
+    JOIN tb_empresa_cliente empcli ON empcli.id_cliente = I.ID_CLIENTE
+    JOIN tb_empresa empre ON empre.id_empresa = empcli.id_empresa
+    JOIN TB_ESTADO EST ON I.ID_ESTADO = EST.ID_ESTADO
+    JOIN TB_PRIORIDAD P ON I.ID_PRIORIDAD = P.ID_PRIORIDAD
+    JOIN TB_PERSONA PER ON O.ID_OPERADOR = PER.ID_PERSONA
+    JOIN TB_PERSONA PERS ON EMP.ID_EMPLEADO = PERS.ID_PERSONA;
+END //
+DELIMITER ;
+
+
+-- -------- OBTENER INCIDENTES PARA LISTADO -----------
+DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO;
+DELIMITER //
+CREATE PROCEDURE USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO (id_empleado int)
+BEGIN
+	SELECT 	I.id_incidencia, 
+			I.descrip_incidencia, 
+            I.fec_ing_incidencia, 
+            I.resumen_incidencia, 
+			I.solucion_incidencia,
+            empre.raz_soc_empresa, 
+            C.nombre_cliente, 
+            G.nombre_grupo, 
+            PER.nombre_persona AS nombre_operador, 
+            (select nombre_persona from TB_PERSONA where id_persona = I.id_empleado) as nombre_empleado,
+            EST.descrip_estado, 
+            P.descrip_prioridad
+    FROM TB_INCIDENCIA I 
+    JOIN TB_CLIENTE C ON I.ID_CLIENTE = C.ID_CLIENTE
+    JOIN TB_GRUPO G ON I.ID_GRUPO = G.ID_GRUPO
+    JOIN tb_empresa_cliente empcli ON empcli.id_cliente = I.ID_CLIENTE
+    JOIN tb_empresa empre ON empre.id_empresa = empcli.id_empresa
+    JOIN TB_ESTADO EST ON I.ID_ESTADO = EST.ID_ESTADO
+    JOIN TB_PRIORIDAD P ON I.ID_PRIORIDAD = P.ID_PRIORIDAD
+    JOIN TB_PERSONA PER ON I.ID_OPERADOR = PER.ID_PERSONA 
+    WHERE I.ID_OPERADOR=id_empleado || I.ID_OPERADOR=id_empleado;
+END //
+DELIMITER ;
+

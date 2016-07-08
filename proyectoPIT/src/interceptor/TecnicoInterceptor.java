@@ -31,11 +31,11 @@ public class TecnicoInterceptor extends AbstractInterceptor implements StrutsSta
 		ValueStack stack = invocation.getStack();
 		IncidenciaService is = new IncidenciaService();
 		lstIncidente = is.read_Empleado(id);
-		
+
 		for (Incidencia incidencia : lstIncidente) {
 			System.out.println(incidencia);
 		}
-		
+		stack.set("idEmpleado", id);
 		stack.set("lstIncidente", lstIncidente);
 		System.out.println("Fin del listado");
 	}
@@ -52,23 +52,28 @@ public class TecnicoInterceptor extends AbstractInterceptor implements StrutsSta
 			System.out.println("Context:       " + invocation.getInvocationContext().getName());
 			System.out.println("SesionActual: " + user);
 			if (invocation.getInvocationContext().getName().equals("manteniendo")) {
-				
+
+
+				String solucionIncidencia = request.getParameter("solucionIncidencia");
 				int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
 				int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
-				String descripIncidencia = request.getParameter("descripIncidencia");
-				String resumenIncidencia = request.getParameter("resumenIncidencia");
-				String solucionIncidencia = request.getParameter("solucionIncidencia");
 				
-				Incidencia incidencia = new Incidencia(idIncidencia, idEmpleado, descripIncidencia, resumenIncidencia, solucionIncidencia);				
+				System.out.println(idIncidencia);
+				System.out.println(idEmpleado);
+				System.out.println(solucionIncidencia);
+
+				Incidencia incidencia = new Incidencia(idIncidencia, idEmpleado, solucionIncidencia);
+				
 				System.out.println(incidencia);
 
 				new IncidenciaService().update(incidencia);
-				
+
 				listados(invocation, user.getIdUsuario());
 				System.out.println("Fin Mantener");
 				return "mantener";
-				
+
 			}
+			
 			listados(invocation, user.getIdUsuario());
 			return invocation.invoke();
 		}

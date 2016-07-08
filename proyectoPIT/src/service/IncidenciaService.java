@@ -64,6 +64,20 @@ public class IncidenciaService implements IService<Incidencia>{
 		}
 		return result;
 	}
+	
+	public int solucion(Incidencia incidente) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		try{
+			result = session.update("IncidenciaMapper.solucion",incidente);
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return result;
+	}
 
 	public int asignar(Incidencia incidente) {
 		int result = 0;

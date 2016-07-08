@@ -28,6 +28,17 @@ public class Incidencia {
 		this.idIncidencia = idIncidencia;
 	}
 	
+	public Incidencia(int idIncidencia, int idEmpleado, String solucionIncidencia) {
+		this.idEmpleado = idEmpleado;
+		this.idIncidencia = idIncidencia;
+		this.solucionIncidencia = solucionIncidencia;
+	}
+	
+	public Incidencia(int idIncidencia, String solucionIncidencia) {
+		this.solucionIncidencia = solucionIncidencia;
+		this.idIncidencia = idIncidencia;
+	}
+	
 	public Incidencia(int idIncidencia, int idEmpleado ,String descripIncidencia, String resumenIncidencia, String solucionIncidencia) {
 		this.idEmpleado = idEmpleado;
 		this.idIncidencia = idIncidencia;

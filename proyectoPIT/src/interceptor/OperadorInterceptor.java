@@ -61,6 +61,12 @@ public class OperadorInterceptor extends AbstractInterceptor implements StrutsSt
 		IncidenciaService is = new IncidenciaService();
 		lstIncidente = is.read_Empleado(id);
 		
+		
+		for (Incidencia incidencia : lstIncidente) {
+			System.out.println("MAMMA MIA:   "+incidencia);
+		}
+		stack.set("lstIncidentesSinAsignar", lstIncidente);
+		
 		// CODIGO AUTOGENERADO PARA EL REGISTRO
 		int codNuevaInciden = 0;
 		codNuevaInciden = new IncidenciaService().read().size() + 1;
@@ -88,11 +94,9 @@ public class OperadorInterceptor extends AbstractInterceptor implements StrutsSt
 		stack.set("clientes", clientes);
 		stack.set("grupos", grupos);
 		stack.set("lstRoles", lstRoles);
+		
 		stack.set("lstTipoUsuarios", lstTipoUsuarios);
 		
-		
-		stack.set("lstIncidente", lstIncidente);
-
 		System.out.println("Fin del listado");
 	}
 
@@ -105,12 +109,14 @@ public class OperadorInterceptor extends AbstractInterceptor implements StrutsSt
 		HttpSession session = request.getSession(false);
 		
 		ValueStack stack = invocation.getStack();
+		
 		if (session.getAttribute(USER_HANDLE) != null) {
 			Usuario user = (Usuario) session.getAttribute(USER_HANDLE);
 			System.out.println("Context:       " + invocation.getInvocationContext().getName());
 			System.out.println("SesionActual: " + user);
+			
+			
 			if (invocation.getInvocationContext().getName().equals("registrando")) {
-				
 				int idCliente = Integer.parseInt(request.getParameter("idCliente"));
 				String descripIncidencia = request.getParameter("descripIncidencia");
 				String resumenIncidencia = request.getParameter("resumenIncidencia");
@@ -194,9 +200,11 @@ public class OperadorInterceptor extends AbstractInterceptor implements StrutsSt
 					stack.set("mensajeError", "Registro Agregado");
 				}
 			}
-			
+			listados(invocation, user.getIdUsuario());
+			System.out.println("Fin OperadorInterceptor");
+			return invocation.invoke();
 		}
-		System.out.println("Fin OperadorInterceptornterceptor");
+		System.out.println("Fin OperadorInterceptor");
 		return "Error";
 	}
 

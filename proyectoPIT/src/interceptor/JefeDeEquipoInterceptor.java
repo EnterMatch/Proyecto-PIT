@@ -15,9 +15,11 @@ import com.opensymphony.xwork2.util.ValueStack;
 
 import model.Empleado;
 import model.Incidencia;
+import model.Rol;
 import model.Usuario;
 import service.EmpleadoService;
 import service.IncidenciaService;
+import service.RolService;
 
 public class JefeDeEquipoInterceptor extends AbstractInterceptor implements StrutsStatics  {
 	/**
@@ -66,7 +68,7 @@ public class JefeDeEquipoInterceptor extends AbstractInterceptor implements Stru
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		System.out.println("---------------------------------------------------------");
-		System.out.println("Interceptor");
+		System.out.println("JefeDeEquipoInterceptor");
 		final ActionContext context = invocation.getInvocationContext();
 		HttpServletRequest request = (HttpServletRequest) context.get(HTTP_REQUEST);
 		HttpSession session = request.getSession(false);
@@ -75,24 +77,70 @@ public class JefeDeEquipoInterceptor extends AbstractInterceptor implements Stru
 			System.out.println("Context:       " + invocation.getInvocationContext().getName());
 			System.out.println("SesionActual: " + user);
 			if (invocation.getInvocationContext().getName().equals("verificar")) {
+				
 				String idIncidencia = (String) request.getParameter("idIncidencia");
 				System.out.println("IdIncidente:       " + idIncidencia);
+				
 				ValueStack stack = invocation.getStack();
 				stack.set("idIncidencia", idIncidencia);
+				
+				listados(invocation, user.getIdUsuario());
+				return "verificar";
 			}
 			if (invocation.getInvocationContext().getName().equals("asignar")) {
+				
+				
 				int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
 				int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
+				
+				//int rol=new EmpleadoService().obtain(idEmpleado).getIdRol();
+				
 				Incidencia incidencia = new Incidencia(idIncidencia, idEmpleado);
 				System.out.println("Incidente:       " + incidencia);
 				new IncidenciaService().asignar(incidencia);
 				listados(invocation, user.getIdUsuario());
 				return "asignado";
+				
+				
+			}
+			if (invocation.getInvocationContext().getName().equals("registrarSolucion")) {
+				
+				
+				int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
+				
+				String solucionIncidencia = new IncidenciaService().obtain(idIncidencia).getSolucionIncidencia();
+				
+				System.out.println("IdIncidente:       " + idIncidencia);
+				
+				ValueStack stack = invocation.getStack();
+				stack.set("idIncidencia", idIncidencia);
+				stack.set("solucionIncidencia", solucionIncidencia);
+				listados(invocation, user.getIdUsuario());
+				return "registrarSolucion";
+				
+				
+			}
+			if (invocation.getInvocationContext().getName().equals("solucionando")) {
+				
+				
+				int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
+				
+				
+				String solucionIncidencia = new IncidenciaService().obtain(idIncidencia).getSolucionIncidencia();
+				
+				Incidencia incidente = new Incidencia(idIncidencia, solucionIncidencia);
+				
+				new IncidenciaService().solucion(incidente);
+				
+				listados(invocation, user.getIdUsuario());
+				return "solucionando";
+				
+				
 			}
 			listados(invocation, user.getIdUsuario());
 			return invocation.invoke();
 		}
-		System.out.println("Fin interceptor");
+		System.out.println("Fin JefeDeEquipoInterceptor");
 		return "error";
 	}
 

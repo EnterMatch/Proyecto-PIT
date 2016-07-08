@@ -7,11 +7,11 @@
 		<div class="content-wrapper">
 
 			<section class="content-header">
-				<h1>Incidentes Pendientes</h1>
+				<h1>Incidentes Asignados</h1>
 				<ol class="breadcrumb">
 					<li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
 					<li><a href="#">Incidente</a></li>
-					<li class="active">Incidentes Pendientes</li>
+					<li class="active">Incidentes Asignados</li>
 				</ol>
 			</section>
 			<section class="content">
@@ -45,7 +45,7 @@
 								</thead>
 								<tbody>
 
-									<s:iterator value="lstIncidentesSinAsignar">
+									<s:iterator value="lstIncidentesAsignados">
 										<tr>
 											<td><s:property value="idIncidencia" /></td>
 											<td><s:property value="fecIngIncidencia" /></td>
@@ -54,7 +54,7 @@
 											<td><s:property value="descripEstado" /></td>
 											<td><s:property value="descripPrioridad" /></td>
 											<td>
-												<form action="verificar" method="post">
+												<form action="registrarSolucion" method="post">
 													<s:hidden name="idIncidencia" value="%{idIncidencia}"/>
 													<button type="submit" class="btn btn-danger">Verificar</button>
 												</form>

@@ -32,27 +32,30 @@
     </div>
     
 	<div class="box-body">
+	
     	<div class="col-md-4">        	
 		<div class="form-group">
 		<s:label>Id del Incidente</s:label>
-		
 		<input name="idIncidencia" value="<s:property value="codNuevaInciden"/>" readonly="readonly"  Class="form-control" placeholder="Id incidente"/>
+		</div>
+		</div>
 		
-		</div>
-		</div>
 		<div class="col-md-4">
     	<div class="form-group">
 		<s:label>Empresa</s:label>
 		<s:select cssClass="form-control select2" name="empresa" headerValue="Seleccione Empresa" listKey="idEmpresa" listValue="razSocEmpresa" list="%{empresas}" />
 		</div>
 		</div>
+		
 		<div class="col-md-4">
 		<div class="form-group">
 		<s:label>Cliente</s:label>
 		<s:select cssClass="form-control select2" name="idCliente" headerValue="Seleccione Cliente" listKey="idCliente" listValue="nombreCliente" list="%{clientes}" />
 		</div>
 		</div>
+		
 	</div>
+	
 	</div>
 	</div>
 

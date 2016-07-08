@@ -12,6 +12,18 @@
 	<put-attribute name="js2" value=""></put-attribute>
 	</definition>
 	
+	<definition name="plantilla_ConsultarIncidenteOperador" extends="plantilla_principal">
+	<put-attribute name="title" value="Consultar incidente operador" />
+	<put-attribute name="body" value="/admin/ConsultarIncidenteOperador.jsp"/>
+	<put-attribute name="js2" value="/scriptsIndividuales/ConsultarIncidentesScripts.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="plantilla_ConsultarIncidentesAsignados" extends="plantilla_principal">
+	<put-attribute name="title" value="Consultar incidente asignado" />
+	<put-attribute name="body" value="/admin/ConsultarIncidentesAsignados.jsp"/>
+	<put-attribute name="js2" value="/scriptsIndividuales/ConsultarIncidentesScripts.jsp"></put-attribute>
+	</definition>
+	
 	<definition name="plantilla_ConsultarIncidente" extends="plantilla_principal">
 	<put-attribute name="title" value="Consultar incidente" />
 	<put-attribute name="body" value="/admin/ConsultarIncidente.jsp"/>

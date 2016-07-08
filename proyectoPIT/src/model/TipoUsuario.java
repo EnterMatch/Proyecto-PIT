@@ -1,12 +1,16 @@
 package model;
 
 public class TipoUsuario {
+	
+	
 	private int idTipoUsuario;
+	
 	private String descripTipoUsuario;
+
+	
 	public int getIdTipoUsuario() {
 		return idTipoUsuario;
 	}
-	
 	public void setIdTipoUsuario(int idTipoUsuario) {
 		this.idTipoUsuario = idTipoUsuario;
 	}

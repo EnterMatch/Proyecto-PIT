@@ -15,7 +15,13 @@
 			<section class="content">
 				<!-- INICIO DEL FORMULARIO REGISTRAR USUARIO -->
 				<s:form id="formRegistrarUsuario" cssClass="form"
-					action="RegistrarUsuario" theme="simple">
+					action="registrandoUsuario" theme="simple">
+					
+					<s:hidden name="idPesona" value="%{codNuevoUsuario}" />
+					<s:hidden name="idPesona">
+						<s:property value="codNuevoUsuario" />
+					</s:hidden>
+					
 					<s:actionmessage />
 					<s:actionerror cssStyle="color:red" />
 					<div class="box box-default">
@@ -32,6 +38,7 @@
 									<i class="fa fa-remove"></i>
 								</button>
 							</div>
+
 						</div>
 
 						<div class="box-body">
@@ -51,28 +58,26 @@
 								<div id="PrimerBloque" class="col-md-4">
 									<div class="form-group">
 										<label for="txtApellidoPaterno">Apellido Paterno</label>
-										<s:textfield id="txtApellidoPaterno"
-											name="persona.apePatPersona" cssClass="form-control"
-											placeholder="Apellido Paterno" />
+										<s:textfield id="txtApellidoPaterno" name="apePatPersona"
+											cssClass="form-control" placeholder="Apellido Paterno" />
 									</div>
 
 									<div class="form-group">
 										<label for="txtNombre">Nombre</label>
-										<s:textfield id="txtNombre" name="persona.nombrePersona"
+										<s:textfield id="txtNombre" name="nombrePersona"
 											cssClass="form-control" placeholder="Nombre" />
 									</div>
 								</div>
 								<div id="SegundoBloque" class="col-md-4">
 									<div class="form-group">
 										<label for="txtApellidoMaterno">Apellido Materno</label>
-										<s:textfield id="txtApellidoMaterno"
-											name="persona.apeMatPersona" cssClass="form-control"
-											placeholder="Apellido Materno" />
+										<s:textfield id="txtApellidoMaterno" name="apeMatPersona"
+											cssClass="form-control" placeholder="Apellido Materno" />
 									</div>
 
 									<div class="form-group">
 										<label for="txtEmail">E-mail</label>
-										<s:textfield id="txtEmail" name="persona.emailPersona"
+										<s:textfield id="txtEmail" name="emailPersona"
 											cssClass="form-control" placeholder="E-mail" />
 									</div>
 
@@ -81,16 +86,14 @@
 								<div id="GrupoYRol" class="col-md-4">
 									<div class="form-group">
 										<label>Grupo de trabajo</label>
-										<s:select id="slcGrupo" name="empleado.idGrupo"
-											cssClass="form-control" list="grupos" listKey="idGrupo"
-											listValue="nombreGrupo" />
+										<s:select id="slcGrupo" name="idGrupo" cssClass="form-control"
+											list="grupos" listKey="idGrupo" listValue="nombreGrupo" />
 									</div>
 
 									<div class="form-group">
 										<label>Rol</label>
-										<s:select id="slcRol" name="empleado.idRol"
-											cssClass="form-control" list="lstRoles" listKey="idRol"
-											listValue="descripRol" />
+										<s:select id="slcRol" name="idRol" cssClass="form-control"
+											list="lstRoles" listKey="idRol" listValue="descripRol" />
 									</div>
 								</div>
 							</div>
@@ -123,21 +126,22 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label for="txtUsuario">Usuario</label>
-										<s:textfield id="txtUsuario" name="usuario.nombreUsuario"
+										<s:textfield id="txtUsuario" name="nombreUsuario"
 											cssClass="form-control" placeholder="Usuario" />
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label for="txtClave">Contraseña</label>
-										<s:password id="txtClave" name="usuario.claveUsuario"
+										<s:password id="txtClave" name="claveUsuario"
 											cssClass="form-control" placeholder="Contraseña" />
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-group">
 										<label for="txtClaveRepetir">Repetir Contraseña</label> <input
-											type="password" class="form-control" id="txtClaveRepetir"
+											type="password" name="repetirClaveUsuario"
+											class="form-control" id="txtClaveRepetir"
 											placeholder="Repetir Contraseña">
 									</div>
 								</div>

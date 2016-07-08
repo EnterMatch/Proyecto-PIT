@@ -43,7 +43,6 @@ public class RegistroUsuarioAction extends ActionSupport{
 			addActionError("Falta completar datos");
 			return;
 		}
-		
 		// Validar que el usuario ingresado no exista
 		for(Usuario usuarioItem : usuarioService.read()){
 			if(usuarioItem.getNombreUsuario().equals(usuario.getNombreUsuario())){
@@ -51,13 +50,11 @@ public class RegistroUsuarioAction extends ActionSupport{
 				return;
 			}
 		}
-		
 		int result = 0;
 		if(tipoUsuario.equals("1")){
 			empleado = new Empleado(persona, empleado.getIdGrupo(), empleado.getIdRol());
 			empleadoService.create(empleado);
 			result = usuarioService.create(new Usuario(empleado.getIdPersona(), usuario.getNombreUsuario(), usuario.getClaveUsuario()));
-			
 		}else{
 			Operador operador = new Operador(persona);
 			operadorService.create(operador);

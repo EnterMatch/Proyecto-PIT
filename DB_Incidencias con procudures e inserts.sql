@@ -1139,11 +1139,7 @@ insert into tb_persona (nombre_persona, ape_pat_persona, ape_mat_persona, email_
 -- Operadores
 /* 13 */('Machin', 'Alberto', 'Lopez', 'malberto@gmail.com'), # Jef
 /* 14 */('Cesar', 'Pozo', 'Gimenez', 'cpozo@gmail.com'), #Tec
-/* 15 */('Luis', 'Gamarra', 'Mina', 'lgamarra@live`PRIMARY`.com'), #Esp
-
-# Extra para testing
-/* 16 */('Nombre', 'ApePat', 'ApeMat', 'na@gmail.com`.com'),
-/* 17 */('Mateo', 'Marcos', 'Gabriel', 'na@gmail.com`.com');
+/* 15 */('Luis', 'Gamarra', 'Mina', 'lgamarra@live`PRIMARY`.com'); #Esp
 
 insert into tb_empleado (id_empleado, id_rol, id_grupo) values
 (1, 1, 1),
@@ -1157,8 +1153,7 @@ insert into tb_empleado (id_empleado, id_rol, id_grupo) values
 (9, 3, 3),
 (10, 1, 4),
 (11, 2, 4),
-(12, 3, 4),
-(17, 3, 2);
+(12, 3, 4);
 
 insert into tb_operador (id_operador, id_rol) values
 (13, 4),
@@ -1182,8 +1177,7 @@ insert into tb_usuario (id_usuario, nombre_usuario, clave_usuario) values
 -- Operadores
 (13, 'malberto', 'admin123'),
 (14, 'cpozo', 'admin123'),
-(15, 'lgamarra', 'admin123'),
-(17, 'mateo', 'admin123');
+(15, 'lgamarra', 'admin123');
 
 insert into tb_cliente (nombre_cliente, email_cliente) values
 /* 1 */('LucÃ­a', 'latoche@gmail.com'),
@@ -1351,6 +1345,7 @@ DELIMITER //
 CREATE PROCEDURE USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO (id_empleado int)
 BEGIN
 	SELECT 	I.id_incidencia, 
+			I.id_empleado,
 			I.descrip_incidencia, 
             I.fec_ing_incidencia, 
             I.resumen_incidencia, 
@@ -1373,7 +1368,7 @@ BEGIN
     WHERE I.ID_OPERADOR=id_empleado || I.id_empleado=id_empleado;
 END //
 DELIMITER ;
-call USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO (17);
+call USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO (2);
 -- call USP_TB_INCIDENCIA_LISTADO_POR_GRUPO(2);
 
 -- -------- OBTENER INCIDENTES PARA LISTADO -----------
@@ -1525,7 +1520,7 @@ select * from tb_empleado where  id_empleado between 6 and 8;
     select * from tb_empleado e left join tb_incidencia i on i.id_empleado=e.id_empleado where e.id_grupo=2 ;
     
 
-    select * from tb_incidencia where id_grupo=2;
+    select * from tb_incidencia where id_grupo=1;
     
     
     
@@ -1533,4 +1528,9 @@ select * from tb_empleado where  id_empleado between 6 and 8;
     select * from tb_usuario;
     
     
-    select * from tb_incidencia where id_empleado = 2;
+    select * from tb_incidencia where id_empleado = 1;
+    
+    
+    select * from tb_rol;
+    
+    

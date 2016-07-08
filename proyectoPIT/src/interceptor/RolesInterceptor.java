@@ -55,7 +55,6 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 	private List<Incidencia> lstIncidentesAsignados;
 	private List<Empleado> lstEmpleado;
 	private List<Rol> lstRoles;
-	private List<TipoUsuario> lstTipoUsuarios = new ArrayList<TipoUsuario>();
 
 	// SE RECIBE ID DEL USUARIO
 	public void listados(ActionInvocation invocation, int id) {
@@ -64,11 +63,14 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 		ValueStack stack = invocation.getStack();
 		IncidenciaService is = new IncidenciaService();
 
-		// ¿EL USUARIO ES OPERADOR O EMPLEADO (TECNICO o ESPECIALISTA)?
+// ¿EL USUARIO ES OPERADOR O EMPLEADO (TECNICO o ESPECIALISTA)?
+		
+		
+		//SI ES EMPLEADO -----------------------------------------
 		if (new EmpleadoService().obtain(id) != null) {
-			EmpleadoService empleadoService = new EmpleadoService();
-
-			Empleado e = empleadoService.obtain(id);
+			
+			//DATOS DEL EMPLEADO
+			Empleado e = new EmpleadoService().obtain(id);
 			Grupo g = new GrupoService().obtain(e.getIdGrupo());
 			Rol r = new RolService().obtain(e.getIdRol());
 
@@ -80,17 +82,18 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 			stack.set("NombreGrupo", g.getNombreGrupo());
 			stack.set("DescripRol", r.getDescripRol());
 
+			//SI EL EMPLEADO ES JEFE DE GRUPO-------------------------
 			if (e.getIdRol() == 1) {
 
 				lstIncidente = is.read_Grupo(e.getIdGrupo());
 
 				lstIncidentesSinAsignar = new ArrayList<Incidencia>(lstIncidente);
+				
 				lstIncidentesAsignados = new ArrayList<Incidencia>(lstIncidente);
 
-				lstEmpleado = empleadoService.readEmpleadoIn(e);
+				lstEmpleado = new EmpleadoService().readEmpleadoIn(e);
 
 				for (Incidencia incidente : lstIncidente) {
-
 					if (incidente.getIdEmpleado() != 0) {
 						System.out.println("Asignados : " + incidente);
 						lstIncidentesSinAsignar.remove(incidente);
@@ -99,27 +102,29 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 						lstIncidentesAsignados.remove(incidente);
 					}
 				}
+				
 				stack.set("lstIncidente", lstIncidente);
 				stack.set("lstIncidentesSinAsignar", lstIncidentesSinAsignar);
 				stack.set("lstIncidentesAsignados", lstIncidentesAsignados);
 				stack.set("lstEmpleado", lstEmpleado);
 
-			} else {
+			}
+			//SI EL EMPLEADO ES TECNICO DE CAMPO O TECNICO ESPECIALISTA
+			else {
 				lstIncidente = is.read_Empleado(id);
-				System.out.println("adadasdasd");
 				for (Incidencia incidencia : lstIncidente) {
 					System.out.println(incidencia);
 				}
-				System.out.println("adadasdasd");
 				stack.set("lstIncidente", lstIncidente);
 			}
 
 		}
 
 		else if (new OperadorService().obtain(id) != null) {
+			
+			// DATOS DEL OPERADOR
 			Operador o = new OperadorService().obtain(id);
 			Rol r = new RolService().obtain(o.getId_rol());
-			lstIncidente = is.read_Empleado(id);
 
 			stack.set("idOperador", id);
 			stack.set("NombrePersona", o.getNombrePersona());
@@ -127,32 +132,52 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 			stack.set("ApePatPersona", o.getApePatPersona());
 			stack.set("EmailPersona", o.getEmailPersona());
 			stack.set("DescripRol", r.getDescripRol());
+			
+			
+			// LISTADO DE INCIDENTES REGISTRADOS POR EL OPERADOR
+			lstIncidente = is.read_Empleado(id);
+			
 			stack.set("lstIncidente", lstIncidente);
 
-			// CODIGO AUTOGENERADO PARA EL REGISTRO
+			
+			// CODIGO AUTOGENERADO PARA EL REGISTRO DE INCIDENCIAS
 			int codNuevaInciden = 0;
 			codNuevaInciden = new IncidenciaService().read().size() + 1;
 			stack.set("codNuevaInciden", codNuevaInciden);
 
-			// LISTADO GENERAL DE TODAS LAS INCIDENCIAS
+			
+			// LISTADO PARA LLENAR COMBOS PARA EL REGISTRO DE INCIDENCIAS
 			estados = new EstadoService().read();
 			prioridades = new PrioridadService().read();
 			empresas = new EmpresaService().read();
 			clientes = new ClienteService().read();
 			grupos = new GrupoService().read();
 			lstRoles = new RolService().read();
-			lstTipoUsuarios.add(new TipoUsuario(1, "Empleado"));
-			lstTipoUsuarios.add(new TipoUsuario(2, "Operador"));
-
+			
 			stack.set("estados", estados);
 			stack.set("prioridades", prioridades);
 			stack.set("estados", estados);
 			stack.set("empresas", empresas);
 			stack.set("clientes", clientes);
 			stack.set("grupos", grupos);
+			
+			// CODIGO AUTOGENERADO PARA EL REGISTRO DE INCIDENCIAS
+			int codNuevoUsuario = 0;
+			codNuevoUsuario = new UsuarioService().read().size()+1;
+			stack.set("codNuevoUsuario", codNuevoUsuario);
+			System.out.println("MIRA MI CODIGO:   "+ codNuevoUsuario);
+			
+			
+			List<TipoUsuario> lstTipoUsuarios = new ArrayList<TipoUsuario>();
+			//LISTADO PARA LLENAR COMBOC PARA EL REGISTRO DE USUARIOS
+			lstTipoUsuarios.add(new TipoUsuario(1, "Empleado"));
+			lstTipoUsuarios.add(new TipoUsuario(2, "Operador"));
+			
 			stack.set("lstRoles", lstRoles);
 			stack.set("lstTipoUsuarios", lstTipoUsuarios);
 		}
+		
+		
 		System.out.println("Fin del listado");
 	}
 
@@ -174,7 +199,9 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 			return true;
 		}
 	}
-
+	
+	
+	//RETORNA EL RESULT ((EN EL LOGUEO)) PARA QUE SU MUESTRE LA PAGINA PRINCIPAL PARA CADA USUARIO
 	public String rol(int idUsuario) {
 		Empleado e = new EmpleadoService().obtain(idUsuario);
 		Operador o = new OperadorService().obtain(idUsuario);
@@ -183,7 +210,7 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 				: (rolUsuario = rs.obtain(e.getIdRol()).getDescripRol());
 		return rolUsuario;
 	}
-
+	
 	public void init() {
 		System.out.println("Inicio de Intercepto");
 	}
@@ -225,14 +252,11 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 				System.out.println("123456:            "+r);
 				return r;
 			} 
-			
-			
+
 			else {
 				System.out.println("Fin interceptor");
 				return "error";
 			}
-			
-			
 		}
 
 		else if (session.getAttribute(USER_HANDLE) != null) {

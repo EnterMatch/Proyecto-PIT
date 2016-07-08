@@ -37,6 +37,7 @@
 		<s:label>Id del Incidente</s:label>
 		
 		<input name="idIncidencia" value="<s:property value="codNuevaInciden"/>" readonly="readonly"  Class="form-control" placeholder="Id incidente"/>
+		
 		</div>
 		</div>
 		<div class="col-md-4">

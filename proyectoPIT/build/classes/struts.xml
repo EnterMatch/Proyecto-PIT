@@ -151,7 +151,12 @@ StrutsConfiguration
 			<interceptor-ref name="JefeDeEquipoStack" />
 			<result type="tiles" name="registrarSolucion">plantilla_RegistrarSolucion</result>
 		</action>
-
+		
+		<action name="solucionando">
+			<interceptor-ref name="JefeDeEquipoStack" />
+			<result type="tiles" name="solucionando">plantilla_RegistrarSolucion</result>
+		</action>
+		
 		<action name="ReporteIncidente">
 			<interceptor-ref name="JefeDeEquipoStack" />
 			<result type="tiles">plantilla_ReporteIncidente</result>

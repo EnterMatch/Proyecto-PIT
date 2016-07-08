@@ -27,72 +27,72 @@
 							</button>
 						</div>
 					</div>
-					
-					
+
+
 					<form action="solucionando">
-					
-					
-					<div class="box-body">
-					
-					
-						<div class="col-md-6">
+
+
+						<div class="box-body">
+
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="box-body pad">
+										<label>Id del Incidente</label> <input name="idIncidencia"
+											value="<s:property value="idIncidencia"/>"
+											readonly="readonly" Class="form-control" />
+									</div>
+										<label>Solución del Incidente</label>
+										<s:textarea cssClass="textarea" readonly="readonly"
+											cssStyle="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+											<s:property value="solucionIncidencia" />
+										</s:textarea>
+								</div>
+							</div>
+
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="box-body pad">
+
+										<div class="col-md-12">
+											<label>Definir Nueva Solución</label>
+											<div class="box-body pad">
+												<textarea name="solucionIncidencia" class="textarea"
+													placeholder="Descipcion de solución"
+													style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
 							<div class="form-group">
-							<div class="box-body pad">
-								<label>Id del Incidente</label>
-								<s:hidden name="idIncidencia" value="%{idIncidencia}" />
-								<input name="idIncidencia" value="<s:property value="idIncidencia"/>" readonly="readonly" Class="form-control"/>
+								<div class="col-xs-6">
+
+
+									<s:hidden name="idIncidencia" value="%{idIncidencia}" />
+									<div class="col-xs-6" align="center">
+										<button type="submit" class="btn btn-danger">Grabar</button>
+									</div>
+									<div class="col-xs-6" align="center">
+										<button type="reset" class="btn btn-danger">Cancelar</button>
+									</div>
+
+
+
+								</div>
 							</div>
-							<div class="box-body pad">
-								<label>Solución del Incidente</label> 
-    	<s:textarea cssClass="textarea" readonly="readonly" cssStyle="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
-    	 name="solucionIncidencia"></s:textarea>
-							</div>
-							</div>
+
+
 						</div>
-						
-						
-						<div class="col-md-6">
-						<div class="form-group">
-						<div class="box-body pad">
-						
-						<div class="col-md-12">
-						<label>Definir Nueva Solución</label> 
-							<div class="box-body pad">
-								<textarea name="solucionIncidencia" class="textarea" placeholder="Descipcion de solución"
-									style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-							</div>
-						</div>
-						</div>
-						</div>
-						</div>
-						
-						
-						<div class="form-group">
-						<div class="col-xs-6">
-						
-						
-						
-							<div class="col-xs-6" align="center">
-								<button type="submit" class="btn btn-danger">Grabar</button>
-							</div>
-							<div class="col-xs-6" align="center">
-								<button type="reset" class="btn btn-danger">Cancelar</button>
-							</div>
-						
-						
-							
-						</div>
-						</div>
-						
-						
-					</div>
-					
-					
+
+
 					</form>
-					
+
 				</div>
-				<br>
-				<br>
+				<br> <br>
 			</section>
 		</div>
 	</div>

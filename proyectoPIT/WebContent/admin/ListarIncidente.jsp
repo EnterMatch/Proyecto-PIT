@@ -72,9 +72,6 @@
 																		<h4 class="box-title">Datos del incidente</h4>
 																		<div class="col-md-2">
 																			<label>Id</label>
-																			
-																			
-																			
 																			<input name="idIncidencia"
 																				value="<s:property value="idIncidencia"/>"
 																				disabled="disabled" readonly class="form-control">

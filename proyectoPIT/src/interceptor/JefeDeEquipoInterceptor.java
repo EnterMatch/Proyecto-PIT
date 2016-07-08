@@ -128,8 +128,12 @@ public class JefeDeEquipoInterceptor extends AbstractInterceptor implements Stru
 				
 				String solucionIncidencia = new IncidenciaService().obtain(idIncidencia).getSolucionIncidencia();
 				
-				Incidencia incidente = new Incidencia(idIncidencia, solucionIncidencia);
+				System.out.println(idIncidencia);
+				System.out.println(solucionIncidencia);
 				
+				
+				Incidencia incidente = new Incidencia(idIncidencia, solucionIncidencia);
+				System.out.println("ESTE ES EL INCIDENTE:           "+incidente);
 				new IncidenciaService().solucion(incidente);
 				
 				listados(invocation, user.getIdUsuario());

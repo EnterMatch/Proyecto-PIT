@@ -96,7 +96,6 @@
           			<ul class="treeview-menu">
             			<li><a href="ConsultarIncidenteJefe"><i class="fa fa-circle-o"></i>Incidentes Pendientes</a></li><!-- AsignarIncidente -->
             			<li><a href="ConsultarIncidenteJefeAsignados"><i class="fa fa-circle-o"></i>Incidentes Asignados</a></li><!-- AsignarIncidente -->
-            			<li><a href="RegistrarSolucion"><i class="fa fa-circle-o"></i>Registrar Solucion</a></li>
           			</ul>
         		</li>
         		<li class="treeview">

@@ -87,6 +87,7 @@ StrutsConfiguration
 			<interceptor-ref name="rolesStack" />
 			<result type="tiles">plantilla_ConsultarIncidente</result>
 		</action>
+		
 		<action name="RegistrarUsuario">
 			<interceptor-ref name="rolesStack" />
 			<result type="tiles">plantilla_RegistrarUsuario</result>

@@ -75,9 +75,12 @@
 																			<s:hidden name="idIncidencia">
 																				<s:property value="idIncidencia" />
 																			</s:hidden>
-																			<input name="idIncidencia"
-																				value="<s:text name=""><s:property value="idIncidencia"/></s:text>"
-																				disabled="disabled" readonly class="form-control">
+																			<s:hidden name="idEmpleado">
+																				<s:property value="idEmpleado" />
+																			</s:hidden>
+<!-- 																			<input name="idIncidencia" -->
+<%-- 																				value="<s:text name=""><s:property value="idIncidencia"/></s:text>" --%>
+<!-- 																				disabled="disabled" readonly class="form-control"> -->
 																		</div>
 																		<div class="col-md-3">
 																			<label>Empresa</label> <input
@@ -126,12 +129,12 @@
               																</textarea>
 																			<div class="col-sm-6">
 																				<center>
-																					<button type="submit" class="btn btn-danger">Grabar</button>
+																					<button  type="submit" class="btn btn-danger">Grabar</button>
 																				</center>
 																			</div>
 																			<div class="col-sm-6">
 																				<center>
-																					<button type="submit" class="btn btn-danger">Cancelar</button>
+																					<button type="reset" class="btn btn-danger">Cancelar</button>
 																				</center>
 																			</div>
 																		</div>

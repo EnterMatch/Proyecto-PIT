@@ -14,9 +14,10 @@
 
 			<section class="content">
 				<!-- INICIO DEL FORMULARIO REGISTRAR USUARIO -->
-				<s:form id="formRegistrarUsuario" cssClass="form" action="RegistrarUsuario" theme="simple">
-				<s:actionmessage/>
-				<s:actionerror cssStyle="color:red"/>
+				<s:form id="formRegistrarUsuario" cssClass="form"
+					action="RegistrarUsuario" theme="simple">
+					<s:actionmessage />
+					<s:actionerror cssStyle="color:red" />
 					<div class="box box-default">
 						<div class="box-header with-border">
 							<h3 class="box-title">Datos generales</h3>
@@ -81,7 +82,7 @@
 									<div class="form-group">
 										<label>Grupo de trabajo</label>
 										<s:select id="slcGrupo" name="empleado.idGrupo"
-											cssClass="form-control" list="lstGrupos" listKey="idGrupo"
+											cssClass="form-control" list="grupos" listKey="idGrupo"
 											listValue="nombreGrupo" />
 									</div>
 

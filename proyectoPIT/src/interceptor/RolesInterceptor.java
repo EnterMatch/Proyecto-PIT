@@ -106,6 +106,11 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 
 			} else {
 				lstIncidente = is.read_Empleado(id);
+				System.out.println("adadasdasd");
+				for (Incidencia incidencia : lstIncidente) {
+					System.out.println(incidencia);
+				}
+				System.out.println("adadasdasd");
 				stack.set("lstIncidente", lstIncidente);
 			}
 
@@ -217,7 +222,7 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 				listados(invocation, user.getIdUsuario());
 				
 				System.out.println("Fin interceptor");
-				
+				System.out.println("123456:            "+r);
 				return r;
 			} 
 			

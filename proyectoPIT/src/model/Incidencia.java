@@ -72,7 +72,7 @@ public class Incidencia {
 				+", descripIncidencia="+ descripIncidencia
 				+", fecIngIncidencia="+ fecIngIncidencia
 				+", resumenIncidencia="+ resumenIncidencia
-				+", solucionIncidencia="+ solucionIncidencia 
+				+", solucionIncidencia="+ solucionIncidencia
 				+", raz_soc_empresa="+ raz_soc_empresa
 				+", nombreCliente="+ nombreCliente
 				+", nombreGrupo="+ nombreGrupo

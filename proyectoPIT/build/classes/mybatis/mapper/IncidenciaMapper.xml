@@ -35,7 +35,7 @@
 	{CALL USP_TB_INCIDENCIA_LISTADO () }
 	</select>
 	<update id="update" parameterType="incidenciaModel" statementType="CALLABLE">
-	{call USP_TB_INCIDENCIA_UPDATE3 (#{idIncidencia},#{descripIncidencia},#{resumenIncidencia},#{solucionIncidencia})}
+	{call USP_TB_INCIDENCIA_UPDATE3 (#{idIncidencia},#{idEmpleado},#{descripIncidencia},#{resumenIncidencia},#{solucionIncidencia})}
 	</update>
 	<delete id="delete" parameterType="int">
 	{call USP_TB_INCIDENCIA_DELETE(#{idIncidencia}) }
@@ -48,5 +48,8 @@
 	</select>
 	<select id="read_Empleado" parameterType="int" resultMap = "incidenciaResultMap">
 	{call USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO(#{idEmpleado})}
+	</select>
+	<select id="read_Grupo" parameterType="int" resultMap = "incidenciaResultMap">
+	{call USP_TB_INCIDENCIA_LISTADO_POR_GRUPO(#{idGrupo})}
 	</select>
 </mapper>

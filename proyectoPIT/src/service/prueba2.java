@@ -13,13 +13,19 @@ public class prueba2 {
 		}
 		*/
 		
-		
+		/*
 		
 		IncidenciaService is = new IncidenciaService();
 		
 		for(Incidencia i :is.read_Empleado(13)){
 			System.out.println(i);
 		}
+		*/
+		
+		IncidenciaService is = new IncidenciaService();
+		Incidencia incidencia = new Incidencia(8, 17, "", "", "");
+		
+		is.update(incidencia);
 		
 	}
 

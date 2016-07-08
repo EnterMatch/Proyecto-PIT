@@ -82,7 +82,22 @@ public class EmpleadoService implements IService<Empleado> {
 		}
 		return empleado; 
 	}
-
+	
+	
+	public List<Empleado> readEmpleadoIn(Empleado empleado) {
+		List<Empleado> empleados = null;
+		SqlSession session = getSqlSession();
+		try {
+			empleados = session.selectList("EmpleadoMapper.readEmpleadoIncidente", empleado);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return empleados;
+	}
+	
+	
 	private SqlSession getSqlSession() {
 		return MyBatisUtil.getSqlSessionFactory().openSession();
 	}

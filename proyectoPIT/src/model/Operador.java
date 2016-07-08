@@ -16,7 +16,7 @@ public class Operador extends Persona{
 		return "Operador [id_operador="+id_operador+",id_rol="+id_rol+",getIdPersona()=" + getIdPersona() + ", getNombrePersona()=" + getNombrePersona()
 				+ ", getApePatPersona()=" + getApePatPersona() + ", getApeMatPersona()=" + getApeMatPersona()
 				+ ", getEmailPersona()=" + getEmailPersona() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + ", toString()=" + super.toString() + "]";
+				+ hashCode() + ", toString()=" + super.toString() + ", idRol=" + id_rol +"]";
 	}
 
 	public int getId_operador() {
@@ -34,8 +34,5 @@ public class Operador extends Persona{
 	public void setId_rol(int id_rol) {
 		this.id_rol = id_rol;
 	}
-	
-	
-	
 	
 }

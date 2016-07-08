@@ -17,6 +17,7 @@
 <script src="js/demo.js"></script>
 <script src="https://cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
 <script src="js/bootstrap3-wysihtml5.all.min.js"></script>
+
 <script>
       $(function () {
         $("#example1").DataTable();

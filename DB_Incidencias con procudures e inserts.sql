@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `db_incidencias`.`tb_usuario` (
   `id_usuario` INT(11) NOT NULL COMMENT '',
   `nombre_usuario` VARCHAR(50) UNIQUE NOT NULL COMMENT '',
   `clave_usuario` VARCHAR(50) NOT NULL COMMENT '',
-  PRIMARY KEY (`id_usuario`)   '',
+  PRIMARY KEY (`id_usuario`)  COMMENT '',
   CONSTRAINT `tb_usuario_ibfk_1`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `db_incidencias`.`tb_persona` (`id_persona`))
@@ -1142,7 +1142,8 @@ insert into tb_persona (nombre_persona, ape_pat_persona, ape_mat_persona, email_
 /* 15 */('Luis', 'Gamarra', 'Mina', 'lgamarra@live`PRIMARY`.com'), #Esp
 
 # Extra para testing
-/* 16 */('Nombre', 'ApePat', 'ApeMat', 'na@gmail.com`.com');
+/* 16 */('Nombre', 'ApePat', 'ApeMat', 'na@gmail.com`.com'),
+/* 17 */('Mateo', 'Marcos', 'Gabriel', 'na@gmail.com`.com');
 
 insert into tb_empleado (id_empleado, id_rol, id_grupo) values
 (1, 1, 1),
@@ -1156,7 +1157,8 @@ insert into tb_empleado (id_empleado, id_rol, id_grupo) values
 (9, 3, 3),
 (10, 1, 4),
 (11, 2, 4),
-(12, 3, 4);
+(12, 3, 4),
+(17, 3, 2);
 
 insert into tb_operador (id_operador, id_rol) values
 (13, 4),
@@ -1180,7 +1182,8 @@ insert into tb_usuario (id_usuario, nombre_usuario, clave_usuario) values
 -- Operadores
 (13, 'malberto', 'admin123'),
 (14, 'cpozo', 'admin123'),
-(15, 'lgamarra', 'admin123');
+(15, 'lgamarra', 'admin123'),
+(17, 'mateo', 'admin123');
 
 insert into tb_cliente (nombre_cliente, email_cliente) values
 /* 1 */('LucÃ­a', 'latoche@gmail.com'),
@@ -1221,12 +1224,25 @@ id_operador,
 id_empleado, 
 id_estado, 
 id_prioridad) values 
-('No puedo conectar a la base de datos al moneto de entrar a la intranet', '2016-05-22', 'No conecta a la BD', 'Se tuvo que reasignar
- con los permisos necesarios para poder entrar a la intranet, ya que no tenia los suficientes permisos', 1, 2, 13, 6, 6, 2),
-('No entra mi facebook', '2016-05-24', 'No entra su FB', 'La empresa bloque los permisos para ciertas pÃ¡ginas, para que sus empleados
- no se distraigan, asi que no puede ni podrÃ¡ entrar al FACEBOOK', 2, 3, 14, 8, 6, 3),
-('Cuando entro a la intranet me notifica que no existe el usuario', '2016-05-26', 'No existe usuario', '', 3, 3, 15, 7, 2, 1);
-
+('No entra mi facebook', '2016-05-24', 'No entra su FB', 'La empresa bloque los permisos para ciertas pÃ¡ginas, para que sus empleados no se distraigan, 
+asi que no puede ni podrÃ¡ entrar al FACEBOOK', 
+2, 1, 14, 2, 6, 3),
+('No puedo conectar a la base de datos al moneto de entrar a la intranet', '2016-05-22', 
+'No conecta a la BD', 'Se tuvo que reasignar con los permisos necesarios para poder entrar a la intranet, ya que no tenia los suficientes permisos',
+1, 2, 13, 5, 6, 2),
+('No puedo conectar a la base de datos al moneto de entrar a la intranet', '2016-05-22', 
+'No conecta a la BD', 'Se tuvo que reasignar con los permisos necesarios para poder entrar a la intranet, ya que no tenia los suficientes permisos',
+1, 2, 13, 5, 6, 2),
+('No puedo conectar a la base de datos al moneto de entrar a la intranet', '2016-05-22', 
+'No conecta a la BD', 'Se tuvo que reasignar con los permisos necesarios para poder entrar a la intranet, ya que no tenia los suficientes permisos',
+1, 2, 13, 6, 6, 2),
+('No puedo conectar a la base de datos al moneto de entrar a la intranet', '2016-05-22', 
+'No conecta a la BD', 'Se tuvo que reasignar con los permisos necesarios para poder entrar a la intranet, ya que no tenia los suficientes permisos',
+1, 2, 13, 5, 6, 2),
+('No puedp conectarme a internet', '2016-05-26', 'No existe usuario', 'se debe configurar las correctas IPs al router', 
+3, 3, 15, 8, 2, 1),
+('El query en el sistema no funciona en mi sql', '2016-05-26', 'El query en el sistema no funciona', 'reemplace el query xxxxx', 
+3, 4, 15, 12, 2, 1);
 
 -- -----------------------------------------------------
 -- procedure USP_TB_INCIDENCIA_READ POR MATEO
@@ -1272,15 +1288,15 @@ DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_UPDATE3;
 DELIMITER $$
 USE `db_incidencias`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_UPDATE3`(
-id INT, descrip VARCHAR(200), resumen VARCHAR(500), solucion VARCHAR(1000))
+id INT, idEmpleado INT, descrip VARCHAR(200), resumen VARCHAR(500), solucion VARCHAR(1000))
 BEGIN
 	UPDATE `db_incidencias`.`tb_incidencia`
 	SET		`descrip_incidencia` = descrip,
+			`id_empleado` = idEmpleado,
 			`resumen_incidencia` = resumen,
 			`solucion_incidencia`= solucion
 	WHERE `id_incidencia` = id;
 END$$
-
 DELIMITER ;
 
 -- -------- OBTENER INCIDENTES PARA LISTADO -----------
@@ -1345,3 +1361,153 @@ BEGIN
 END //
 DELIMITER ;
 
+-- call USP_TB_INCIDENCIA_LISTADO_POR_GRUPO(2);
+
+-- -------- OBTENER INCIDENTES PARA LISTADO -----------
+DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_LISTADO_POR_GRUPO;
+DELIMITER //
+CREATE PROCEDURE USP_TB_INCIDENCIA_LISTADO_POR_GRUPO (id_grupo int)
+BEGIN
+	SELECT 	I.id_incidencia, 
+			I.descrip_incidencia, 
+            I.fec_ing_incidencia, 
+            I.resumen_incidencia, 
+			I.solucion_incidencia,
+            empre.raz_soc_empresa, 
+            C.nombre_cliente, 
+            G.nombre_grupo,
+            I.id_empleado,
+            PER.nombre_persona AS nombre_operador, 
+            (select nombre_persona from TB_PERSONA where id_persona = I.id_empleado) as nombre_empleado,
+            EST.descrip_estado, 
+            P.descrip_prioridad
+    FROM TB_INCIDENCIA I 
+    JOIN TB_CLIENTE C ON I.ID_CLIENTE = C.ID_CLIENTE
+    JOIN TB_GRUPO G ON I.ID_GRUPO = G.ID_GRUPO
+    JOIN tb_empresa_cliente empcli ON empcli.id_cliente = I.ID_CLIENTE
+    JOIN tb_empresa empre ON empre.id_empresa = empcli.id_empresa
+    JOIN TB_ESTADO EST ON I.ID_ESTADO = EST.ID_ESTADO
+    JOIN TB_PRIORIDAD P ON I.ID_PRIORIDAD = P.ID_PRIORIDAD
+    JOIN TB_PERSONA PER ON I.ID_OPERADOR = PER.ID_PERSONA 
+    WHERE G.id_grupo = id_grupo;
+END //
+DELIMITER ;
+
+-- select * from tb_rol;
+call USP_TB_INCIDENCIA_LISTADO_POR_GRUPO(2);
+
+select u.*,p.id_persona,concat(p.nombre_persona,' ',p.ape_mat_persona,' ',p.ape_pat_persona) as Persona, r.* 
+	from tb_usuario u join tb_persona p on id_usuario = id_persona join tb_operador o on p.id_persona=o.id_operador join tb_rol r on o.id_rol=r.id_rol;
+
+select u.*,p.id_persona, concat(p.nombre_persona,' ',p.ape_mat_persona,' ',p.ape_pat_persona) as Persona, r.*,  g.*
+	from tb_usuario u join tb_persona p on id_usuario = id_persona join tb_empleado e on p.id_persona=e.id_empleado join tb_rol r on e.id_rol=r.id_rol join tb_grupo g on e.id_grupo=g.id_grupo; 
+
+
+select u.*,p.id_persona, concat(p.nombre_persona,' ',p.ape_mat_persona,' ',p.ape_pat_persona) as Persona, r.*,  g.*
+	from tb_usuario u join tb_persona p on id_usuario = id_persona join tb_empleado e on p.id_persona=e.id_empleado join 
+		tb_rol r on e.id_rol=r.id_rol join tb_grupo g on e.id_grupo=g.id_grupo
+			where r.id_rol=1;
+            
+select
+i.id_empleado, 
+concat(p.nombre_persona,' ',p.ape_mat_persona,' ',p.ape_pat_persona) as Persona, 
+count(*) as TotalIncidencias,
+(select count(*) from tb_incidencia 	inc where inc.id_prioridad=1 and inc.id_empleado=5) as Alta, 
+(select count(*) from tb_incidencia 	inc where inc.id_prioridad=2 and inc.id_empleado=5) as Media,
+(select count(*) from tb_incidencia 	inc where inc.id_prioridad=3 and inc.id_empleado=5) as Baja
+from tb_incidencia i join tb_grupo g on i.id_grupo=g.id_grupo join tb_empleado e on e.id_empleado=i.id_empleado join tb_persona p on e.id_empleado=p.id_persona
+where i.id_grupo=2 and i.id_empleado=5;
+
+
+
+select i.id_incidencia, p.descrip_prioridad from tb_incidencia i join tb_prioridad p on i.id_prioridad = p.id_prioridad;
+
+select* from tb_prioridad;
+select count(*) as Alta from tb_incidencia where id_prioridad=1  ;
+select count(*) as Media from tb_incidencia where id_prioridad=2 ;
+select count(*) as Baja from tb_incidencia where id_prioridad=3  ;
+
+
+select * from tb_incidencia where id_estado = 1;
+/* 1 ('Registrado'),*/
+/* 2 ('En espera'),*/
+/* 3 ('Asignado'),*/
+/* 4 ('Reasignado'),*/
+/* 5 ('Resuelto'),*/
+/* 6 ('Notificado');*/
+select * from tb_rol;
+
+select * from tb_empleado e join tb_incidencia i on e.id_empleado=i.id_empleado  where e.id_rol between 2 and 3 ;
+
+select * from tb_incidencia where id_grupo=2;
+
+select * from tb_empleado where  id_empleado between 6 and 8;
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 	select
+	i.id_empleado, 	
+	concat(p.nombre_persona,' ',p.ape_mat_persona,' ',p.ape_pat_persona) as Persona, 
+	count(*) as TotalIncidencias,
+	(select count(*) from tb_incidencia inc where inc.id_prioridad=1 and inc.id_empleado=5) as Alta, 
+	(select count(*) from tb_incidencia inc where inc.id_prioridad=2 and inc.id_empleado=5) as Media,
+	(select count(*) from tb_incidencia inc where inc.id_prioridad=3 and inc.id_empleado=5) as Baja
+	from tb_incidencia i
+	join tb_empleado 	e on 	e.id_empleado	=	i.id_empleado 
+	join tb_persona		p on 	e.id_empleado	=	p.id_persona
+	where i.id_grupo=2 and i.id_empleado=5;
+    
+    select  i.id_empleado   from tb_incidencia i   where i.id_grupo=2 and i.id_empleado=5;
+    
+    select * from tb_empleado;
+    
+    select id_empleado from tb_empleado;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+
+
+ 	select
+	e.id_empleado, e.id_rol,
+    p.nombre_persona,p.ape_mat_persona,p.ape_pat_persona, 
+	(select count(*) from tb_incidencia inc where inc.id_empleado=e.id_empleado) as numeroIncidentes,
+	(select count(*) from tb_incidencia inc where inc.id_prioridad=1 and inc.id_empleado=e.id_empleado) as Alta, 
+	(select count(*) from tb_incidencia inc where inc.id_prioridad=2 and inc.id_empleado=e.id_empleado) as Media,
+	(select count(*) from tb_incidencia inc where inc.id_prioridad=3 and inc.id_empleado=e.id_empleado) as Baja
+	from tb_empleado  	e
+    join tb_persona		p     on 		e.id_empleado	=	p.id_persona where e.id_grupo = 1 ;
+    
+    
+    select * from tb_incidencia where id_grupo=2;
+    
+    
+    
+    select * from tb_empleado e left join tb_incidencia i on i.id_empleado=e.id_empleado where e.id_grupo=2 ;
+    
+    
+    select * from tb_incidencia where id_grupo=2;
+    

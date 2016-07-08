@@ -23,6 +23,15 @@ public class Incidencia {
 
 	public Incidencia() {}
 	
+	public Incidencia(int idIncidencia, int idEmpleado ,String descripIncidencia, String resumenIncidencia, String solucionIncidencia) {
+		this.idEmpleado = idEmpleado;
+		this.idIncidencia = idIncidencia;
+		this.descripIncidencia = descripIncidencia;
+		this.resumenIncidencia = resumenIncidencia;
+		this.solucionIncidencia = solucionIncidencia;
+	}
+	
+	
 	public Incidencia(int idIncidencia,String descripIncidencia, String resumenIncidencia, String solucionIncidencia) {
 		this.idIncidencia = idIncidencia;
 		this.descripIncidencia = descripIncidencia;
@@ -62,6 +71,7 @@ public class Incidencia {
 				+", raz_soc_empresa="+ raz_soc_empresa
 				+", nombreCliente="+ nombreCliente
 				+", nombreGrupo="+ nombreGrupo
+				+", idEmpleado="+ idEmpleado
 				+", nombreOperador="+ nombreOperador
 				+", nombreEmpleado="+ nombreEmpleado
 				+", descripEstado="+ descripEstado

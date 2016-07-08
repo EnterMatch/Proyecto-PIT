@@ -6,14 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <mapper namespace="EmpleadoMapper">
  
- 	<resultMap type="empleadoModel" id="empleadoResultMap">
- 		<result property="idPersona" column="id_persona"/>
- 		<result property="nombrePersona" column="nombre_persona"/>
- 		<result property="apePatPersona" column="ape_pat_persona"/>
- 		<result property="apeMatPersona" column="ape_mat_persona"/>
- 		<result property="emailPersona" column="email_persona"/>
- 		<result property="idRol" column="id_rol"/>
- 		<result property="idGrupo" column="id_grupo"/>
+ 	<resultMap type="empleadoModel" 		id="empleadoResultMap">
+ 	<result property="Alta" 	column="Alta"/>
+ 	<result property="Media" 	column="Media"/>
+ 	<result property="Baja" 	column="Baja"/>
+ 		<result property="numIncidencias" 	column="numIncidencias"/>
+ 		<result property="idPersona" 		column="id_persona"/>
+ 		<result property="idEmpleado" 		column="id_empleado"/>
+ 		<result property="nombrePersona" 	column="nombre_persona"/>
+ 		<result property="apePatPersona" 	column="ape_pat_persona"/>
+ 		<result property="apeMatPersona" 	column="ape_mat_persona"/>
+ 		<result property="emailPersona" 	column="email_persona"/>
+ 		<result property="idRol" 			column="id_rol"/>
+ 		<result property="idGrupo" 			column="id_grupo"/>
  	</resultMap>
  	<insert id="create" parameterType="empleadoModel" statementType="CALLABLE">
  		{call usp_tb_empleado_create(#{idPersona, mode=OUT, jdbcType=NUMERIC},#{nombrePersona},#{apePatPersona},#{apeMatPersona},#{emailPersona},#{idRol},#{idGrupo})}
@@ -34,4 +39,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  	<select id="obtain" parameterType="int" resultMap="empleadoResultMap">
  		{call usp_tb_empleado_obtain(#{idPersona})}
  	</select>
+ 	
+ 	<select id="readEmpleadoIncidente" parameterType="int" resultMap="empleadoResultMap">
+ 	select
+	e.id_empleado, e.id_rol,
+    p.nombre_persona,p.ape_mat_persona,p.ape_pat_persona, 
+	(select count(*) from tb_incidencia inc where inc.id_empleado=e.id_empleado) as numIncidencias,
+	(select count(*) from tb_incidencia inc where inc.id_prioridad=1 and inc.id_empleado=e.id_empleado) as Alta, 
+	(select count(*) from tb_incidencia inc where inc.id_prioridad=2 and inc.id_empleado=e.id_empleado) as Media,
+	(select count(*) from tb_incidencia inc where inc.id_prioridad=3 and inc.id_empleado=e.id_empleado) as Baja
+	from tb_empleado  	e
+    join tb_persona		p     on 		e.id_empleado	=	p.id_persona where e.id_grupo = #{idGrupo} ;
+ 	</select>
+ 	
  </mapper>

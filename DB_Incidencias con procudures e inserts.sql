@@ -1275,6 +1275,8 @@ END$$
 
 DELIMITER ;
 
+
+
 -- -----------------------------------------------------
 -- procedure USP_TB_INCIDENCIA_UPDATE_SOLUCION
 -- -----------------------------------------------------
@@ -1282,16 +1284,34 @@ DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_UPDATE3;
 DELIMITER $$
 USE `db_incidencias`$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_UPDATE3`(
-id INT, idEmpleado INT, descrip VARCHAR(200), resumen VARCHAR(500), solucion VARCHAR(1000))
+id INT, idEmpleado INT,  solucion VARCHAR(1000))
 BEGIN
 	UPDATE `db_incidencias`.`tb_incidencia`
-	SET		`descrip_incidencia` = descrip,
-			`id_empleado` = idEmpleado,
-			`resumen_incidencia` = resumen,
+	SET		`id_empleado` = idEmpleado,
+            `id_estado`	  = 2,
 			`solucion_incidencia`= solucion
 	WHERE `id_incidencia` = id;
 END$$
 DELIMITER ;
+
+select * from tb_estado;
+
+-- -----------------------------------------------------
+-- procedure USP_TB_INCIDENCIA_UPDATE_SOLUCION
+-- -----------------------------------------------------
+DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_SOLUCION;
+DELIMITER $$
+USE `db_incidencias`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_SOLUCION`(
+id INT, solucion VARCHAR(1000))
+BEGIN
+	UPDATE `db_incidencias`.`tb_incidencia`
+	SET		`id_estado`	  = 5,
+			`solucion_incidencia`= solucion
+	WHERE `id_incidencia` = id;
+END$$
+DELIMITER ;
+
 
 
 DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_UPDATE_ASIGNAR;
@@ -1301,10 +1321,28 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_UPDATE_ASIGNAR`(
 id INT, idEmpleado INT)
 BEGIN
 	UPDATE `db_incidencias`.`tb_incidencia`
-	SET		`id_empleado` = idEmpleado
+	SET		`id_empleado` = idEmpleado,
+			`id_estado`	  = 3
 	WHERE `id_incidencia` = id;
 END$$
 DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_UPDATE_REASIGNAR;
+DELIMITER $$
+USE `db_incidencias`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_UPDATE_REASIGNAR`(
+id INT, idEmpleado INT)
+BEGIN
+	UPDATE `db_incidencias`.`tb_incidencia`
+	SET		`id_empleado` = idEmpleado,
+			`id_estado`	  = 4
+	WHERE `id_incidencia` = id;
+END$$
+DELIMITER ;
+
+
 
 -- -------- OBTENER INCIDENTES PARA LISTADO -----------
 DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_LISTADO;
@@ -1368,7 +1406,7 @@ BEGIN
     WHERE I.ID_OPERADOR=id_empleado || I.id_empleado=id_empleado;
 END //
 DELIMITER ;
-call USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO (2);
+-- call USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO (1);
 -- call USP_TB_INCIDENCIA_LISTADO_POR_GRUPO(2);
 
 -- -------- OBTENER INCIDENTES PARA LISTADO -----------
@@ -1534,3 +1572,42 @@ select * from tb_empleado where  id_empleado between 6 and 8;
     select * from tb_rol;
     
     
+    select * from tb_estado;
+    
+    
+    select * from tb_incidencia where id_estado = 1;
+    
+    select * from tb_persona where id_persona =13;
+    
+    
+    DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_LISTADO_REPORTE_POR_GRUPO;
+DELIMITER //
+CREATE PROCEDURE USP_TB_INCIDENCIA_LISTADO_REPORTE_POR_GRUPO ()
+BEGIN
+SELECT count(*) as idGrupo, P.descrip_prioridad
+    FROM TB_INCIDENCIA I 
+    JOIN TB_CLIENTE C ON I.ID_CLIENTE = C.ID_CLIENTE
+    JOIN TB_GRUPO G ON I.ID_GRUPO = G.ID_GRUPO
+    JOIN tb_empresa_cliente empcli ON empcli.id_cliente = I.ID_CLIENTE
+    JOIN tb_empresa empre ON empre.id_empresa = empcli.id_empresa
+    JOIN TB_ESTADO EST ON I.ID_ESTADO = EST.ID_ESTADO
+    JOIN TB_PRIORIDAD P ON I.ID_PRIORIDAD = P.ID_PRIORIDAD
+    JOIN TB_PERSONA PER ON I.ID_OPERADOR = PER.ID_PERSONA
+    GROUP BY P.descrip_prioridad;
+END //
+DELIMITER ;
+call USP_TB_INCIDENCIA_LISTADO_REPORTE_POR_GRUPO;
+
+
+
+
+
+
+
+
+
+
+select * from tb_incidencia;
+
+
+

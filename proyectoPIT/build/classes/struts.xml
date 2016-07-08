@@ -15,19 +15,34 @@ StrutsConfiguration
 		</result-types>
 
 		<interceptors>
-		
+
+			<interceptor name="personaInterceptor" class="interceptor.PersonaInterceptor" />
+
 			<interceptor name="rolesInterceptor" class="interceptor.RolesInterceptor" />
 			<interceptor-stack name="rolesStack">
+				
 				<interceptor-ref name="rolesInterceptor" />
+				
 			</interceptor-stack>
-			
-			<interceptor name="asignarInterceptor" class="interceptor.AsignarInterceptor" />
-			<interceptor name="personaInterceptor" class="interceptor.PersonaInterceptor" />
-			<interceptor-stack name="asignarStack">
+
+			<interceptor name="JefeDeEquipoInterceptor" class="interceptor.JefeDeEquipoInterceptor" />
+			<interceptor-stack name="JefeDeEquipoStack">
 				<interceptor-ref name="personaInterceptor" />
-				<interceptor-ref name="asignarInterceptor" />
+				<interceptor-ref name="JefeDeEquipoInterceptor" />
 			</interceptor-stack>
 			
+			<interceptor name="TecnicoInterceptor" class="interceptor.TecnicoInterceptor" />
+			<interceptor-stack name="TecnicoStack">
+				<interceptor-ref name="personaInterceptor" />
+				<interceptor-ref name="TecnicoInterceptor" />
+			</interceptor-stack>
+			
+			<interceptor name="OperadorInterceptor" class="interceptor.OperadorInterceptor" />
+			<interceptor-stack name="OperadorStack">
+				<interceptor-ref name="personaInterceptor" />
+				<interceptor-ref name="OperadorInterceptor" />
+			</interceptor-stack>
+
 		</interceptors>
 
 		<!-- <default-interceptor-ref name="rolesStack" /> -->
@@ -35,12 +50,9 @@ StrutsConfiguration
 		<global-results>
 			<result name="error">index.jsp</result>
 			<result name="Operador" type="tiles">plantilla_principal</result>
-			<result name="Jefe de equipo" type="tiles">plantilla_ConsultarIncidente
-			</result>
-			<result name="TÃ©cnico" type="tiles">plantilla_ListarIncidente
-			</result>
-			<result name="Especialista" type="tiles">plantilla_ListarIncidente
-			</result>
+			<result name="Jefe de equipo" type="tiles">plantilla_ConsultarIncidente</result>
+			<result name="TÃ©cnico" type="tiles">plantilla_ListarIncidente</result>
+			<result name="Especialista" type="tiles">plantilla_ListarIncidente</result>
 		</global-results>
 
 		<!-- TODOS -->
@@ -63,11 +75,11 @@ StrutsConfiguration
 			<result type="tiles">plantilla_principal</result>
 		</action>
 
-		<action name="registrando" class="action.RegistroIncidenciaAction"
-			method="registrar">
-			<result name="Exito" type="tiles">plantilla_ConsultarIncidente
+		<action name="registrando">
+			<interceptor-ref name="OperadorStack" />
+			<result name="Exito" type="tiles">plantilla_principal
 			</result>
-			<result name="Error" type="tiles">plantilla_ConsultarIncidente
+			<result name="Error" type="tiles">plantilla_principal
 			</result>
 		</action>
 
@@ -84,11 +96,11 @@ StrutsConfiguration
 
 		<!-- TECNICO o ESPECIALISTA -->
 		<action name="ListarIncidente">
-			<interceptor-ref name="rolesStack" />
+			<interceptor-ref name="TecnicoStack" />
 			<result type="tiles">plantilla_ListarIncidente</result>
 		</action>
-		<action name="manteniendo" class="action.MantenerIncidenciaAction"
-			method="mantenerIncidente">
+		<action name="manteniendo">
+			<interceptor-ref name="TecnicoStack" />
 			<result type="tiles" name="mantener">plantilla_ListarIncidente</result>
 		</action>
 		<!-- ....................................................................................... -->
@@ -102,26 +114,26 @@ StrutsConfiguration
 
 		<action name="verificar" class="action.AsignarIncidenciaAction"
 			method="verificarEmpleado">
-			<interceptor-ref name="rolesStack" />
+			<interceptor-ref name="JefeDeEquipoStack" />
 			<result type="tiles" name="asignar">plantilla_AsignarIncidente</result>
 		</action>
 
 		<action name="asignar">
-			<interceptor-ref name="asignarStack" />
-			<result type="tiles" name="asignar">plantilla_AsignarIncidente</result>
-			<result type="tiles" name="asignado">plantilla_ConsultarIncidente</result>
+			<interceptor-ref name="JefeDeEquipoStack" />
+			<result type="tiles" name="asignado">plantilla_ConsultarIncidente
+			</result>
 		</action>
 
 		<action name="RegistrarSolucion">
 			<interceptor-ref name="rolesStack" />
 			<result type="tiles">plantilla_RegistrarSolucion</result>
 		</action>
-		
+
 		<action name="ReporteIncidente">
 			<interceptor-ref name="rolesStack" />
 			<result type="tiles">plantilla_ReporteIncidente</result>
 		</action>
 		<!-- ....................................................................................... -->
-		
+
 	</package>
 </struts>

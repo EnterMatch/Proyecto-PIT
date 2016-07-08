@@ -37,6 +37,9 @@
 	<update id="update" parameterType="incidenciaModel" statementType="CALLABLE">
 	{call USP_TB_INCIDENCIA_UPDATE3 (#{idIncidencia},#{idEmpleado},#{descripIncidencia},#{resumenIncidencia},#{solucionIncidencia})}
 	</update>
+	<update id="asignar" parameterType="incidenciaModel" statementType="CALLABLE">
+	{call USP_TB_INCIDENCIA_UPDATE_ASIGNAR (#{idIncidencia},#{idEmpleado})}
+	</update>
 	<delete id="delete" parameterType="int">
 	{call USP_TB_INCIDENCIA_DELETE(#{idIncidencia}) }
 	</delete>

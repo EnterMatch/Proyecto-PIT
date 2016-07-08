@@ -39,12 +39,12 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 	/**
 	 * 
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
 	private static final String USER_HANDLE = "QUADRAN_USER_SESSSION_HANDLE";
 	private static final String USERNAME = "nombreUsuario";
 	private static final String PASSWORD = "claveUsuario";
-	
+
 	private List<Empresa> empresas;
 	private List<Cliente> clientes;
 	private List<Grupo> grupos;
@@ -169,6 +169,7 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 			return true;
 		}
 	}
+
 	public String rol(int idUsuario) {
 		Empleado e = new EmpleadoService().obtain(idUsuario);
 		Operador o = new OperadorService().obtain(idUsuario);
@@ -177,19 +178,23 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 				: (rolUsuario = rs.obtain(e.getIdRol()).getDescripRol());
 		return rolUsuario;
 	}
+
 	public void init() {
 		System.out.println("Inicio de Intercepto");
 	}
+
 	public void destroy() {
 		System.out.println("Fin de Intercepto");
 	}
+
 	public String intercept(ActionInvocation invocation) throws Exception {
 		System.out.println("---------------------------------------------------------");
 		System.out.println("Interceptor");
+
 		final ActionContext context = invocation.getInvocationContext();
 		HttpServletRequest request = (HttpServletRequest) context.get(HTTP_REQUEST);
 		HttpSession session = request.getSession(false);
-		
+
 		if (invocation.getInvocationContext().getName().equals("CerrarSesion")) {
 			session.setAttribute(USER_HANDLE, null);
 			session.removeAttribute(USER_HANDLE);
@@ -197,42 +202,42 @@ public class RolesInterceptor extends AbstractInterceptor implements StrutsStati
 			System.out.println("Fin interceptor");
 			return "error";
 		}
+		
 		if (invocation.getInvocationContext().getName().equals("bienvenido")) {
+			
 			logueo(request, session);
+			
 			if (session.getAttribute(USER_HANDLE) != null) {
 				Usuario user = (Usuario) session.getAttribute(USER_HANDLE);
+				
 				System.out.println("SesionActual: " + user);
-				System.out.println("CODIGO: " + user.getIdUsuario());
-				listados(invocation, user.getIdUsuario());
-				System.out.println("Fin interceptor");
+				
 				String r = rol(user.getIdUsuario());
+				
+				listados(invocation, user.getIdUsuario());
+				
+				System.out.println("Fin interceptor");
+				
 				return r;
-			} else {
+			} 
+			
+			
+			else {
 				System.out.println("Fin interceptor");
 				return "error";
 			}
-		} 
+			
+			
+		}
+
 		else if (session.getAttribute(USER_HANDLE) != null) {
 			Usuario user = (Usuario) session.getAttribute(USER_HANDLE);
 			System.out.println("Context:       " + invocation.getInvocationContext().getName());
 			System.out.println("SesionActual: " + user);
 			listados(invocation, user.getIdUsuario());
-			if (invocation.getInvocationContext().getName().equals("verificar")) {
-				String idIncidencia = (String) request.getParameter("idIncidencia");
-				System.out.println("IdIncidente:       " + idIncidencia);
-				ValueStack stack = invocation.getStack();
-				stack.set("idIncidencia", idIncidencia);
-			}
-			if (invocation.getInvocationContext().getName().equals("asignar")) {
-				int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
-				int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
-				Incidencia incidencia = new Incidencia(idIncidencia, idEmpleado, "", "", "");
-				System.out.println("Incidente:       " + incidencia);
-				new IncidenciaService().update(incidencia);
-				return "asignado";
-			}
 			return invocation.invoke();
 		}
+		
 		System.out.println("Fin interceptor");
 		return "error";
 	}

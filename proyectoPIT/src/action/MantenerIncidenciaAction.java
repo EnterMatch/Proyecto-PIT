@@ -38,31 +38,21 @@ public class MantenerIncidenciaAction extends ActionSupport {
 		return "mantener";
 	}
 	
-	
-
 	public Incidencia getIncidencia() {
 		return incidencia;
 	}
-
-
 
 	public void setIncidencia(Incidencia incidencia) {
 		this.incidencia = incidencia;
 	}
 
-
-
 	public String getSolucionIncidencia() {
 		return solucionIncidencia;
 	}
 
-
-
 	public void setSolucionIncidencia(String solucionIncidencia) {
 		this.solucionIncidencia = solucionIncidencia;
 	}
-
-
 
 	public int getIdIncidencia() {
 		return idIncidencia;

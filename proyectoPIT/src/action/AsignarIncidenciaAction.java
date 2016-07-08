@@ -48,18 +48,7 @@ public class AsignarIncidenciaAction extends ActionSupport implements ServletReq
 	}
 	
 	public String asignar() {
-		/*
-		System.out.println(idEmpleado);
-		System.out.println(idIncidencia);
 
-		Incidencia incidencia = new Incidencia(idIncidencia, idEmpleado, "", "", "");
-
-		System.out.println(incidencia);
-
-		IncidenciaService is = new IncidenciaService();
-		is.update(incidencia);
-		System.out.println("Asignado");
-		*/
 		return "asignar";
 		
 	}
@@ -73,10 +62,7 @@ public class AsignarIncidenciaAction extends ActionSupport implements ServletReq
 	
 	public String verificarEmpleado() {
 		System.out.println("A: "+idIncidencia);
-		/*
-		String id = (String) request.getParameter("idIncidencia");
-		System.out.println("A: "+id);
-		*/
+
 		return "asignar";
 	}
 }

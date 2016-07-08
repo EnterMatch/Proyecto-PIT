@@ -14,16 +14,12 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import com.opensymphony.xwork2.util.ValueStack;
 
 import model.Empleado;
-import model.Grupo;
 import model.Incidencia;
-import model.Rol;
 import model.Usuario;
 import service.EmpleadoService;
-import service.GrupoService;
 import service.IncidenciaService;
-import service.RolService;
 
-public class AsignarInterceptor extends AbstractInterceptor implements StrutsStatics {
+public class JefeDeEquipoInterceptor extends AbstractInterceptor implements StrutsStatics  {
 	/**
 	 * 
 	 */
@@ -43,20 +39,12 @@ public class AsignarInterceptor extends AbstractInterceptor implements StrutsSta
 
 		EmpleadoService empleadoService = new EmpleadoService();
 		Empleado e = empleadoService.obtain(id);
-		Grupo g = new GrupoService().obtain(e.getIdGrupo());
-		Rol r = new RolService().obtain(e.getIdRol());
-		stack.set("idEmpleado", id);
-		stack.set("NombrePersona", e.getNombrePersona());
-		stack.set("ApeMatPersona", e.getApeMatPersona());
-		stack.set("ApePatPersona", e.getApePatPersona());
-		stack.set("EmailPersona", e.getEmailPersona());
-		stack.set("NombreGrupo", g.getNombreGrupo());
-		stack.set("DescripRol", r.getDescripRol());
 
+		lstEmpleado = empleadoService.readEmpleadoIn(e);
+		
 		lstIncidente = is.read_Grupo(e.getIdGrupo());
 		lstIncidentesSinAsignar = new ArrayList<Incidencia>(lstIncidente);
 		lstIncidentesAsignados = new ArrayList<Incidencia>(lstIncidente);
-		lstEmpleado = empleadoService.readEmpleadoIn(e);
 		
 		for (Incidencia incidente : lstIncidente) {
 			if (incidente.getIdEmpleado() != 0) {
@@ -75,7 +63,6 @@ public class AsignarInterceptor extends AbstractInterceptor implements StrutsSta
 
 		System.out.println("Fin del listado");
 	}
-
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		System.out.println("---------------------------------------------------------");
@@ -96,9 +83,9 @@ public class AsignarInterceptor extends AbstractInterceptor implements StrutsSta
 			if (invocation.getInvocationContext().getName().equals("asignar")) {
 				int idIncidencia = Integer.parseInt(request.getParameter("idIncidencia"));
 				int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
-				Incidencia incidencia = new Incidencia(idIncidencia, idEmpleado, "", "", "");
+				Incidencia incidencia = new Incidencia(idIncidencia, idEmpleado);
 				System.out.println("Incidente:       " + incidencia);
-				new IncidenciaService().update(incidencia);
+				new IncidenciaService().asignar(incidencia);
 				listados(invocation, user.getIdUsuario());
 				return "asignado";
 			}

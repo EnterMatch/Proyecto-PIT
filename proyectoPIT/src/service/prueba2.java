@@ -23,9 +23,15 @@ public class prueba2 {
 		*/
 		
 		IncidenciaService is = new IncidenciaService();
+		/*
 		Incidencia incidencia = new Incidencia(8, 17, "", "", "");
 		
 		is.update(incidencia);
+		*/
+		for (Incidencia incidencia : is.read_Empleado(2) ) {
+			System.out.println(incidencia);
+		}
+		
 		
 	}
 

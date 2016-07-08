@@ -120,7 +120,7 @@
         		</li>	
         </s:if>
         
-        <s:elseif test="%{#privilegios=='Técnico'}">
+        <s:elseif test="%{#privilegios=='TÃ©cnico'}">
         	   	<li class="treeview">
           			<a href="#">
             			<i class="fa fa-pie-chart"></i>

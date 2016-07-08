@@ -1299,6 +1299,19 @@ BEGIN
 END$$
 DELIMITER ;
 
+
+DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_UPDATE_ASIGNAR;
+DELIMITER $$
+USE `db_incidencias`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `USP_TB_INCIDENCIA_UPDATE_ASIGNAR`(
+id INT, idEmpleado INT)
+BEGIN
+	UPDATE `db_incidencias`.`tb_incidencia`
+	SET		`id_empleado` = idEmpleado
+	WHERE `id_incidencia` = id;
+END$$
+DELIMITER ;
+
 -- -------- OBTENER INCIDENTES PARA LISTADO -----------
 DROP PROCEDURE IF EXISTS USP_TB_INCIDENCIA_LISTADO;
 DELIMITER //
@@ -1357,10 +1370,10 @@ BEGIN
     JOIN TB_ESTADO EST ON I.ID_ESTADO = EST.ID_ESTADO
     JOIN TB_PRIORIDAD P ON I.ID_PRIORIDAD = P.ID_PRIORIDAD
     JOIN TB_PERSONA PER ON I.ID_OPERADOR = PER.ID_PERSONA 
-    WHERE I.ID_OPERADOR=id_empleado || I.ID_OPERADOR=id_empleado;
+    WHERE I.ID_OPERADOR=id_empleado || I.id_empleado=id_empleado;
 END //
 DELIMITER ;
-
+call USP_TB_INCIDENCIA_LISTADO_POR_EMPLEADO (17);
 -- call USP_TB_INCIDENCIA_LISTADO_POR_GRUPO(2);
 
 -- -------- OBTENER INCIDENTES PARA LISTADO -----------
@@ -1401,6 +1414,9 @@ select u.*,p.id_persona,concat(p.nombre_persona,' ',p.ape_mat_persona,' ',p.ape_
 
 select u.*,p.id_persona, concat(p.nombre_persona,' ',p.ape_mat_persona,' ',p.ape_pat_persona) as Persona, r.*,  g.*
 	from tb_usuario u join tb_persona p on id_usuario = id_persona join tb_empleado e on p.id_persona=e.id_empleado join tb_rol r on e.id_rol=r.id_rol join tb_grupo g on e.id_grupo=g.id_grupo; 
+
+
+select * from tb_incidencia where id_empleado = 2;
 
 
 select u.*,p.id_persona, concat(p.nombre_persona,' ',p.ape_mat_persona,' ',p.ape_pat_persona) as Persona, r.*,  g.*
@@ -1508,6 +1524,13 @@ select * from tb_empleado where  id_empleado between 6 and 8;
     
     select * from tb_empleado e left join tb_incidencia i on i.id_empleado=e.id_empleado where e.id_grupo=2 ;
     
-    
+
     select * from tb_incidencia where id_grupo=2;
     
+    
+    
+    
+    select * from tb_usuario;
+    
+    
+    select * from tb_incidencia where id_empleado = 2;
